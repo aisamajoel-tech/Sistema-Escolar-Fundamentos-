@@ -108,7 +108,7 @@ def run_server():
     print("=" * 65)
     print(" 🚀 SISTEMA SITA-IA · SERVICIO INICIADO CON PATRÓN MVC")
     print(f" 🌐 Acceso a la Plataforma: {url}")
-    print(" 📂 Arquitectura: Models (src/models) | Views (views/) | Controllers")
+    print(" 📂 Arquitectura: Models (models/) | Views (views/) | Controllers (controllers/)")
     print(" 🔒 Gobernanza Ética: Puntos N1 a N8 y Regla C1 activos")
     print(" ⚡ API Google AI Studio: Gemini 1.5 Flash integrada")
     print(" Presione Ctrl + C para detener el servidor")

@@ -23,7 +23,7 @@ def ejecutar_pipeline(
     dias_inaccion_tutor: int = 0
 ) -> Dict[str, Any]:
     """Orquesta la inferencia de modelos y emite la trazabilidad Prometheus."""
-    if not os.path.exists(os.path.join(data_dir, "asistencia.csv")):
+    if not os.path.exists(os.path.join(data_dir, "asistencia.csv")) or not os.path.exists(os.path.join(data_dir, "historial.csv")):
         generar_datos(data_dir)
 
     mensajes: List[Dict[str, str]] = []

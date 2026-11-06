@@ -25,6 +25,7 @@ class AgenteMonitoreo:
         asistencia_path = os.path.join(self.data_dir, "asistencia.csv")
         campus_path = os.path.join(self.data_dir, "campus.csv")
         notas_path = os.path.join(self.data_dir, "notas.csv")
+        historial_path = os.path.join(self.data_dir, "historial.csv")
 
         # Verificar existencia de archivos
         if not os.path.exists(asistencia_path) or not os.path.exists(notas_path):
@@ -51,8 +52,22 @@ class AgenteMonitoreo:
                     "tps_exigidos": None,
                     "nota_parcial": None,
                     "fuente_campus_activa": not simular_corte_campus,
-                    "datos_completos": False
+                    "datos_completos": False,
+                    "historial_previo": [20, 25, 30]
                 }
+
+        # 1b. Leer Historial longitudinal (Semanas 1 a 3)
+        if os.path.exists(historial_path):
+            with open(historial_path, mode="r", encoding="utf-8") as f:
+                reader = csv.DictReader(f)
+                for row in reader:
+                    leg = row["legajo"]
+                    if leg in perfiles:
+                        perfiles[leg]["historial_previo"] = [
+                            int(row["semana_1"]),
+                            int(row["semana_2"]),
+                            int(row["semana_3"])
+                        ]
 
         # 2. Leer Campus (o aplicar Regla F1 si está cortado)
         if not simular_corte_campus and os.path.exists(campus_path):

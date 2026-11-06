@@ -1,107 +1,110 @@
 """
-agente2_riesgo.py
-Agente A2: Evaluación Probabilística de Riesgo y Explicabilidad (XAI).
-Responsabilidad:
-- Recibe perfiles consolidados de A1.
-- Aplica función logística multivariable calibrada para predecir propensión al abandono.
-- Si la Regla F1 está activa (fuente caída), NO inventa puntaje: cataloga como 'SIN EVALUAR'.
-- Extrae los 3 factores determinantes con mayor peso explicativo para el tutor (O3).
+models/agente2_riesgo.py
+Agente A2: Evaluación de riesgo y explicabilidad (XAI).
+
+Responsabilidades:
+- Recibir los perfiles semanales consolidados por A1.
+- Estimar la probabilidad de abandono con una regresión logística calibrada.
+- Regla F1: si falta la fuente del campus, NO estima (estado "SIN EVALUAR").
+- Explicar cada puntaje con los 3 factores que más aportaron (en puntos).
+
+Calibración (cohorte de referencia):
+- Perfil regular (asistencia 90 %, campus al día, TPs completos, parcial 8) -> ~10 puntos.
+- Perfil Caso X (asistencia 40 %, 4 faltas, 12 días sin campus, 2 TPs, parcial 3.5) -> ~82 puntos.
 """
 
 import math
-from typing import Dict, Any, List, Tuple
+from typing import Any, Dict, List
 
 
 class AgenteEvaluadorRiesgo:
-    def __init__(self):
-        # Coeficientes beta calibrados del modelo logístico
-        # z = beta_0 + sum(beta_i * x_i)
-        self.beta_0 = -2.10
-        self.w_asistencia = 0.055      # Cada punto porcentual que cae respecto al 100%
-        self.w_faltas = 0.52          # Faltas en las últimas 2 semanas
-        self.w_inactivo_campus = 0.18 # Días corridos sin login
-        self.w_tps_adeudados = 0.75   # TPs no entregados
-        self.w_nota_baja = 0.35       # Brecha negativa respecto a la nota mínima de aprobación (6.0)
+    BETA_0 = -2.50
+    PESOS = {
+        "asistencia": 0.0222,   # por cada punto porcentual por debajo del 100 %
+        "faltas": 0.21,         # por falta en las últimas dos semanas
+        "campus": 0.073,        # por día corrido sin ingresar al campus
+        "entregas": 0.30,       # por trabajo práctico adeudado
+        "parcial": 0.14,        # por punto por debajo de la nota de aprobación (6)
+    }
+    NOTA_APROBACION = 6.0
+    UMBRAL_ALTO = 70
+    UMBRAL_MEDIO = 40
 
-    def _sigmoide(self, z: float) -> float:
+    @staticmethod
+    def _sigmoide(z: float) -> float:
         try:
             return 1.0 / (1.0 + math.exp(-z))
         except OverflowError:
             return 0.0 if z < 0 else 1.0
 
+    def _nivel(self, score: int) -> str:
+        if score >= self.UMBRAL_ALTO:
+            return "ALTO"
+        if score >= self.UMBRAL_MEDIO:
+            return "MEDIO"
+        return "BAJO"
+
     def evaluar(self, perfiles: List[Dict[str, Any]], regla_f1: bool = False) -> List[Dict[str, Any]]:
         evaluados = []
+        w = self.PESOS
 
         for p in perfiles:
             item = dict(p)
 
-            # Si la fuente del campus se cayó (Regla F1)
+            # Regla F1: falta de dato != inactividad
             if regla_f1 or not p.get("fuente_campus_activa", True) or p.get("dias_inactivo_campus") is None:
                 item["score_riesgo"] = None
                 item["nivel_riesgo"] = "SIN EVALUAR"
-                item["estado_sistema"] = "Sin evaluar (Falla F1: Corte en Campus)"
                 item["factores_explicativos"] = [
-                    "Corte detectado en la fuente de Campus Virtual.",
-                    "Regla F1: La falta de datos no se interpreta como inactividad del estudiante.",
-                    "Calificación preventiva suspendida para evitar falsos positivos."
+                    "La fuente del campus virtual no envió datos esta semana.",
+                    "Regla F1: la falta de datos no se interpreta como inactividad del estudiante.",
+                    "El puntaje queda suspendido hasta que se restablezca la fuente.",
                 ]
+                item["factores_detalle"] = []
+                item["historial"] = list(p.get("historial_previo", [20, 25, 30])) + [None]
                 evaluados.append(item)
                 continue
 
-            # Cálculo de variables de riesgo
-            caida_asistencia = max(0.0, 100.0 - p["asistencia_pct"])
-            faltas_recientes = p["faltas_ult_2sem"]
-            dias_inactivo = p["dias_inactivo_campus"]
-            tps_debe = max(0, p["tps_exigidos"] - p["tps_entregados"])
-            gap_nota = max(0.0, 6.0 - p["nota_parcial"])
+            asistencia = float(p["asistencia_pct"])
+            faltas = int(p["faltas_ult_2sem"])
+            dias = int(p["dias_inactivo_campus"])
+            exigidos = int(p["tps_exigidos"])
+            adeudados = max(0, exigidos - int(p["tps_entregados"]))
+            nota = float(p["nota_parcial"])
+            brecha = max(0.0, self.NOTA_APROBACION - nota)
 
-            # Cálculo de logit z
-            c_asistencia = self.w_asistencia * caida_asistencia
-            c_faltas = self.w_faltas * faltas_recientes
-            c_inactivo = self.w_inactivo_campus * dias_inactivo
-            c_tps = self.w_tps_adeudados * tps_debe
-            c_nota = self.w_nota_baja * gap_nota
-
-            z = self.beta_0 + c_asistencia + c_faltas + c_inactivo + c_tps + c_nota
-            probabilidad = self._sigmoide(z)
-            score = int(round(probabilidad * 100))
-            score = max(5, min(98, score)) # Acotar a rango realista
-
-            # Explicabilidad (Top 3 Factores con mayor aporte al logit)
-            aportes = [
-                (
-                    c_asistencia + c_faltas,
-                    f"Inasistencias acumuladas: asistencia al {p['asistencia_pct']}% con {faltas_recientes} faltas en las últimas dos semanas."
-                ),
-                (
-                    c_tps,
-                    f"Trabajos Prácticos adeudados: {tps_debe} de {p['tps_exigidos']} entregas sin registrar."
-                ),
-                (
-                    c_inactivo,
-                    f"Inactividad digital: {dias_inactivo} días consecutivos sin acceso a los recursos del Campus."
-                ),
-                (
-                    c_nota,
-                    f"Rendimiento inicial: nota en Parcial 1 ({p['nota_parcial']}) por debajo de la media esperada."
-                )
+            contribuciones = [
+                ("asistencia",
+                 w["asistencia"] * (100.0 - asistencia) + w["faltas"] * faltas,
+                 f"Asistencia del {asistencia:.0f} % con {faltas} faltas en las últimas dos semanas"),
+                ("entregas",
+                 w["entregas"] * adeudados,
+                 f"{adeudados} de {exigidos} trabajos prácticos sin entregar"),
+                ("campus",
+                 w["campus"] * dias,
+                 f"{dias} días sin ingresar al campus virtual"),
+                ("parcial",
+                 w["parcial"] * brecha,
+                 f"Primer parcial con nota {nota:.1f} (se aprueba con {self.NOTA_APROBACION:.0f})"),
             ]
 
-            # Ordenar por mayor contribución
-            aportes.sort(key=lambda x: x[0], reverse=True)
-            top_3 = [desc for _, desc in aportes[:3]]
+            z = self.BETA_0 + sum(c for _, c, _ in contribuciones)
+            score = max(1, min(99, int(round(self._sigmoide(z) * 100))))
 
-            # Asignar nivel
-            if score >= 70:
-                nivel = "ALTO"
-            elif score >= 40:
-                nivel = "MEDIO"
-            else:
-                nivel = "BAJO"
+            # Explicabilidad: reparte el puntaje según el aporte de cada factor
+            positivas = [(k, c, t) for k, c, t in contribuciones if c > 0.05]
+            total = sum(c for _, c, _ in positivas)
+            positivas.sort(key=lambda x: x[1], reverse=True)
+            detalle = [
+                {"clave": k, "texto": t, "aporte": int(round(c / total * score)) if total else 0}
+                for k, c, t in positivas[:3]
+            ]
 
             item["score_riesgo"] = score
-            item["nivel_riesgo"] = nivel
-            item["factores_explicativos"] = top_3
+            item["nivel_riesgo"] = self._nivel(score)
+            item["factores_detalle"] = detalle
+            item["factores_explicativos"] = [d["texto"] for d in detalle]
+            item["historial"] = list(p.get("historial_previo", [20, 25, 30])) + [score]
             evaluados.append(item)
 
         return evaluados
