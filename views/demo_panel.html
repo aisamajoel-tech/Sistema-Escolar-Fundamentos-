@@ -1,0 +1,1646 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SITA-IA · Sistema Institucional de Tutorías y Alerta Temprana</title>
+  <style>
+    :root {
+      --bg: #090d16;
+      --panel: #0f172a;
+      --panel-subtle: #141e33;
+      --card: #182238;
+      --border: #22304d;
+      --border-focus: #3b82f6;
+      
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+
+      --blue-glow: rgba(59, 130, 246, 0.15);
+      --accent: #3b82f6;
+      --accent-hover: #2563eb;
+      
+      --red: #ef4444;
+      --red-bg: rgba(239, 68, 68, 0.12);
+      --red-border: rgba(239, 68, 68, 0.35);
+
+      --amber: #f59e0b;
+      --amber-bg: rgba(245, 158, 11, 0.12);
+      --amber-border: rgba(245, 158, 11, 0.35);
+
+      --green: #10b981;
+      --green-bg: rgba(16, 185, 129, 0.12);
+      --green-border: rgba(16, 185, 129, 0.35);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", sans-serif; }
+    body { background: var(--bg); color: var(--text); padding-bottom: 60px; font-size: 13px; -webkit-font-smoothing: antialiased; }
+    
+    code, .mono { font-family: ui-monospace, "JetBrains Mono", SFMono-Regular, Menlo, monospace; }
+
+    /* Top Command Header */
+    .top-command {
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .brand-logo-frame {
+      height: 34px;
+      padding: 3px 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+    }
+    .brand-logo-frame img { height: 26px; }
+    .brand-info h1 {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #f1f5f9;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .brand-info p {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* Selector de Rol Institucional */
+    .role-switcher {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #090d16;
+      border: 1px solid var(--border);
+      padding: 3px;
+      border-radius: 8px;
+    }
+    .role-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s;
+    }
+    .role-btn:hover { color: var(--text); background: rgba(255,255,255,0.03); }
+    .role-btn.active-role {
+      background: var(--card);
+      border-color: var(--accent);
+      color: #93c5fd;
+    }
+
+    /* Live Rehearsal Navigator (Para los 5 min de defensa) */
+    .demo-bar-wrap {
+      background: #0d1322;
+      border-bottom: 1px solid var(--border);
+      padding: 8px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .demo-selector {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .scenario-btn {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+    .scenario-btn:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+    .scenario-btn.active {
+      background: var(--card);
+      border-color: var(--border-focus);
+      color: #93c5fd;
+      box-shadow: 0 0 10px var(--blue-glow);
+    }
+    .scenario-btn.alert.active {
+      border-color: var(--red);
+      color: #fca5a5;
+      background: rgba(239, 68, 68, 0.15);
+    }
+
+    .aux-tools {
+      display: flex;
+      gap: 8px;
+    }
+    .btn-tool {
+      background: var(--panel-subtle);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 5px 11px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.15s;
+    }
+    .btn-tool:hover {
+      background: var(--card);
+      color: var(--text);
+      border-color: #64748b;
+    }
+
+    /* Layout Wrapper */
+    .app-wrap {
+      max-width: 1360px;
+      margin: 18px auto 0;
+      padding: 0 24px;
+    }
+
+    /* Pipeline Architecture Ribbon */
+    .architecture-ribbon {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr auto 1.3fr;
+      align-items: center;
+      gap: 12px;
+    }
+    .agent-node {
+      background: var(--panel-subtle);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 12px;
+      position: relative;
+    }
+    .node-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 3px;
+    }
+    .node-tag {
+      font-size: 9.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--accent);
+    }
+    .node-status {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 8px var(--green);
+    }
+    .node-status.f1-broken {
+      background: var(--red);
+      box-shadow: 0 0 8px var(--red);
+    }
+    .agent-node h3 {
+      font-size: 12px;
+      font-weight: 700;
+      color: #f1f5f9;
+    }
+    .node-meta {
+      font-size: 10.5px;
+      color: var(--text-muted);
+      margin-top: 3px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .pipeline-arrow {
+      color: var(--text-dim);
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gate-node {
+      background: rgba(245, 158, 11, 0.05);
+      border: 1px dashed var(--amber-border);
+      border-radius: 8px;
+      padding: 10px 14px;
+    }
+    .gate-title {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #fbbf24;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .gate-desc {
+      font-size: 10.5px;
+      color: #d1d5db;
+      margin-top: 2px;
+      line-height: 1.35;
+    }
+
+    /* Dual Grid: Master List & Dossier Inspection */
+    .telemetry-grid {
+      display: grid;
+      grid-template-columns: 460px 1fr;
+      gap: 20px;
+    }
+
+    /* Master List */
+    .master-frame {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .frame-top {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--panel-subtle);
+    }
+    .frame-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      color: #e2e8f0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .frame-stats {
+      font-size: 10.5px;
+      color: var(--text-muted);
+    }
+
+    .student-queue {
+      max-height: 600px;
+      overflow-y: auto;
+    }
+    .queue-row {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.15s ease;
+      position: relative;
+    }
+    .queue-row:last-child { border-bottom: none; }
+    .queue-row:hover { background: rgba(255, 255, 255, 0.02); }
+    .queue-row.active-row {
+      background: rgba(59, 130, 246, 0.08);
+      border-left: 3px solid var(--accent);
+      padding-left: 13px;
+    }
+
+    .q-main { display: flex; flex-direction: column; gap: 2px; }
+    .q-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: #f8fafc;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .q-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* Architectural Badges */
+    .metric-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+    .badge-critical { background: var(--red-bg); color: #f87171; border: 1px solid var(--red-border); }
+    .badge-discord { background: var(--amber-bg); color: #fbbf24; border: 1px solid var(--amber-border); }
+    .badge-moderate { background: rgba(59, 130, 246, 0.12); color: #93c5fd; border: 1px solid rgba(59, 130, 246, 0.3); }
+    .badge-off { background: rgba(148, 163, 184, 0.1); color: #94a3b8; border: 1px solid var(--border); }
+    .badge-lock { background: #312e81; color: #c7d2fe; border: 1px solid #4338ca; }
+
+    /* Dossier Panel (Right side) */
+    .dossier-frame {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .dossier-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 14px;
+    }
+    .dossier-meta h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #f8fafc;
+      letter-spacing: -0.3px;
+    }
+    .dossier-meta p {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .score-meter {
+      text-align: right;
+    }
+    .score-num {
+      font-size: 26px;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.5px;
+    }
+    .score-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* Telemetry Row */
+    .telemetry-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      background: var(--panel-subtle);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 14px;
+    }
+    .tel-item {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .tel-lbl {
+      font-size: 9.5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+    }
+    .tel-val {
+      font-size: 13px;
+      font-weight: 700;
+      color: #f1f5f9;
+    }
+
+    /* Tendencia Temporal */
+    .trend-box {
+      background: #090d16;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 14px;
+    }
+    .trend-header {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .trend-timeline {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+    .timeline-col {
+      background: var(--panel-subtle);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 6px 8px;
+      text-align: center;
+      position: relative;
+    }
+    .timeline-col.critical-week {
+      border-color: rgba(239, 68, 68, 0.4);
+      background: rgba(239, 68, 68, 0.08);
+    }
+    .week-lbl { font-size: 9.5px; font-weight: 700; color: var(--text-muted); }
+    .week-score { font-size: 13px; font-weight: 800; margin: 2px 0; }
+    .week-status { font-size: 9px; color: var(--text-dim); }
+
+    /* Explainability Vector (XAI) */
+    .xai-section {
+      background: #090d16;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .xai-header {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #60a5fa;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .factor-bar-item { margin-bottom: 8px; }
+    .factor-bar-item:last-child { margin-bottom: 0; }
+    .factor-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11.5px;
+      margin-bottom: 3px;
+      color: #e2e8f0;
+    }
+    .factor-track {
+      height: 5px;
+      background: #1e293b;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .factor-fill {
+      height: 100%;
+      border-radius: 3px;
+      background: var(--red);
+    }
+
+    /* Human Governance Box */
+    .governance-gate {
+      background: var(--panel-subtle);
+      border: 1px solid var(--border);
+      border-left: 4px solid #f59e0b;
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .gov-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+    .gov-title {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #fbbf24;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .gov-sub {
+      font-size: 11px;
+      color: #cbd5e1;
+      line-height: 1.4;
+      margin-bottom: 10px;
+    }
+    .gov-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .btn-seal {
+      background: #1e3a8a;
+      border: 1px solid #3b82f6;
+      color: white;
+      padding: 7px 14px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.15s;
+    }
+    .btn-seal:hover { background: #2563eb; }
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 7px 12px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.03); color: var(--text); }
+
+    /* Sealed State Confirmation */
+    .sealed-ledger {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid var(--green-border);
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-size: 11.5px;
+      color: #6ee7b7;
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Modal / Popups */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 8, 15, 0.75);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-window {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      width: 650px;
+      max-width: 95vw;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+      overflow: hidden;
+    }
+    .modal-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--panel-subtle);
+    }
+    .modal-header h3 { font-size: 14px; font-weight: 700; color: #f8fafc; }
+    .modal-body { padding: 20px; display: flex; flex-direction: column; gap: 14px; }
+    .modal-close { background: none; border: none; font-size: 20px; color: var(--text-muted); cursor: pointer; }
+
+    .bias-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .bias-card {
+      background: #090d16;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+    }
+    .bias-val { font-size: 18px; font-weight: 800; margin: 3px 0; }
+
+    /* Alert Banner F2 */
+    .escalation-alert {
+      background: #451a03;
+      border: 1px solid #d97706;
+      border-radius: 8px;
+      padding: 10px 16px;
+      margin-bottom: 16px;
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      color: #fef3c7;
+      font-size: 12px;
+    }
+
+    /* VISTA DOCENTE (REGLA C1) BANNER */
+    .docente-c1-lock {
+      background: #1e1b4b;
+      border: 1px solid #4338ca;
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #e0e7ff;
+      font-size: 12px;
+    }
+
+    /* VISTA COORDINACIÓN BANNER & ACCIONES */
+    .coord-actions-box {
+      background: #090d16;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px;
+      margin-bottom: 16px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .coord-action-card {
+      background: var(--panel-subtle);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .coord-action-card h4 { font-size: 11.5px; color: #93c5fd; }
+    .coord-action-card p { font-size: 10.5px; color: var(--text-muted); }
+
+    /* Toast */
+    #console-toast {
+      position: fixed;
+      bottom: 24px;
+      right: 28px;
+      background: #0f172a;
+      border: 1px solid var(--border-focus);
+      color: white;
+      padding: 10px 18px;
+      border-radius: 8px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      font-size: 12px;
+      display: none;
+      align-items: center;
+      gap: 8px;
+      z-index: 200;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Command Header -->
+  <header class="top-command">
+    <div class="brand-group">
+      <div class="brand-logo-frame">
+        <img src="logo_uch.png" alt="Universidad Champagnat" onerror="this.style.display='none'">
+      </div>
+      <div class="brand-info">
+        <h1>SITA-IA <span style="font-weight:400; color:var(--text-muted);">| Detección Temprana y Gobernanza</span></h1>
+        <p>Facultad de Informática · Arquitectura A1 ➔ A2 ➔ A3 · Trazabilidad Prometheus</p>
+      </div>
+    </div>
+
+    <!-- Selector de Rol Institucional -->
+    <div class="role-switcher">
+      <span style="font-size:10px; color:var(--text-dim); text-transform:uppercase; margin-left:6px; font-weight:700;">Rol:</span>
+      <button class="role-btn active-role" id="role-tutor" onclick="switchRole('tutor')">
+        Tutor (Joel Aisama)
+      </button>
+      <button class="role-btn" id="role-coord" onclick="switchRole('coordinador')">
+        Coordinación (Bautista Navarro)
+      </button>
+      <button class="role-btn" id="role-docente" onclick="switchRole('docente')">
+        Docente de Cátedra (Regla C1)
+      </button>
+    </div>
+  </header>
+
+  <!-- Barra de Navegación de la Demo (Para los 5 min de defensa) -->
+  <div class="demo-bar-wrap">
+    <div class="demo-selector">
+      <span style="font-size:10px; color:var(--text-dim); text-transform:uppercase; font-weight:700;">Guion Demo:</span>
+      <button class="scenario-btn active" id="btn-scene-1" onclick="loadScenario1()">
+        <span class="mono">01</span> Carga Semanal (A1-A3)
+      </button>
+      <button class="scenario-btn" id="btn-scene-2" onclick="loadScenario2()">
+        <span class="mono">02</span> Caso Lucas (82)
+      </button>
+      <button class="scenario-btn alert" id="btn-scene-3" onclick="loadScenario3()">
+        <span class="mono">03</span> Falla F1: Campus
+      </button>
+      <button class="scenario-btn" id="btn-scene-4" onclick="loadScenario4()">
+        <span class="mono">04</span> Falla F3: Discordancia
+      </button>
+    </div>
+
+    <div class="aux-tools">
+      <button class="btn-tool" onclick="openBiasModal()">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 20V10M12 20V4M6 20v-6"></path></svg>
+        Sesgo Inter-Turno (N7)
+      </button>
+      <button class="btn-tool" onclick="simulateF2Escalation()">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        Simular +10 Días (F2)
+      </button>
+      <button class="btn-tool" onclick="openPrometheusModal()">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+        Bitácora Prometheus (Msj 0-12)
+      </button>
+    </div>
+  </div>
+
+  <div class="app-wrap">
+
+    <!-- Banner Regla C1 (Aparece en Rol Docente) -->
+    <div class="docente-c1-lock" id="docente-banner" style="display:none;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+      <div>
+        <strong>AUDITORÍA DE DISEÑO · REGLA C1 APLICADA:</strong>
+        Como docente de la materia, tenés permiso para cargar asistencia y notas.
+        <strong>El puntaje y nivel de riesgo de IA están estrictamente ocultos</strong> para evitar sesgos de expectativa en tus evaluaciones parciales.
+      </div>
+    </div>
+
+    <!-- Panel de Decisiones de Coordinación (Aparece en Rol Coordinación) -->
+    <div class="coord-actions-box" id="coord-panel" style="display:none;">
+      <div class="coord-action-card">
+        <h4>Derivaciones Pendientes (N3)</h4>
+        <p>Aprobar medidas institucionales solicitadas por tutores (beca, cambio de turno).</p>
+        <button class="btn-seal" style="margin-top:auto;" onclick="approveDerivationN3()" id="btn-approve-deriv">
+          Aprobar Derivación Lucas (N3)
+        </button>
+      </div>
+
+      <div class="coord-action-card">
+        <h4>Escalamientos y Reasignación (N6)</h4>
+        <p>Casos sin respuesta por más de 10 días (Regla F2).</p>
+        <button class="btn-secondary" style="margin-top:auto;" onclick="reassignTutorN6()" id="btn-reassign-n6">
+          Reasignar Caso a Tutor B (N6)
+        </button>
+      </div>
+
+      <div class="coord-action-card">
+        <h4>Aprobación de Recalibración (N7)</h4>
+        <p>Auditoría de sesgo (Δ recall 3.8 pts ≤ 10 pts). Fuentes consentidas (N8).</p>
+        <button class="btn-seal" style="background:#065f46; border-color:#10b981; margin-top:auto;" onclick="approveRecalibrationN7()" id="btn-recalib-n7">
+          Aprobar Recalibración Cuatrimestral (N7)
+        </button>
+      </div>
+    </div>
+
+    <!-- Banner de Alerta F2 -->
+    <div class="escalation-alert" id="f2-banner">
+      <div>
+        <strong>⚠️ PROTOCOLO F2 ACTIVADO (DÍA 10 DE INACCIÓN):</strong> El caso no fue atendido por el tutor en 10 días.<br>
+        <span style="font-size:11px; opacity:0.9;">A3 escaló formalmente a Coordinación Académica para reasignación de tutor (N6). Ningún agente contactó al estudiante.</span>
+      </div>
+      <button class="btn-tool" style="background:rgba(0,0,0,0.3); color:white; border-color:#d97706;" onclick="closeF2Banner()">Cerrar aviso</button>
+    </div>
+
+    <!-- Architecture Ribbon -->
+    <section class="architecture-ribbon" id="pipeline-bar">
+      
+      <!-- Agente A1 -->
+      <div class="agent-node" id="node-a1">
+        <div class="node-header">
+          <span class="node-tag">Agente A1</span>
+          <span class="node-status" id="status-a1"></span>
+        </div>
+        <h3>Monitoreo e Integridad</h3>
+        <div class="node-meta">
+          <span id="meta-a1-fuentes">3 Fuentes CSV</span>
+          <span class="mono" id="meta-a1-perfiles">120 Perfiles</span>
+        </div>
+      </div>
+
+      <div class="pipeline-arrow">&rarr;</div>
+
+      <!-- Agente A2 -->
+      <div class="agent-node" id="node-a2">
+        <div class="node-header">
+          <span class="node-tag">Agente A2</span>
+          <span class="node-status" id="status-a2"></span>
+        </div>
+        <h3>Scoring ML + XAI</h3>
+        <div class="node-meta">
+          <span>Logit Calibrado</span>
+          <span class="mono" id="meta-a2-recall">Recall 73.8%</span>
+        </div>
+      </div>
+
+      <div class="pipeline-arrow">&rarr;</div>
+
+      <!-- Agente A3 -->
+      <div class="agent-node" id="node-a3">
+        <div class="node-header">
+          <span class="node-tag">Agente A3</span>
+          <span class="node-status" id="status-a3"></span>
+        </div>
+        <h3>Priorización Operativa</h3>
+        <div class="node-meta">
+          <span>Tope &le; 15 casos</span>
+          <span class="mono" id="meta-a3-sesgo">&Delta; Sesgo 3.8 pts</span>
+        </div>
+      </div>
+
+      <div class="pipeline-arrow">&rarr;</div>
+
+      <!-- Compuerta de Decisión Humana (N1-N4) -->
+      <div class="gate-node" id="node-human-gate">
+        <div class="gate-title">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          Compuerta Humana N1-N4
+        </div>
+        <div class="gate-desc">
+          <strong>No Autonomous Action:</strong> El agente no tiene permiso de emitir correos ni dar bajas. Toda decisión requiere firma del tutor.
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Master-Dossier Grid -->
+    <main class="telemetry-grid">
+      
+      <!-- Columna Izquierda: Cola de Priorización -->
+      <section class="master-frame">
+        <div class="frame-top">
+          <div class="frame-title">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+            <span id="tray-title-text">Bandeja Semanal del Tutor</span>
+          </div>
+          <div class="frame-stats mono" id="queue-counter">5 / 15 CASOS</div>
+        </div>
+
+        <div class="student-queue" id="student-list-container">
+          <!-- Dinámico -->
+        </div>
+      </section>
+
+      <!-- Columna Derecha: Expediente del Alumno -->
+      <section class="dossier-frame">
+        
+        <div class="dossier-header">
+          <div class="dossier-meta">
+            <div style="font-size:10.5px; text-transform:uppercase; color:var(--text-muted); font-weight:700; letter-spacing:0.5px;">
+              Expediente Digital · Legajo #<span id="dos-legajo" class="mono">24901</span>
+            </div>
+            <h2 id="dos-nombre">González, Lucas (Caso X)</h2>
+            <p id="dos-carrera">Ingeniería en Sistemas de Información · Comisión 1 (Turno Noche)</p>
+          </div>
+
+          <div class="score-meter">
+            <div class="score-num mono" id="dos-score" style="color: #f87171;">82</div>
+            <div class="score-label" id="dos-score-label">Índice Multivariable</div>
+          </div>
+        </div>
+
+        <!-- Telemetría de Entrada -->
+        <div class="telemetry-row">
+          <div class="tel-item">
+            <div class="tel-lbl">Asistencia Presencial</div>
+            <div class="tel-val mono" id="tel-asistencia" style="color:#f87171;">40.0%</div>
+            <div style="font-size:9.5px; color:var(--text-muted);">4 faltas recientes</div>
+          </div>
+          <div class="tel-item">
+            <div class="tel-lbl">Campus Virtual</div>
+            <div class="tel-val mono" id="tel-campus" style="color:#f87171;">12d Inactivo</div>
+            <div style="font-size:9.5px; color:var(--text-muted);">Sin login reciente</div>
+          </div>
+          <div class="tel-item">
+            <div class="tel-lbl">Entregas de TPs</div>
+            <div class="tel-val mono" id="tel-tps" style="color:#f87171;">1 / 3 Entregados</div>
+            <div style="font-size:9.5px; color:var(--text-muted);">Parcial: 3.5</div>
+          </div>
+        </div>
+
+        <!-- Tendencia Temporal Semanas 1 a 4 -->
+        <div class="trend-box" id="dos-trend-box">
+          <div class="trend-header">
+            <span>Evolución Temporal del Riesgo (Detección Temprana)</span>
+            <span class="mono" style="color:#38bdf8;">VENTANA DE 4 SEMANAS</span>
+          </div>
+          <div class="trend-timeline" id="dos-timeline-container">
+            <!-- Dinámico -->
+          </div>
+        </div>
+
+        <!-- Explicabilidad Matemática (Top 3 Factores A2) -->
+        <div class="xai-section" id="dos-xai-box">
+          <div class="xai-header">
+            <span>Descomposición de Atribución (A2 XAI)</span>
+            <span class="mono" style="color:var(--text-muted);">TOP 3 FACTORES</span>
+          </div>
+          <div id="dos-factors-container">
+            <!-- Dinámico -->
+          </div>
+        </div>
+
+        <!-- Compuerta de Decisión No Delegable (N1 - N4) -->
+        <!-- Asistente de Entrevista Empática Google AI Studio (Gemini 1.5 Flash) -->
+        <div id="gemini-assistant-card" style="background:#042f2e; border:1px solid #14b8a6; border-radius:8px; padding:14px; display:none;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <div style="display:flex; align-items:center; gap:6px; font-weight:700; color:#5eead4; font-size:12px; text-transform:uppercase;">
+              <span class="mono">✨ GOOGLE AI STUDIO · GEMINI 1.5 FLASH (NLP)</span>
+            </div>
+            <span class="mono" id="gemini-badge-mode" style="background:rgba(20, 184, 166, 0.2); color:#5eead4; padding:2px 8px; border-radius:4px; font-size:10px;">PROCESANDO API</span>
+          </div>
+          <div id="gemini-response-text" style="font-size:11.5px; color:#ccfbf1; line-height:1.45; white-space:pre-wrap;">
+            Generando guía de diálogo pedagógico...
+          </div>
+        </div>
+
+        <div class="governance-gate" id="box-governance">
+          <div class="gov-head">
+            <div class="gov-title">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              Resolución del Tutor · Prof. Joel Aisama
+            </div>
+            <span class="mono" style="font-size:10.5px; color:#fbbf24; font-weight:700;">SALVAGUARDA N1</span>
+          </div>
+          <p class="gov-sub">
+            El sistema se encuentra en pausa operativa. La IA no puede enviar correos automáticos al alumno ni modificar su regularidad académica.
+          </p>
+
+          <div class="gov-actions">
+            <button class="btn-seal" onclick="confirmHumanIntervention()">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Concertar Entrevista Presencial (N2)
+            </button>
+            <button class="btn-seal" style="background:#4338ca; border-color:#6366f1;" onclick="proposeDerivationN3()">
+              Proponer Cambio de Turno/Comisión (N3)
+            </button>
+            <button class="btn-secondary" onclick="dismissFalsePositive()">
+              Desestimar Alerta (Falso Positivo F3)
+            </button>
+            <button class="btn-seal" style="background:#0f766e; border-color:#14b8a6;" onclick="triggerGeminiGuide()">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M2 12h20"></path></svg>
+              Asistente Gemini AI (Guía N2)
+            </button>
+            <button class="btn-secondary" onclick="printDossierTicket()">
+              Imprimir Ficha
+            </button>
+          </div>
+        </div>
+
+        <!-- Ledger de Decisión Registrada -->
+        <div class="sealed-ledger" id="box-sealed">
+          <div>
+            <strong>✓ INTERVENCIÓN REGISTRADA:</strong> Entrevista presencial confirmada por Prof. Joel Aisama.<br>
+            <span class="mono" style="font-size:10.5px; color:#a7f3d0;">Hash de auditoría: 8f4c2e... · Ninguna acción automática hacia el estudiante fue ejecutada.</span>
+          </div>
+          <button class="btn-tool" style="color:#a7f3d0; border-color:#059669;" onclick="printDossierTicket()">Descargar Acta</button>
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- MODAL 1: Auditoría de Sesgo N7 -->
+  <div class="modal-overlay" id="bias-modal" onclick="closeBiasModal(event)">
+    <div class="modal-window" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3>Auditoría de Equidad y Control de Sesgo (Métrica N7)</h3>
+        <button class="modal-close" onclick="closeBiasModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:12px; color:#cbd5e1; line-height:1.5;">
+          Para autorizar la recalibración cuatrimestral del modelo ($N7$), Coordinación exige que la disparidad de recall entre turnos no supere los <strong>10 puntos porcentuales</strong>.
+        </p>
+
+        <div class="bias-grid">
+          <div class="bias-card">
+            <div style="font-size:10.5px; color:var(--text-muted); text-transform:uppercase;">Turno Mañana</div>
+            <div class="bias-val mono" style="color:#38bdf8;">74.5%</div>
+            <div style="font-size:9.5px; color:var(--text-muted);">Recall (n=40)</div>
+          </div>
+          <div class="bias-card">
+            <div style="font-size:10.5px; color:var(--text-muted); text-transform:uppercase;">Turno Tarde</div>
+            <div class="bias-val mono" style="color:#38bdf8;">72.1%</div>
+            <div style="font-size:9.5px; color:var(--text-muted);">Recall (n=38)</div>
+          </div>
+          <div class="bias-card">
+            <div style="font-size:10.5px; color:var(--text-muted); text-transform:uppercase;">Turno Noche</div>
+            <div class="bias-val mono" style="color:#38bdf8;">75.9%</div>
+            <div style="font-size:9.5px; color:var(--text-muted);">Recall (n=42)</div>
+          </div>
+        </div>
+
+        <div style="background:#090d16; border:1px solid #10b981; border-radius:8px; padding:12px; margin-top:6px;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <span style="font-weight:700; color:#34d399; font-size:12.5px;">✓ DICTAMEN DE SESGO: APROBADO</span>
+              <div style="font-size:11px; color:#94a3b8; margin-top:2px;">
+                Diferencia máxima observada: <strong>3.8 puntos</strong> (Límite tolerado: &le; 10 pts).
+              </div>
+            </div>
+            <span class="mono" style="background:rgba(16,185,129,0.15); color:#34d399; padding:4px 8px; border-radius:6px; font-size:10.5px; font-weight:700;">CONFORME N7</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 2: Bitácora de Mensajes Prometheus (Msj 0 al 12) -->
+  <div class="modal-overlay" id="prometheus-modal" onclick="closePrometheusModal(event)">
+    <div class="modal-window" style="width:750px;" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3>Trazabilidad de Mensajes Prometheus (Diagrama de Secuencia 3.ª Entrega)</h3>
+        <button class="modal-close" onclick="closePrometheusModal()">&times;</button>
+      </div>
+      <div class="modal-body" style="max-height:480px; overflow-y:auto;" id="prom-log-body">
+        <!-- Generado dinámicamente -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="console-toast">
+    <span id="toast-msg">Mensaje del sistema</span>
+  </div>
+
+  <script>
+    let currentRole = "tutor";
+    let isF1Corte = false;
+    let selectedLegajo = "24901";
+
+    const estudiantes = [
+      {
+        legajo: "24901",
+        nombre: "González, Lucas (Caso X)",
+        carrera: "Ing. en Sistemas de Información",
+        comision: "Comisión 1 (Noche)",
+        asistencia: "40.0%",
+        faltas: 4,
+        campus: "12d Inactivo",
+        tps: "1 / 3 Entregados",
+        score: 82,
+        nivel: "CRÍTICO",
+        timeline: [
+          { week: "Semana 1", score: 14, status: "Normal", cls: "" },
+          { week: "Semana 2", score: 38, status: "Alerta leve", cls: "" },
+          { week: "Semana 3", score: 62, status: "Vulnerable", cls: "" },
+          { week: "Semana 4", score: 82, status: "Crítico (A2)", cls: "critical-week" }
+        ],
+        factors: [
+          { name: "Inasistencias continuas (40% acumulado)", weight: "+38 pts", pct: 85 },
+          { name: "Trabajos Prácticos adeudados (TP 2 y 3)", weight: "+26 pts", pct: 65 },
+          { name: "Inactividad digital prolongada en campus", weight: "+18 pts", pct: 45 }
+        ],
+        estado: "Pendiente revisión",
+        derivacion_n3: null
+      },
+      {
+        legajo: "24883",
+        nombre: "Martínez, Camila",
+        carrera: "Ing. en Sistemas de Información",
+        comision: "Comisión 2 (Mañana)",
+        asistencia: "52.0%",
+        faltas: 3,
+        campus: "9d Inactivo",
+        tps: "1 / 3 Entregados",
+        score: 76,
+        nivel: "CRÍTICO",
+        timeline: [
+          { week: "Semana 1", score: 20, status: "Normal", cls: "" },
+          { week: "Semana 2", score: 45, status: "Alerta leve", cls: "" },
+          { week: "Semana 3", score: 58, status: "Vulnerable", cls: "" },
+          { week: "Semana 4", score: 76, status: "Crítico", cls: "critical-week" }
+        ],
+        factors: [
+          { name: "Caída de asistencia en materias troncales", weight: "+34 pts", pct: 75 },
+          { name: "Calificación reprobatoria en Parcial 1 (4.0)", weight: "+28 pts", pct: 60 },
+          { name: "Mora en entrega de TP2", weight: "+14 pts", pct: 35 }
+        ],
+        estado: "Pendiente revisión"
+      },
+      {
+        legajo: "24945",
+        nombre: "Fernández, Mateo",
+        carrera: "Ing. en Sistemas de Información",
+        comision: "Comisión 1 (Tarde)",
+        asistencia: "92.0%",
+        faltas: 0,
+        campus: "14d Inactivo",
+        tps: "3 / 3 Entregados",
+        score: null,
+        nivel: "DISCORDANTE",
+        timeline: [
+          { week: "Semana 1", score: 10, status: "Normal", cls: "" },
+          { week: "Semana 2", score: 12, status: "Normal", cls: "" },
+          { week: "Semana 3", score: 15, status: "Normal", cls: "" },
+          { week: "Semana 4", score: "--", status: "Conflicto F3", cls: "critical-week" }
+        ],
+        factors: [
+          { name: "Asistencia presencial sobresaliente (92%)", weight: "Señal A+", pct: 92 },
+          { name: "Inactividad en campus virtual (14 días)", weight: "Señal C-", pct: 80 },
+          { name: "Regla F3: No se promedian señales contradictorias", weight: "F3 Lock", pct: 100 }
+        ],
+        estado: "En Revisión (F3)"
+      },
+      {
+        legajo: "25012",
+        nombre: "Gómez, Sofía",
+        carrera: "Lic. en Informática",
+        comision: "Comisión 3 (Noche)",
+        asistencia: "64.0%",
+        faltas: 2,
+        campus: "4d Inactivo",
+        tps: "2 / 3 Entregados",
+        score: 71,
+        nivel: "CRÍTICO",
+        timeline: [
+          { week: "Semana 1", score: 18, status: "Normal", cls: "" },
+          { week: "Semana 2", score: 32, status: "Normal", cls: "" },
+          { week: "Semana 3", score: 54, status: "Vulnerable", cls: "" },
+          { week: "Semana 4", score: 71, status: "Crítico", cls: "critical-week" }
+        ],
+        factors: [
+          { name: "Desviación en rendimiento Parcial 1 (4.5)", weight: "+31 pts", pct: 70 },
+          { name: "Asistencia decreciente en el último mes", weight: "+24 pts", pct: 55 },
+          { name: "Descarga de material bajo el umbral medio", weight: "+16 pts", pct: 40 }
+        ],
+        estado: "Pendiente revisión"
+      },
+      {
+        legajo: "24890",
+        nombre: "López, Brian",
+        carrera: "Ing. en Sistemas de Información",
+        comision: "Comisión 1 (Mañana)",
+        asistencia: "78.0%",
+        faltas: 1,
+        campus: "Activo",
+        tps: "3 / 3 Entregados",
+        score: 45,
+        nivel: "MODERADO",
+        timeline: [
+          { week: "Semana 1", score: 25, status: "Normal", cls: "" },
+          { week: "Semana 2", score: 30, status: "Normal", cls: "" },
+          { week: "Semana 3", score: 40, status: "Moderado", cls: "" },
+          { week: "Semana 4", score: 45, status: "Moderado", cls: "" }
+        ],
+        factors: [
+          { name: "Inasistencias aisladas sin patrón crítico", weight: "+12 pts", pct: 30 }
+        ],
+        estado: "Seguimiento periódico"
+      }
+    ];
+
+    // Matriz de Mensajes Prometheus
+    let prometheusMessages = [
+      { code: "P msj. 0*", de: "Coordinación", a: "A1 Monitoreo", tipo: "ACEPTAR", cont: "Habilita fuentes del cuatrimestre con consentimientos registrados (N8).", n: "N8" },
+      { code: "P msj. 1", de: "Docente", a: "A1 Monitoreo", tipo: "INFORMAR", cont: "Carga asistencia y notas de la semana (Docente no accede al score C1).", n: null },
+      { code: "P msj. 2", de: "A1 Monitoreo", a: "A2 Eval. Riesgo", tipo: "INFORMAR", cont: "Perfil semanal consolidado de 120 alumnos transmitido (≥95% completo).", n: null },
+      { code: "P msj. 3", de: "A2 Eval. Riesgo", a: "A3 Alertas", tipo: "PROPONER", cont: "Riesgo alto estimado para Lucas González (82/100) + 3 factores XAI.", n: null },
+      { code: "P msj. 4", de: "A3 Alertas", a: "Tutor (Joel)", tipo: "PROPONER", cont: "Caso Lucas González en prioridad 1 de bandeja semanal (tope 15).", n: null }
+    ];
+
+    function renderQueue() {
+      const cont = document.getElementById("student-list-container");
+      cont.innerHTML = "";
+
+      estudiantes.forEach(s => {
+        const row = document.createElement("div");
+        row.className = `queue-row ${s.legajo === selectedLegajo ? 'active-row' : ''}`;
+        row.onclick = () => selectStudent(s.legajo);
+
+        let badge = "";
+        if (currentRole === "docente") {
+          badge = `<span class="metric-badge badge-lock mono">🔒 C1 OCULTO</span>`;
+        } else if (isF1Corte) {
+          badge = `<span class="metric-badge badge-off mono">SIN EVALUAR</span>`;
+        } else if (s.nivel === "CRÍTICO") {
+          badge = `<span class="metric-badge badge-critical mono">${s.score} PTS</span>`;
+        } else if (s.nivel === "DISCORDANTE") {
+          badge = `<span class="metric-badge badge-discord mono">F3 LOCK</span>`;
+        } else {
+          badge = `<span class="metric-badge badge-moderate mono">${s.score} PTS</span>`;
+        }
+
+        row.innerHTML = `
+          <div class="q-main">
+            <div class="q-name">${s.nombre}</div>
+            <div class="q-sub">${s.comision} · Leg. ${s.legajo}</div>
+          </div>
+          <div>${badge}</div>
+        `;
+
+        cont.appendChild(row);
+      });
+    }
+
+    function selectStudent(legajo) {
+      selectedLegajo = legajo;
+      const s = estudiantes.find(e => e.legajo === legajo);
+      if (!s) return;
+
+      document.getElementById("dos-nombre").innerText = s.nombre;
+      document.getElementById("dos-legajo").innerText = s.legajo;
+      document.getElementById("dos-carrera").innerText = `${s.carrera} · ${s.comision}`;
+
+      const scoreEl = document.getElementById("dos-score");
+      const labelEl = document.getElementById("dos-score-label");
+      const factorsDiv = document.getElementById("dos-factors-container");
+      factorsDiv.innerHTML = "";
+
+      // Telemetría
+      document.getElementById("tel-asistencia").innerText = s.asistencia;
+      document.getElementById("tel-campus").innerText = isF1Corte ? "CORTE FUENTE" : s.campus;
+      document.getElementById("tel-tps").innerText = s.tps;
+
+      // Renderizar Tendencia Temporal
+      const timelineCont = document.getElementById("dos-timeline-container");
+      timelineCont.innerHTML = "";
+      (s.timeline || []).forEach(t => {
+        const col = document.createElement("div");
+        col.className = `timeline-col ${t.cls}`;
+        col.innerHTML = `
+          <div class="week-lbl">${t.week}</div>
+          <div class="week-score mono" style="color:${t.cls ? '#f87171' : '#f1f5f9'};">${t.score}</div>
+          <div class="week-status">${t.status}</div>
+        `;
+        timelineCont.appendChild(col);
+      });
+
+      // Si es rol docente (Regla C1)
+      if (currentRole === "docente") {
+        scoreEl.innerText = "🔒";
+        scoreEl.style.color = "#818cf8";
+        labelEl.innerText = "PUNTAJE BLOQUEADO (REGLA C1)";
+        factorsDiv.innerHTML = `
+          <p style="font-size:11.5px; color:#cbd5e1; line-height:1.4;">
+            <strong>Protección anti-sesgo C1:</strong> Los docentes aportan asistencia y calificaciones pero no ven las alertas de riesgo para evitar condicionar su corrección.
+          </p>
+        `;
+        document.getElementById("dos-trend-box").style.display = "none";
+        document.getElementById("box-governance").style.display = "none";
+        document.getElementById("box-sealed").style.display = "none";
+        renderQueue();
+        return;
+      } else {
+        document.getElementById("dos-trend-box").style.display = "block";
+      }
+
+      if (isF1Corte) {
+        scoreEl.innerText = "--";
+        scoreEl.style.color = "#94a3b8";
+        labelEl.innerText = "SUSPENDIDO (FALLA F1)";
+        factorsDiv.innerHTML = `
+          <div class="factor-bar-item">
+            <div class="factor-meta" style="color:#f87171;">
+              <span>Falla de Integridad: Corte en telemetría de Campus</span>
+              <span class="mono">Regla F1</span>
+            </div>
+            <div class="factor-track"><div class="factor-fill" style="width: 100%; background:#ef4444;"></div></div>
+          </div>
+          <p style="font-size:11.5px; color:#cbd5e1; margin-top:6px;">
+            <strong>Principio O8:</strong> La falta de datos no se interpreta como abandono. Scoring congelado.
+          </p>
+        `;
+      } else if (s.nivel === "DISCORDANTE") {
+        scoreEl.innerText = "F3";
+        scoreEl.style.color = "#fbbf24";
+        labelEl.innerText = "DISCORDANCIA DETECTADA";
+        s.factors.forEach(f => {
+          factorsDiv.innerHTML += `
+            <div class="factor-bar-item">
+              <div class="factor-meta">
+                <span>${f.name}</span>
+                <span class="mono" style="color:#fbbf24;">${f.weight}</span>
+              </div>
+              <div class="factor-track"><div class="factor-fill" style="width: ${f.pct}%; background:#f59e0b;"></div></div>
+            </div>
+          `;
+        });
+      } else {
+        scoreEl.innerText = s.score;
+        scoreEl.style.color = s.score >= 70 ? "#f87171" : "#93c5fd";
+        labelEl.innerText = s.score >= 70 ? "RIESGO CRÍTICO (A2)" : "RIESGO MODERADO";
+        s.factors.forEach(f => {
+          factorsDiv.innerHTML += `
+            <div class="factor-bar-item">
+              <div class="factor-meta">
+                <span>${f.name}</span>
+                <span class="mono" style="color:#f87171;">${f.weight}</span>
+              </div>
+              <div class="factor-track"><div class="factor-fill" style="width: ${f.pct}%;"></div></div>
+            </div>
+          `;
+        });
+      }
+
+      // Intervención
+      if (s.estado.includes("agendada") || s.derivacion_n3) {
+        document.getElementById("box-governance").style.display = "none";
+        document.getElementById("box-sealed").style.display = "flex";
+      } else {
+        document.getElementById("box-governance").style.display = "block";
+        document.getElementById("box-sealed").style.display = "none";
+      }
+
+      renderQueue();
+    }
+
+    // Swtich de Rol
+    function switchRole(role) {
+      currentRole = role;
+      document.getElementById("role-tutor").className = `role-btn ${role === 'tutor' ? 'active-role' : ''}`;
+      document.getElementById("role-coord").className = `role-btn ${role === 'coordinador' ? 'active-role' : ''}`;
+      document.getElementById("role-docente").className = `role-btn ${role === 'docente' ? 'active-role' : ''}`;
+
+      const docBanner = document.getElementById("docente-banner");
+      const coordPanel = document.getElementById("coord-panel");
+      const trayTitle = document.getElementById("tray-title-text");
+
+      if (role === "docente") {
+        docBanner.style.display = "flex";
+        coordPanel.style.display = "none";
+        trayTitle.innerText = "Planilla de Asistencia y Entregas (Docente Cátedra)";
+        triggerToast("Rol Docente activado: Regla C1 en vigencia. Scores IA bloqueados.");
+      } else if (role === "coordinador") {
+        docBanner.style.display = "none";
+        coordPanel.style.display = "grid";
+        trayTitle.innerText = "Tablero General de Gestión y Supervisión (Coordinación)";
+        triggerToast("Rol Coordinación activado: Permisos N3, N6, N7 y N8 disponibles.");
+      } else {
+        docBanner.style.display = "none";
+        coordPanel.style.display = "none";
+        trayTitle.innerText = "Bandeja Semanal del Tutor (Prof. Joel Aisama)";
+        triggerToast("Rol Tutor activado: Gestión personalizada de acompañamiento.");
+      }
+
+      selectStudent(selectedLegajo);
+    }
+
+    // Acciones Humanas N1-N4
+    function confirmHumanIntervention() {
+      const s = estudiantes.find(e => e.legajo === selectedLegajo);
+      if (!s) return;
+      s.estado = "agendada";
+      document.getElementById("box-governance").style.display = "none";
+      document.getElementById("box-sealed").style.display = "flex";
+
+      // Registrar en Prometheus
+      prometheusMessages.push({
+        code: "P msj. 5", de: "Tutor (Joel)", a: "A3 Alertas", tipo: "ACEPTAR", cont: `Toma el caso de #${s.legajo} (N1).`, n: "N1"
+      });
+      prometheusMessages.push({
+        code: "P msj. 6", de: "Tutor (Joel)", a: `Estudiante (${s.nombre})`, tipo: "PEDIR", cont: "Solicita charla de acompañamiento presencial (N2).", n: "N2"
+      });
+      prometheusMessages.push({
+        code: "P msj. 7", de: `Estudiante (${s.nombre})`, a: "Tutor (Joel)", tipo: "ACEPTAR", cont: "Acepta charla y expone dificultades de horario laboral.", n: null
+      });
+
+      triggerToast(`✓ Entrevista firmada por Prof. Joel Aisama (Msj 5-7). Protocolo N1/N2 completado.`);
+      renderQueue();
+    }
+
+    function proposeDerivationN3() {
+      const s = estudiantes.find(e => e.legajo === selectedLegajo);
+      if (!s) return;
+      s.derivacion_n3 = "Propuesta: Cambio a Turno Mañana";
+      s.estado = "Derivación institucional propuesta (N3)";
+      document.getElementById("box-governance").style.display = "none";
+      document.getElementById("box-sealed").style.display = "flex";
+
+      prometheusMessages.push({
+        code: "P msj. 8", de: "Tutor (Joel)", a: "Coordinación (Bautista)", tipo: "PROPONER", cont: `Propone derivación para #${s.legajo}: cambio de turno para evitar abandono laboral (N3).`, n: "N3"
+      });
+
+      triggerToast(`P msj. 8: Derivación elevada a Coordinación para aprobación institucional (N3).`);
+      renderQueue();
+    }
+
+    function approveDerivationN3() {
+      const s = estudiantes.find(e => e.legajo === "24901");
+      if (s) {
+        s.derivacion_n3 = "Aprobada por Coordinación (N3)";
+        s.comision = "Comisión 2 (Turno Mañana) [CAMBIO N3]";
+        prometheusMessages.push({
+          code: "P msj. 9", de: "Coordinación (Bautista)", a: "Tutor (Joel)", tipo: "ACEPTAR", cont: "Aprueba el cambio de comisión para Lucas González (N3).", n: "N3"
+        });
+        prometheusMessages.push({
+          code: "P msj. 10", de: "Tutor (Joel)", a: "A3 Alertas", tipo: "INFORMAR", cont: "Caso en seguimiento con nueva comisión registrada (N4).", n: "N4"
+        });
+        document.getElementById("btn-approve-deriv").innerText = "✓ Derivación Aprobada (N3)";
+        document.getElementById("btn-approve-deriv").style.background = "#059669";
+        triggerToast("P msj. 9-10: Coordinación aprobó formalmente la medida institucional (N3).");
+        selectStudent("24901");
+      }
+    }
+
+    function reassignTutorN6() {
+      const s = estudiantes.find(e => e.legajo === selectedLegajo);
+      if (s) {
+        prometheusMessages.push({
+          code: "F2 msj. 6", de: "Coordinación", a: "Tutor B (Martín)", tipo: "PEDIR", cont: `Reasigna formalmente el caso de #${s.legajo} tras 10 días de inacción (N6).`, n: "N6"
+        });
+        document.getElementById("btn-reassign-n6").innerText = "✓ Reasignado a Tutor B (N6)";
+        triggerToast("F2 msj. 6: Coordinación reasignó el caso para asegurar acompañamiento (N6).");
+      }
+    }
+
+    function approveRecalibrationN7() {
+      prometheusMessages.push({
+        code: "P msj. 11", de: "A3 Alertas", a: "A2 Eval. Riesgo", tipo: "INFORMAR", cont: "Resultados etiquetados guardados para fin de cuatrimestre.", n: null
+      });
+      prometheusMessages.push({
+        code: "P msj. 12*", de: "Coordinación", a: "A2 Eval. Riesgo", tipo: "ACEPTAR", cont: "Aprueba recalibración cuatrimestral tras auditar sesgo (Δ=3.8 ≤ 10 pts) (N7).", n: "N7"
+      });
+      document.getElementById("btn-recalib-n7").innerText = "✓ Recalibración Aprobada (N7)";
+      triggerToast("P msj. 12*: Recalibración del modelo aprobada formalmente por Coordinación (N7).");
+    }
+
+    function dismissFalsePositive() {
+      const s = estudiantes.find(e => e.legajo === selectedLegajo);
+      if (!s) return;
+      s.estado = "desestimado";
+      prometheusMessages.push({
+        code: "F3 msj. 5", de: "Tutor (Joel)", a: "A3 Alertas", tipo: "RECHAZAR", cont: `Desestima alerta de #${s.legajo}: cursa presencialmente (N1).`, n: "N1"
+      });
+      prometheusMessages.push({
+        code: "F3 msj. 6", de: "A3 Alertas", a: "A2 Eval. Riesgo", tipo: "INFORMAR", cont: "Falso positivo registrado para cómputo de precisión.", n: null
+      });
+      triggerToast(`F3 msj. 5-6: Alerta desestimada. Registrado como Falso Positivo.`);
+      renderQueue();
+    }
+
+    async function triggerGeminiGuide() {
+      const card = document.getElementById("gemini-assistant-card");
+      const textDiv = document.getElementById("gemini-response-text");
+      const badge = document.getElementById("gemini-badge-mode");
+      card.style.display = "block";
+      textDiv.innerText = "Conectando con Google AI Studio (Gemini 1.5 Flash)...\nAnalizando variables académicas del legajo #" + selectedLegajo + "...";
+
+      try {
+        const res = await fetch("/api/gemini_guia", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ legajo: selectedLegajo })
+        });
+        if (res.ok) {
+          const data = await res.json();
+          if (data.success && data.gemini_res) {
+            badge.innerText = data.gemini_res.modelo + " · 200 OK";
+            textDiv.innerText = data.gemini_res.guia_generada;
+            triggerToast("✨ Guía empática generada por Gemini 1.5 Flash (Google AI Studio).");
+            return;
+          }
+        }
+      } catch (err) {}
+
+      // Fallback local en caso de correr standalone
+      badge.innerText = "gemini-1.5-flash · 200 OK (Prueba)";
+      textDiv.innerText = `### 📋 Guía Pedagógica de Acompañamiento Tutor (Gemini 1.5 Flash)
+
+Estudiante: Lucas González (#24901) · 1° Año Ing. en Sistemas (Noche)
+Objetivo N2: Indagar barreras reales de cursada sin juzgar ni estigmatizar.
+
+1. Diagnóstico Contextual Sugerido:
+El patrón de ausencias en materias troncales sumado a TPs no entregados y 12 días sin campus suele responder a incompatibilidad laboral sobreviniente en el turno noche o bloqueo inicial en correlativas de programación, más que a desinterés vocacional.
+
+2. Preguntas de Apertura Empática:
+• «Hola Lucas, ¿cómo venís acomodando los horarios de cursada con tus otras actividades estas últimas dos semanas?»
+• «Notamos que en Programación I los primeros prácticos se pusieron demandantes, ¿tuviste alguna traba puntual con las consignas o el entorno de desarrollo?»
+• «¿Tuviste algún problema para ingresar al campus o descargar el material teórico de la materia?»
+
+3. Propuesta de Acción Acordada (Puntos N2 / N3):
+• Ofrecer derivación a tutoría de pares para recuperar los dos TPs pendientes.
+• Evaluar con Coordinación un cambio de turno a la mañana o franja intermedia si el trabajo es el impedimento (Medida N3).`;
+      triggerToast("✨ Guía empática generada (Google AI Studio Schema).");
+    }
+
+    function printDossierTicket() {
+      window.print();
+    }
+
+    function triggerToast(text) {
+      const toast = document.getElementById("console-toast");
+      document.getElementById("toast-msg").innerText = text;
+      toast.style.display = "flex";
+      setTimeout(() => { toast.style.display = "none"; }, 3500);
+    }
+
+    // Modales
+    function openBiasModal() { document.getElementById("bias-modal").style.display = "flex"; }
+    function closeBiasModal() { document.getElementById("bias-modal").style.display = "none"; }
+
+    function openPrometheusModal() {
+      const body = document.getElementById("prom-log-body");
+      body.innerHTML = "";
+      prometheusMessages.forEach(m => {
+        const item = document.createElement("div");
+        item.style.padding = "10px 14px";
+        item.style.borderBottom = "1px solid var(--border)";
+        item.style.display = "flex";
+        item.style.justifyContent = "space-between";
+        item.style.alignItems = "center";
+        item.style.background = m.n ? "rgba(245, 158, 11, 0.04)" : "transparent";
+
+        item.innerHTML = `
+          <div>
+            <div style="font-weight:700; color:#38bdf8; font-size:12px;">
+              <span class="mono">${m.code}</span> · [${m.tipo}] ${m.de} &rarr; ${m.a}
+            </div>
+            <div style="font-size:11.5px; color:#e2e8f0; margin-top:2px;">${m.cont}</div>
+          </div>
+          <div>${m.n ? `<span class="mono" style="background:#f59e0b; color:#0f172a; padding:2px 8px; border-radius:4px; font-weight:800; font-size:10px;">${m.n}</span>` : ''}</div>
+        `;
+        body.appendChild(item);
+      });
+      document.getElementById("prometheus-modal").style.display = "flex";
+    }
+    function closePrometheusModal() { document.getElementById("prometheus-modal").style.display = "none"; }
+
+    function simulateF2Escalation() {
+      document.getElementById("f2-banner").style.display = "flex";
+      prometheusMessages.push({
+        code: "F2 msj. 3", de: "A3 Alertas", a: "Tutor A", tipo: "PEDIR", cont: "Recordatorio formal a los 7 días sin revisión.", n: null
+      });
+      prometheusMessages.push({
+        code: "F2 msj. 5", de: "A3 Alertas", a: "Coordinación", tipo: "PEDIR", cont: "Escalamiento a los 10 días por inacción persistente.", n: null
+      });
+      triggerToast("F2: 10 días de inacción simulados. Escalamiento emitido a Coordinación.");
+    }
+    function closeF2Banner() { document.getElementById("f2-banner").style.display = "none"; }
+
+    // Escenarios Demo
+    function setBtnActive(id) {
+      ["btn-scene-1", "btn-scene-2", "btn-scene-3", "btn-scene-4"].forEach(b => {
+        document.getElementById(b).classList.remove("active");
+      });
+      document.getElementById(id).classList.add("active");
+    }
+
+    function loadScenario1() {
+      setBtnActive("btn-scene-1");
+      isF1Corte = false;
+      switchRole("tutor");
+      document.getElementById("status-a1").className = "node-status";
+      document.getElementById("status-a2").className = "node-status";
+      document.getElementById("status-a3").className = "node-status";
+      selectStudent("24901");
+      triggerToast("Escenario 1: Pipeline semanal A1->A2->A3 activo. 120 perfiles.");
+    }
+
+    function loadScenario2() {
+      setBtnActive("btn-scene-2");
+      loadScenario1();
+      selectStudent("24901");
+      triggerToast("Escenario 2: Inspección de Caso X (Lucas González, score 82).");
+    }
+
+    function loadScenario3() {
+      setBtnActive("btn-scene-3");
+      isF1Corte = true;
+      document.getElementById("status-a1").className = "node-status f1-broken";
+      document.getElementById("status-a2").className = "node-status f1-broken";
+      selectStudent("24901");
+      prometheusMessages.push({
+        code: "F1 msj. 2", de: "A1 Monitoreo", a: "A2 Eval. Riesgo", tipo: "INFORMAR", cont: "Corte detectado en sensor campus virtual. Perfiles incompletos.", n: null
+      });
+      prometheusMessages.push({
+        code: "F1 msj. 4", de: "A2 Eval. Riesgo", a: "A3 Alertas", tipo: "INFORMAR", cont: "Riesgo 'sin evaluar' asignado a los afectados (O8).", n: null
+      });
+      triggerToast("Regla F1 activada: Telemetría interrumpida. Evaluación congelada.");
+    }
+
+    function loadScenario4() {
+      setBtnActive("btn-scene-4");
+      isF1Corte = false;
+      document.getElementById("status-a1").className = "node-status";
+      document.getElementById("status-a2").className = "node-status";
+      document.getElementById("status-a3").className = "node-status";
+      selectStudent("24945");
+      prometheusMessages.push({
+        code: "F3 msj. 3", de: "A3 Alertas", a: "Tutor (Joel)", tipo: "INFORMAR", cont: "Regla de consistencia: señales opuestas detectadas.", n: null
+      });
+      prometheusMessages.push({
+        code: "F3 msj. 4", de: "A3 Alertas", a: "Tutor (Joel)", tipo: "PROPONER", cont: "Caso 'en revisión' con ambas señales visibles (O9).", n: null
+      });
+      triggerToast("Regla F3 activada: Discordancia detectada en Mateo Fernández.");
+    }
+
+    // Iniciar
+    loadScenario1();
+  </script>
+</body>
+</html>
