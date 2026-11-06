@@ -1,0 +1,121 @@
+legajo,nombre,comision,turno,carrera,asistencia_acumulada_pct,faltas_ultimas_2_semanas
+24901,"González, Lucas (Caso X)",Comisión 1 (Noche),Noche,Ing. en Sistemas de Información,40.0,4
+24945,"Fernández, Mateo",Comisión 1 (Tarde),Tarde,Ing. en Sistemas de Información,92.0,0
+24883,"Martínez, Camila",Comisión 2 (Mañana),Mañana,Ing. en Sistemas de Información,52.0,3
+25012,"Gómez, Sofía",Comisión 3 (Noche),Noche,Lic. en Informática,64.0,2
+25020,"Castro, Sofía",Comisión 1 (Noche),Noche,Ing. en Sistemas de Información,80.6,0
+25021,"González, Mateo",Comisión 1 (Noche),Noche,Ing. en Sistemas de Información,88.8,0
+25022,"Luna, Rocío",Comisión 1 (Noche),Noche,Ing. en Sistemas de Información,78.7,1
+25023,"Gómez, Mateo",Comisión 2 (Mañana),Mañana,Ing. en Sistemas de Información,69.4,3
+25024,"Morales, Joaquín",Comisión 1 (Noche),Noche,Ing. en Sistemas de Información,94.1,1
+25025,"Nuñez, Lucía",Comisión 1 (Noche),Noche,Ing. en Sistemas de Información,94.9,1
+25026,"Pérez, Martina",Comisión 2 (Mañana),Mañana,Ing. en Sistemas de Información,81.1,0
+25027,"Álvarez, Zoe",Comisión 3 (Tarde),Tarde,Lic. en Informática,80.1,1
+25028,"Flores, Agustín",Comisión 1 (Noche),Noche,Ing. en Sistemas de Información,96.7,1
+25029,"Acosta, Brian",Comisión 2 (Mañana),Mañana,Ing. en Sistemas de Información,67.7,3
+25030,"Ramírez, Valentina",Comisión 1 (Noche),Noche,Ing. en Sistemas de Información,77.1,0
+25031,"Benítez, Abril",Comisión 1 (Noche),Noche,Ing. en Sistemas de Información,88.7,1
+25032,"Molina, Lautaro",Comisión 3 (Tarde),Tarde,Lic. en Informática,92.7,1
+25033,"González, Belén",Comisión 3 (Tarde),Tarde,Lic. en Informática,86.5,0
+25034,"Giménez, Tomás",Comisión 1 (Noche),Noche,Ing. en Sistemas de Información,78.7,0
+25035,"Ríos, Rodrigo",Comisión 2 (Mañana),Mañana,Ing. en Sistemas de Información,80.5,0
+25036,"Nuñez, Brian",Comisión 1 (Noche),Noche,Ing. en Sistemas de Información,96.8,0
+25037,"Nuñez, Belén",Comisión 3 (Tarde),Tarde,Lic. en Informática,82.2,1
+25038,"Fernández, Facundo",Comisión 1 (Noche),Noche,Ing. en Sistemas de Información,80.3,0
+25039,"Díaz, Mateo",Comisión 1 (Noche),Noche,Ing. en Sistemas de Información,76.6,0
+25040,"Silva, Zoe",Comisión 3 (Tarde),Tarde,Lic. en Informática,80.6,1
+25041,"Benítez, Martina",Comisión 2 (Mañana),Mañana,Ing. en Sistemas de Información,94.9,0
+25042,"Luna, Rocío",Comisión 1 (Noche),Noche,Ing. en Sistemas de Información,79.4,1
+25043,"Díaz, Rocío",Comisión 1 (Noche),Noche,Ing. en Sistemas de Información,94.8,0
+25044,"Pérez, Micaela",Comisión 2 (Mañana),Mañana,Ing. en Sistemas de Información,94.9,0
+25045,"Álvarez, Zoe",Comisión 2 (Mañana),Mañana,Ing. en Sistemas de Información,91.0,1
+25046,"Aguirre, Belén",Comisión 3 (Tarde),Tarde,Lic. en Informática,60.3,1
+25047,"Martínez, Ignacio",Comisión 1 (Noche),Noche,Ing. en Sistemas de Información,76.6,0
+25048,"Díaz, Santiago",Comisión 3 (Tarde),Tarde,Lic. en Informática,56.4,3
+25049,"Molina, Mariano",Comisión 2 (Mañana),Mañana,Ing. en Sistemas de Información,84.1,1
+25050,"González, Nicolás",Comisión 3 (Tarde),Tarde,Lic. en Informática,97.9,0
+25051,"Ríos, Mateo",Comisión 1 (Noche),Noche,Ing. en Sistemas de Información,78.6,1
+25052,"Ríos, Brian",Comisión 2 (Mañana),Mañana,Ing. en Sistemas de Información,56.8,3
+25053,"Ortiz, Facundo",Comisión 1 (Noche),Noche,Ing. en Sistemas de Información,94.6,1
+25054,"Juárez, Agustín",Comisión 1 (Noche),Noche,Ing. en Sistemas de Información,68.1,3
+25055,"Suárez, Lucas",Comisión 1 (Noche),Noche,Ing. en Sistemas de Información,70.0,1
+25056,"Benítez, Brian",Comisión 1 (Noche),Noche,Ing. en Sistemas de Información,95.7,0
+25057,"Gómez, Martina",Comisión 3 (Tarde),Tarde,Lic. en Informática,84.3,0
+25058,"Ríos, Micaela",Comisión 1 (Noche),Noche,Ing. en Sistemas de Información,48.9,4
+25059,"Flores, Rocío",Comisión 1 (Noche),Noche,Ing. en Sistemas de Información,80.1,1
+25060,"Díaz, Lucas",Comisión 3 (Tarde),Tarde,Lic. en Informática,39.9,3
+25061,"Molina, Rodrigo",Comisión 3 (Tarde),Tarde,Lic. en Informática,75.6,1
+25062,"Benítez, Martina",Comisión 3 (Tarde),Tarde,Lic. en Informática,85.0,0
+25063,"Benítez, Lucas",Comisión 3 (Tarde),Tarde,Lic. en Informática,87.4,0
+25064,"Morales, Facundo",Comisión 3 (Tarde),Tarde,Lic. en Informática,94.5,1
+25065,"Torres, Paula",Comisión 1 (Noche),Noche,Ing. en Sistemas de Información,45.0,4
+25066,"Torres, Lucía",Comisión 1 (Noche),Noche,Ing. en Sistemas de Información,88.3,1
+25067,"Herrera, Florencia",Comisión 3 (Tarde),Tarde,Lic. en Informática,36.3,5
+25068,"Molina, Lucía",Comisión 1 (Noche),Noche,Ing. en Sistemas de Información,78.4,0
+25069,"Acosta, Micaela",Comisión 3 (Tarde),Tarde,Lic. en Informática,91.5,1
+25070,"Ortiz, Lucas",Comisión 1 (Noche),Noche,Ing. en Sistemas de Información,80.0,1
+25071,"Acosta, Brian",Comisión 2 (Mañana),Mañana,Ing. en Sistemas de Información,97.7,1
+25072,"Acosta, Lautaro",Comisión 1 (Noche),Noche,Ing. en Sistemas de Información,85.9,1
+25073,"Medina, Gonzalo",Comisión 1 (Noche),Noche,Ing. en Sistemas de Información,76.8,1
+25074,"Fernández, Brian",Comisión 1 (Noche),Noche,Ing. en Sistemas de Información,91.0,0
+25075,"Acosta, Micaela",Comisión 1 (Noche),Noche,Ing. en Sistemas de Información,84.7,0
+25076,"Torres, Federico",Comisión 2 (Mañana),Mañana,Ing. en Sistemas de Información,96.9,1
+25077,"Medina, Lucas",Comisión 2 (Mañana),Mañana,Ing. en Sistemas de Información,90.6,1
+25078,"Suárez, Lucas",Comisión 2 (Mañana),Mañana,Ing. en Sistemas de Información,90.2,0
+25079,"Martínez, Agustín",Comisión 2 (Mañana),Mañana,Ing. en Sistemas de Información,85.5,1
+25080,"Álvarez, Rodrigo",Comisión 1 (Noche),Noche,Ing. en Sistemas de Información,92.2,0
+25081,"Martínez, Federico",Comisión 1 (Noche),Noche,Ing. en Sistemas de Información,79.6,0
+25082,"Gómez, Santiago",Comisión 1 (Noche),Noche,Ing. en Sistemas de Información,80.9,1
+25083,"Torres, Sofía",Comisión 3 (Tarde),Tarde,Lic. en Informática,60.3,3
+25084,"Fernández, Santiago",Comisión 3 (Tarde),Tarde,Lic. en Informática,80.6,1
+25085,"Molina, Martina",Comisión 1 (Noche),Noche,Ing. en Sistemas de Información,82.8,1
+25086,"Castro, Lautaro",Comisión 2 (Mañana),Mañana,Ing. en Sistemas de Información,85.0,1
+25087,"Aguirre, Agustín",Comisión 2 (Mañana),Mañana,Ing. en Sistemas de Información,94.1,0
+25088,"Aguirre, Abril",Comisión 3 (Tarde),Tarde,Lic. en Informática,75.7,1
+25089,"Ruiz, Agustín",Comisión 3 (Tarde),Tarde,Lic. en Informática,81.4,0
+25090,"Medina, Paula",Comisión 1 (Noche),Noche,Ing. en Sistemas de Información,89.9,1
+25091,"Flores, Mariano",Comisión 1 (Noche),Noche,Ing. en Sistemas de Información,88.4,1
+25092,"Ruiz, Martina",Comisión 3 (Tarde),Tarde,Lic. en Informática,82.1,0
+25093,"Suárez, Federico",Comisión 3 (Tarde),Tarde,Lic. en Informática,38.2,4
+25094,"Torres, Valentina",Comisión 2 (Mañana),Mañana,Ing. en Sistemas de Información,35.2,5
+25095,"Suárez, Lucía",Comisión 3 (Tarde),Tarde,Lic. en Informática,89.7,1
+25096,"Medina, Nicolás",Comisión 2 (Mañana),Mañana,Ing. en Sistemas de Información,35.8,4
+25097,"Aguirre, Gonzalo",Comisión 3 (Tarde),Tarde,Lic. en Informática,57.5,3
+25098,"Suárez, Federico",Comisión 2 (Mañana),Mañana,Ing. en Sistemas de Información,93.2,0
+25099,"Cabrera, Santiago",Comisión 2 (Mañana),Mañana,Ing. en Sistemas de Información,89.3,0
+25100,"Pérez, Valentina",Comisión 1 (Noche),Noche,Ing. en Sistemas de Información,78.6,1
+25101,"Torres, Mariano",Comisión 2 (Mañana),Mañana,Ing. en Sistemas de Información,85.4,0
+25102,"Díaz, Gonzalo",Comisión 1 (Noche),Noche,Ing. en Sistemas de Información,94.0,0
+25103,"Silva, Rodrigo",Comisión 3 (Tarde),Tarde,Lic. en Informática,85.1,1
+25104,"Suárez, Florencia",Comisión 2 (Mañana),Mañana,Ing. en Sistemas de Información,55.7,2
+25105,"Fernández, Valentina",Comisión 3 (Tarde),Tarde,Lic. en Informática,88.2,0
+25106,"Medina, Ignacio",Comisión 3 (Tarde),Tarde,Lic. en Informática,81.4,1
+25107,"Ruiz, Facundo",Comisión 3 (Tarde),Tarde,Lic. en Informática,57.7,2
+25108,"Juárez, Federico",Comisión 3 (Tarde),Tarde,Lic. en Informática,56.5,2
+25109,"Cabrera, Ignacio",Comisión 1 (Noche),Noche,Ing. en Sistemas de Información,87.5,1
+25110,"Nuñez, Florencia",Comisión 3 (Tarde),Tarde,Lic. en Informática,76.2,1
+25111,"Medina, Sofía",Comisión 1 (Noche),Noche,Ing. en Sistemas de Información,89.0,0
+25112,"Benítez, Mateo",Comisión 1 (Noche),Noche,Ing. en Sistemas de Información,96.0,1
+25113,"Torres, Ignacio",Comisión 3 (Tarde),Tarde,Lic. en Informática,94.2,1
+25114,"Romero, Zoe",Comisión 3 (Tarde),Tarde,Lic. en Informática,95.2,0
+25115,"Álvarez, Rodrigo",Comisión 1 (Noche),Noche,Ing. en Sistemas de Información,81.9,1
+25116,"Ruiz, Paula",Comisión 3 (Tarde),Tarde,Lic. en Informática,96.5,0
+25117,"Martínez, Facundo",Comisión 3 (Tarde),Tarde,Lic. en Informática,96.0,1
+25118,"López, Ignacio",Comisión 3 (Tarde),Tarde,Lic. en Informática,77.3,1
+25119,"Benítez, Rocío",Comisión 3 (Tarde),Tarde,Lic. en Informática,76.7,1
+25120,"Cabrera, Candela",Comisión 3 (Tarde),Tarde,Lic. en Informática,82.3,1
+25121,"Morales, Lucía",Comisión 1 (Noche),Noche,Ing. en Sistemas de Información,85.0,0
+25122,"Ríos, Lucas",Comisión 1 (Noche),Noche,Ing. en Sistemas de Información,76.3,1
+25123,"Benítez, Santiago",Comisión 3 (Tarde),Tarde,Lic. en Informática,78.9,0
+25124,"López, Valentina",Comisión 2 (Mañana),Mañana,Ing. en Sistemas de Información,85.6,0
+25125,"Fernández, Nicolás",Comisión 2 (Mañana),Mañana,Ing. en Sistemas de Información,81.9,1
+25126,"Flores, Rocío",Comisión 2 (Mañana),Mañana,Ing. en Sistemas de Información,61.5,2
+25127,"González, Rodrigo",Comisión 3 (Tarde),Tarde,Lic. en Informática,75.2,0
+25128,"Giménez, Delfina",Comisión 2 (Mañana),Mañana,Ing. en Sistemas de Información,79.4,1
+25129,"Martínez, Lucía",Comisión 2 (Mañana),Mañana,Ing. en Sistemas de Información,61.2,1
+25130,"Pérez, Tomás",Comisión 1 (Noche),Noche,Ing. en Sistemas de Información,95.2,1
+25131,"Luna, Lucía",Comisión 3 (Tarde),Tarde,Lic. en Informática,93.5,1
+25132,"Cabrera, Candela",Comisión 3 (Tarde),Tarde,Lic. en Informática,84.1,1
+25133,"Gómez, Nicolás",Comisión 2 (Mañana),Mañana,Ing. en Sistemas de Información,90.5,1
+25134,"González, Abril",Comisión 3 (Tarde),Tarde,Lic. en Informática,89.0,0
+25135,"López, Camila",Comisión 1 (Noche),Noche,Ing. en Sistemas de Información,86.3,0
