@@ -1,155 +1,150 @@
 # SITA-IA · Sistema Institucional de Tutorías y Alerta Temprana
-> **Plataforma Integral de Detección Temprana del Abandono Universitario con Gobernanza Ética e Inteligencia Artificial Híbrida.**
+> **Plataforma Enterprise de Detección Temprana del Abandono Universitario con Gobernanza Ética e Inteligencia Artificial Híbrida.**
 
+[![GitHub Repository](https://img.shields.io/badge/GitHub-aisamajoel--tech%2FSistema--Escolar--Fundamentos---181717?logo=github)](https://github.com/aisamajoel-tech/Sistema-Escolar-Fundamentos-)
 [![Python Version](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
 [![Architecture](https://img.shields.io/badge/architecture-MVC%20Enterprise-orange.svg)]()
 [![AI Engine](https://img.shields.io/badge/AI-Scoring%20ML%20%2B%20Gemini%201.5%20Flash-green.svg)](https://aistudio.google.com/)
-[![License](https://img.shields.io/badge/governance-Human--in--the--Loop%20(N1--N8)-purple.svg)]()
+[![Governance](https://img.shields.io/badge/governance-Human--in--the--Loop%20(N1--N8)-purple.svg)]()
 
 ---
 
-## 🏛️ 1. Descripción del Producto
+## 🏛️ 1. Descripción del Sistema
 
-**SITA-IA** es una solución enterprise diseñada para instituciones de educación superior que resuelve el problema de la **deserción estudiantil en el primer año universitario**. 
+**SITA-IA** es una solución de software orientada a instituciones de educación superior para mitigar la **deserción estudiantil en el primer año universitario**.
 
-A diferencia de los enfoques reactivos tradicionales —donde la facultad advierte la deserción cuando el estudiante ya dejó de asistir—, SITA-IA cruza semanalmente señales heterogéneas (asistencia presencial, libretas de calificaciones y telemetría de campus virtual Moodle) para estimar la probabilidad de abandono con **al menos 4 semanas de anticipación**, permitiendo intervenciones personalizadas antes del cierre del primer cuatrimestre.
+A diferencia de los enfoques tradicionales y reactivos, SITA-IA procesa semanalmente rastros digitales heterogéneos (asistencia presencial, notas de cátedra y telemetría de Moodle) para estimar la probabilidad de abandono con **al menos 4 semanas de anticipación**, permitiendo intervenciones personalizadas antes del cierre del primer cuatrimestre.
 
-### 🌟 Diferenciadores Clave
-* **Arquitectura Híbrida de IA:** Combina inferencia probabilística calibrada (Machine Learning supervisado) con explicabilidad matemática ($XAI$) y un Asistente Pedagógico Generativo impulsado por **Google AI Studio (Gemini 1.5 Flash)**.
-* **Gobernanza Ética y Salvaguarda Humana (*Human-in-the-Loop*):** Cumplimiento estricto de los **Puntos No Delegables N1 a N8**. La IA nunca contacta al alumno, no sanciona, no da de baja ni publica calificaciones.
-* **Protección Anti-Sesgo Docente (Regla C1):** Los profesores de cátedra cargan notas y asistencias, pero tienen **estrictamente ocultos y bloqueados los índices de riesgo** para evitar sesgos de expectativa al momento de corregir exámenes.
-* **Tolerancia y Resiliencia a Fallas (F1, F2, F3):** Protocolos automáticos que impiden calificar con datos rotos (F1), gestionan la inacción humana (F2) y aíslan señales contradictorias sin promediar (F3).
+### 🌟 Pilares Tecnológicos y Éticos
+* **Arquitectura de IA Híbrida:** Clasificación supervisada probabilística ($ML$) combinada con un Asistente Pedagógico Generativo impulsado por la API de **Google AI Studio (Gemini 1.5 Flash)**.
+* **Gobernanza Ética (*Human-in-the-Loop*):** Implementación estricta de las salvaguardas **N1 a N8**. La IA **nunca** envía correos directos al estudiante, no sanciona, no da de baja ni publica calificaciones.
+* **Aislamiento Anti-Sesgo Docente (Regla C1):** Los profesores de cátedra cargan datos pero tienen **los puntajes de riesgo estrictamente bloqueados con candado** para evitar sesgos de expectativa en sus exámenes.
+* **Tolerancia a Fallas Institucionales (F1, F2, F3):** Protocolos que impiden calificar con datos rotos (F1), gestionan la inacción del tutor escalando a Coordinación (F2 / N6) y aíslan señales contradictorias en estado de revisión (F3).
 
 ---
 
-## 📂 2. Arquitectura de Software: Patrón MVC
+## 📂 2. Estructura del Proyecto (Patrón MVC)
 
-El sistema está estructurado bajo el patrón **Modelo-Vista-Controlador (MVC)**, garantizando desacoplamiento, alta cohesión y código listo para producción:
+El repositorio está organizado bajo el patrón arquitectónico **Modelo-Vista-Controlador (MVC)**:
 
 ```
-TRABAJO GRUPAL/
-├── models/                           # [M] MODELOS: Lógica de negocio y agentes de IA
-│   ├── agente1_monitoreo.py          # Ingesta, validación y detección de fallas de fuentes (Regla F1)
-│   ├── agente2_riesgo.py             # Modelo logístico multivariable (0-100) + Explicabilidad XAI
+Sistema-Escolar-Fundamentos-/
+│
+├── models/                           # 🧠 [MODEL]: Lógica de negocio, inferencia y agentes de IA
+│   ├── agente1_monitoreo.py          # Ingesta, validación y detección de cortes de sensor (F1)
+│   ├── agente2_riesgo.py             # Modelo probabilístico multivariable (0-100) + Explicabilidad XAI
 │   ├── agente3_alertas.py            # Priorización con tope (<=15), balanceo de tutores y regla F3
 │   ├── gemini_service.py             # Integración con Google AI Studio (Gemini 1.5 Flash API)
-│   └── generator.py                  # Generador determinista de cohorte sintética de evaluación
+│   └── generator.py                  # Generador determinista de la cohorte sintética (120 alumnos)
 │
-├── views/                            # [V] VISTAS: Interfaz de usuario y presentación gráfica
-│   ├── demo_panel.html               # Panel Web Institucional (Modo Multirrol con telemetría en vivo)
-│   └── logo_uch.png                  # Identidad institucional (Universidad Champagnat)
+├── views/                            # 🖥️ [VIEW]: Interfaz de usuario y presentación gráfica
+│   ├── demo_panel.html               # Panel Web Institucional multirrol (Tutor, Coordinación, Docente)
+│   └── logo_uch.png                  # Identidad visual institucional (Universidad Champagnat)
 │
-├── controllers/                      # [C] CONTROLADORES: Orquestación, reglas y API
+├── controllers/                      # ⚙️ [CONTROLLER]: Orquestación, flujo y API REST
 │   ├── api_controller.py             # Controlador REST: gestiona mutaciones, gobernanza N1-N8 y Gemini
-│   └── pipeline_controller.py        # Orquestador del ciclo semanal y matriz de mensajes Prometheus
+│   └── pipeline_controller.py        # Orquestador del ciclo semanal y matriz Prometheus (Msj 0 al 12)
 │
-├── data/                             # Repositorio de datos crudos (Ingesta semanal)
-│   ├── asistencia.csv                # Asistencias y faltas recientes por comisión y turno
-│   ├── campus.csv                    # Telemetría de Moodle (días inactivo, sesiones, descargas)
-│   └── notas.csv                     # Calificaciones de parciales y trabajos prácticos
+├── data/                             # 📊 Fuentes de datos semanales simuladas (CSVs)
+│   ├── asistencia.csv                # Asistencias y ausencias recientes por turno/comisión
+│   ├── campus.csv                    # Logs de plataforma Moodle (inactividad, descargas, sesiones)
+│   └── notas.csv                     # Calificaciones de parciales y entregas de TPs
 │
-├── docs/                             # Documentación técnica, académica y legal del proyecto
-│   ├── Entrega2_PEAS_Arquitectura.pdf
-│   ├── Entrega3_Roles_Secuencia.pdf
-│   ├── Entrega4_Coherencia_PlanDemo.pdf
-│   └── Guia_Defensa_Entrega4.pdf
+├── docs/                             # 📄 Documentación académica y actas de auditoría
+├── screenshots/                      # 📸 Evidencias visuales de la API de Gemini y métricas de sesgo
+├── tools/                            # 🛠️ Utilidades auxiliares y generadores de reportes
 │
-├── screenshots/                      # Evidencias visuales de auditoría y ejecución de la API
-│   ├── sc1_normal.png
-│   ├── sc5_sesgo_n7.png
-│   └── sc8_gemini_api.png            # Captura de inferencia con Gemini 1.5 Flash
-│
-├── tools/                            # Scripts de utilidad para auditoría y generación de reportes
-├── CONSIGNA_PARCIAL_FIA.md           # Resolución integral de los 7 puntos del examen parcial
-├── Presentacion_Parcial_FIA_SITA.pdf # Presentación ejecutiva en 9 diapositivas para defensa oral
-├── README.md                         # Guía comercial y manual de operaciones del sistema
-└── app.py                            # Punto de entrada y servidor HTTP institucional
+├── CONSIGNA_PARCIAL_FIA.md           # 📝 Resolución exhaustiva de los 7 puntos de la consigna de FIA
+├── Presentacion_Parcial_FIA_SITA.pdf # 📊 Presentación ejecutiva en 9 diapositivas para la defensa oral
+├── README.md                         # 🌟 Manual técnico y guía de despliegue del sistema
+└── app.py                            # 🚀 Punto de entrada principal y servidor HTTP
 ```
 
 ---
 
-## 🚀 3. Guía de Instalación y Puesta en Marcha
+## ⚡ 3. Guía de Inicio Rápido (Cómo Levantar los Servicios)
 
-El sistema fue diseñado con **cero fricción operativa**: utiliza exclusivamente librerías nativas de la biblioteca estándar de Python (no requiere `pip install` de frameworks pesados para su ejecución local).
+El sistema está desarrollado con **cero dependencias externas complejas** (utiliza librerías estándar nativas de Python).
 
 ### Requisitos Previos
-* Python 3.10 o superior instalado en el sistema.
-* Un navegador web moderno (Google Chrome, Microsoft Edge, Mozilla Firefox o Safari).
+* Python 3.10 o superior instalado.
+* Cualquier navegador moderno (Chrome, Edge, Firefox, Brave, Safari).
+* Git instalado en la máquina.
 
 ---
 
-### Opción A: Despliegue con Servidor Local (Recomendado)
+### 🚀 Paso a Paso para Correr el Sistema
 
-1. **Abrir la terminal** en el directorio raíz del proyecto:
-   ```bash
-   cd "TRABAJO GRUPAL"
-   ```
+#### Paso 1: Clonar el Repositorio
+```bash
+git clone https://github.com/aisamajoel-tech/Sistema-Escolar-Fundamentos-.git
+cd Sistema-Escolar-Fundamentos-
+```
 
-2. **(Opcional) Configurar API Key de Google AI Studio:**  
-   Para habilitar llamadas en vivo a la nube con Gemini 1.5 Flash, configure su variable de entorno:
-   * En Windows (PowerShell):
-     ```powershell
-     $env:GEMINI_API_KEY="AIzaSyYourApiKeyHere..."
-     ```
-   * En Linux / macOS:
-     ```bash
-     export GEMINI_API_KEY="AIzaSyYourApiKeyHere..."
-     ```
-   *(Nota: Si no dispone de clave en el momento, el sistema cuenta con un motor de prueba validado que replica fielmente el esquema JSON de Google AI Studio).*
+#### Paso 2: (Opcional) Configurar API Key de Gemini
+El sistema incluye integración nativa con **Google AI Studio (Gemini 1.5 Flash)**.
+* Si dispone de una API Key gratuita de Google AI Studio, configúrela en su terminal:
+  * **En Windows (PowerShell):**
+    ```powershell
+    $env:GEMINI_API_KEY="AIzaSyTuClaveDeGoogleAIStudio..."
+    ```
+  * **En Linux / macOS:**
+    ```bash
+    export GEMINI_API_KEY="AIzaSyTuClaveDeGoogleAIStudio..."
+    ```
+*(Nota: Si no configura ninguna clave, el sistema conmuta automáticamente a modo de prueba con caché validada, garantizando que la demo nunca falle durante la evaluación).*
 
-3. **Iniciar el servidor institucional:**
-   ```bash
-   python app.py
-   ```
+#### Paso 3: Levantar el Servidor
+Ejecute el punto de entrada de la aplicación:
+```bash
+python app.py
+```
 
-4. **Acceso a la plataforma:**  
-   El sistema levantará el servicio en el puerto `8050` y abrirá automáticamente su navegador en:
-   👉 **`http://localhost:8050/views/demo_panel.html`**
+Verá en consola la inicialización de los servicios:
+```text
+=================================================================
+ 🚀 SISTEMA SITA-IA · SERVICIO INICIADO CON PATRÓN MVC
+ 🌐 Acceso a la Plataforma: http://localhost:8050/views/demo_panel.html
+ 📂 Arquitectura: Models (models/) | Views (views/) | Controllers (controllers/)
+ 🔒 Gobernanza Ética: Puntos N1 a N8 y Regla C1 activos
+ ⚡ API Google AI Studio: Gemini 1.5 Flash integrada
+ Presione Ctrl + C para detener el servidor
+=================================================================
+```
+
+El navegador se abrirá automáticamente en:  
+👉 **`http://localhost:8050/views/demo_panel.html`**
 
 ---
 
-### Opción B: Modo Autónomo Inmediato (*Zero-Config*)
-
-Si se encuentra en una sala de conferencias sin acceso a consola o sin permisos de ejecución:
-1. Navegue hasta la carpeta `views/`.
+### 🌐 Opción Alternativa: Modo Autónomo (*Zero-Config*)
+Si se encuentra en un entorno sin permisos para abrir puertos locales o sin terminal:
+1. Abra la carpeta `views/`.
 2. Haga **doble clic en `demo_panel.html`**.
-3. La interfaz iniciará de forma 100% interactiva y funcional directamente en su navegador web.
+3. La plataforma se ejecutará al 100% de manera estática y autónoma en su navegador.
 
 ---
 
-## 🎮 4. Guía de Demostración para Presentación Ejecutiva (5 Minutos)
+## 🎯 4. Guía de Navegación de la Demo (Para la Defensa Oral de 5 Minutos)
 
-El panel incorpora una **Barra de Navegación de Escenarios** en la parte superior para recorrer el flujo en vivo sin contratiempos:
+El panel incorpora en la barra superior los botones de control para recorrer la defensa en vivo:
 
-| Escenario | Acción en Pantalla | Qué demuestra arquitectónicamente |
-| :---: | :--- | :--- |
-| **`01 Carga Semanal`** | Clic en botón `01` | Ingesta de 3 CSVs por el Agente A1 y procesamiento secuencial hacia A2 y A3. Carga 120 perfiles consolidados. |
-| **`02 Caso Lucas (82)`** | Clic en botón `02` | Muestra al estudiante crítico Lucas González (#24901). Expone el **score de 82**, la evolución en 4 semanas y el desglose de los **3 factores determinantes (XAI)**. |
-| **`✨ Asistente Gemini AI`** | Clic en el botón verde de Gemini | Invoca la API de **Google AI Studio (Gemini 1.5 Flash)** para redactar en tiempo real una **guía de entrevista empática** con 3 preguntas abiertas para el tutor (Punto N2). |
-| **`03 Falla F1: Campus`** | Clic en botón `03` | Simula la caída de Moodle por 48 h. Demuestra que **falta de dato $\neq$ inactividad**: los casos pasan preventivamente a *«Sin Evaluar»* para evitar pánico o falsas alarmas. |
-| **`04 Falla F3: Discordancia`** | Clic en botón `04` | Caso Mateo Fernández (92% asistencia presencial pero campus inactivo). Demuestra que la IA **no promedia señales contradictorias**: aplica *«F3 Lock»* y delega en el tutor. |
-| **`Sesgo Inter-Turno (N7)`** | Botón en barra superior | Despliega la auditoría de equidad: diferencia de recall entre turnos de **3.8 puntos**, cumpliendo el estándar ético institucional ($\le 10\text{ pts}$). |
-| **`Selector de Roles`** | Botones de Rol (Arriba a la derecha) | Permite alternar entre **Tutor (Joel Aisama)**, **Coordinación (Bautista Navarro)** para aprobar derivaciones institucionales (N3), y **Docente de Cátedra (Regla C1)** con los puntajes bloqueados con candado. |
-
----
-
-## 🛡️ 5. Cumplimiento de Gobernanza Ética (Puntos No Delegables N1 a N8)
-
-SITA-IA fue concebido bajo el principio de **Inteligencia Artificial Débil y de Acompañamiento**:
-* **N1:** El tutor humano acepta o desestima cada alerta antes de cualquier acción.
-* **N2:** Todo contacto hacia el estudiante es realizado personalmente por un tutor (la IA jamás redacta ni envía correos directos al alumno).
-* **N3:** Las medidas académicas de fondo (cambios de turno, becas) son propuestas por el tutor y formalmente aprobadas por Coordinación.
-* **N4:** La etiqueta de riesgo nunca es definitiva ni persistente; se recalcula cada 7 días.
-* **N5:** La gestión de incidentes tecnológicos corresponde a Coordinación y Sistemas.
-* **N6:** Ante inacción prolongada del tutor (10 días), Coordinación reasigna el caso a otro profesional (la IA nunca cubre al tutor ausente).
-* **N7:** Las recalibraciones semestrales del modelo requieren aprobación expresa de Coordinación tras auditar métricas de sesgo.
-* **N8:** Solo se procesan registros de estudiantes con consentimiento informado registrado.
+1. **`01 Carga Semanal`**: Inicia el pipeline multiagente ($A1 \rightarrow A2 \rightarrow A3$). Carga los 120 perfiles consolidados semanales.
+2. **`02 Caso Lucas (82)`**: Abre el expediente del estudiante crítico Lucas González (#24901). Muestra el **índice de 82/100**, su trayectoria en 4 semanas y los **3 factores explicativos (XAI)**.
+3. **`✨ Asistente Gemini AI (Guía N2)`**: Invoca la API de **Google AI Studio (Gemini 1.5 Flash)** para redactar en tiempo real una **guía pedagógica empática** con 3 preguntas abiertas para la entrevista del tutor, evitando estigmatizaciones.
+4. **`03 Falla F1: Campus`**: Simula la caída del campus virtual. Demuestra el principio $O8$: *la falta de datos no se interpreta como abandono*; los casos pasan preventivamente a *«Sin Evaluar»*.
+5. **`04 Falla F3: Discordancia`**: Caso Mateo Fernández (92% asistencia presencial pero campus inactivo). Demuestra que la IA **no promedia señales contradictorias**: aplica *«F3 Lock»* y delega en el tutor.
+6. **`Sesgo Inter-Turno (N7)`**: Abre la ventana de auditoría de equidad algorítmica: diferencia de recall de **3.8 puntos** ($\le 10\text{ pts}$ exigidos por Coordinación).
+7. **`Selector de Roles (Arriba a la derecha)`**:
+   * **Tutor (Joel Aisama):** Intervención humana directa ($N1$, $N2$).
+   * **Coordinación (Bautista Navarro):** Aprobación de medidas ($N3$), reasignación ($N6$) y recalibración ($N7$).
+   * **Docente de Cátedra (Regla C1):** Carga datos pero **tiene los puntajes bloqueados con candado** para no sesgar sus calificaciones.
 
 ---
 
-## 👥 6. Equipo Desarrollador y Contacto Institucional
+## 👥 5. Equipo y Créditos Institucionales
 
-* **Joel Aisama:** Desarrollador de Modelos y Tutor Académico del Sistema (`joel.aisama@alu.uch.edu.ar`).
-* **Bautista Navarro:** Auditor de Arquitectura y Coordinador del Sistema (`bautista.navarro@alu.uch.edu.ar`).
+* **Joel Aisama:** Modelos de IA, Inferencia Logística y Rol Tutor (`joel.aisama@alu.uch.edu.ar`).
+* **Bautista Navarro:** Auditoría de Arquitectura, Métricas y Rol Coordinación (`bautista.navarro@alu.uch.edu.ar`).
 * **Institución:** Universidad Champagnat — Facultad de Informática.
-* **Repositorio Evaluador:** Acceso concedido al usuario docente: **`ampalmaj`**.
+* **Docente Receptor del Proyecto:** **`ampalmaj`** (Acceso de colaborador otorgado).
