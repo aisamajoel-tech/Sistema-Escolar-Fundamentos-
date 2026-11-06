@@ -40,16 +40,17 @@ En el primer año universitario, más del 30 % del desgranamiento ocurre durante
 
 ---
 
-## 🖥️ 2. Arquitectura del Portal Universitario (4 Módulos y 4 Roles)
+## 🖥️ 2. Arquitectura del Campus Virtual UCH (`campus.uch.edu.ar` + Plugin `local/sitaia`)
 
-La interfaz fue diseñada siguiendo principios de arquitectura de software institucional, separando claramente las vistas según el módulo académico y el rol activo:
+La interfaz replica la experiencia real del **Campus Virtual Moodle de la Universidad Champagnat (`campus.uch.edu.ar`)**, integrando las pantallas de entregas (`mod/assign/view.php?id=560274`), el índice lateral de unidades del curso, el listado de participantes y el **Plugin Institucional SITA-IA (`local/sitaia`)**:
 
-| Módulo en Barra Lateral | ¿Qué contiene? | Roles Principales |
-| :--- | :--- | :--- |
-| **1. 📚 Mis Cursos y Cátedras** | Cursada de 1° año (*Algoritmos y Programación I, Álgebra, Sistemas y Organizaciones, Arquitectura*), horarios, cátedras, planilla docente con **bloqueo C1** y **Espacio de Tutoría Estudiantil**. | **Alumno** (*Lucas González*) y **Docente de Cátedra** (*Prof. Méndez*) |
-| **2. 🚨 Alerta Temprana SITA** | KPIs de cohorte (`120 alumnos`), tabla maestra priorizada (`12/15 casos`) y **Expediente Pedagógico Individual** con gráfico de 4 semanas, barras **XAI**, generador **Gemini 1.5 Flash** y formulario de decisión humana (`N1`–`N4`). | **Tutor Pedagógico** (*Prof. Joel Aisama*) |
-| **3. 👨‍🏫 Claustro y Tutores** | Directorio del equipo de tutorías (*Tutor A: Joel Aisama*, *Tutor B: Martín Suárez*), balanceo de carga operativa ($\le 15$ casos) y nómina de cátedras sujetas a la Regla C1. | Todos los roles institucionales |
-| **4. 🏛️ Administración y N1–N8** | Panel de **Coordinación Académica**: aprobación de derivaciones (`N3`), protocolo de inacción de 10 días y reasignación (`F2 / N6`), auditoría de sesgo inter-turno (`N7`, $\Delta = 3.8\text{ pts}$) y bitácora del protocolo **Prometheus (`Msj 0*` a `Msj 12*`)**. | **Coordinación** (*Bautista Navarro*) |
+| Pestaña de Moodle UCH | Ruta Simulada en `campus.uch.edu.ar` | ¿Qué contiene? | Rol Principal |
+| :--- | :--- | :--- | :--- |
+| **1. 📤 Tarea / Entregas (`mod/assign`)** | `/mod/assign/view.php?id=560274` | Tabla clásica de Moodle (**Estado de la entrega**, **Estado de la calificación**, **Tiempo restante**, **Archivos enviados**) para los TPs 1 a 4 + **Espacio de Tutoría Universitaria (Punto N2)** donde el alumno recibe invitación humana sin etiquetas de riesgo. | **Estudiante** (*Lucas González #24901*) |
+| **2. 📚 Curso (Unidades y Materias)** | `/course/view.php?id=101` | Estructura de unidades de *Algoritmos y Programación I*, avisos de cátedra, constancia de consentimiento informado (`N8`) y acceso a las demás materias de 1° año (*Álgebra, Sistemas y Organizaciones, Arquitectura*). | **Estudiante / General** |
+| **3. 👥 Participantes, Asistencia y Notas** | `/user/index.php?id=101` | Nómina de los 120 matriculados con **Último acceso a Moodle**, porcentaje de asistencia presencial, envíos en `mod/assign`, nota del Parcial 1 y **columna SITA-IA bloqueada con candado (`🔒 Regla C1`)** cuando ingresa el docente de cátedra. | **Profesor de Cátedra** (*Prof. Ing. Carlos Méndez*) |
+| **4. 🛡️ Alerta Temprana SITA-IA** | `/local/sitaia/view.php?courseid=101` | KPIs del pipeline ($A1 \rightarrow A2 \rightarrow A3$), **Bandeja Semanal Priorizada ($\le 15$ casos)** y **Expediente Pedagógico Individual** con evolución en 4 semanas, barras **XAI**, **Asistente Google AI Studio (Gemini 1.5 Flash)** y registro de decisión humana (`N1`–`N4`). | **Tutor Pedagógico SITA** (*Prof. Joel Aisama*) |
+| **5. ⚖️ Gobernanza y Auditoría (`N1`–`N8`)** | `/local/sitaia/governance.php?courseid=101` | Auditoría de equidad inter-turno (`N7`, $\Delta = 3.8\text{ pts} \le 10\text{ pts}$), protocolo de inacción de 10 días y reasignación al Tutor B (`F2 / N6`), aprobación de derivaciones (`N3`) y bitácora del protocolo **Prometheus (`Msj 0*` a `Msj 12*`)**. | **Coordinación Académica** (*Bautista Navarro*) |
 
 ---
 
