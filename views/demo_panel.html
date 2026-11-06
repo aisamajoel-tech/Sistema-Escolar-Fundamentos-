@@ -3,40 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Campus Virtual UCH · SITA-IA (campus.uch.edu.ar / mod/assign & local/sitaia)</title>
+  <title>Campus Virtual · Universidad Champagnat</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      /* Identidad visual Campus Virtual Universidad Champagnat (Moodle 4 UCH) */
-      --uch-bordeaux: #7c1830;
-      --uch-bordeaux-dark: #5c1022;
-      --uch-bordeaux-light: #fdf2f4;
-      --uch-navy: #1b2a4a;
-      --uch-gold: #c69214;
-      --moodle-bg: #f5f7fa;
-      --moodle-card: #ffffff;
-      --moodle-gray-row: #f8f9fa;
+      --uch-bordeaux: #80162b;
+      --uch-bordeaux-hover: #631020;
+      --uch-navy: #1d2b44;
+      --moodle-bg: #f8f9fa;
+      --moodle-white: #ffffff;
       --moodle-border: #dee2e6;
-      --moodle-border-dark: #ced4da;
-      --text-main: #1d2125;
-      --text-secondary: #495057;
-      --text-muted: #6a737b;
-      /* Colores clásicos de tablas Moodle (mod/assign/view.php) */
-      --moodle-submitted-bg: #cfefcf;
-      --moodle-submitted-text: #155724;
-      --moodle-overdue-bg: #f5c6cb;
-      --moodle-overdue-text: #721c24;
-      --moodle-warn-bg: #fff3cd;
-      --moodle-warn-text: #856404;
-      --moodle-info-bg: #d1ecf1;
-      --moodle-info-text: #0c5460;
-      --moodle-purple-bg: #ede9fe;
-      --moodle-purple-text: #5b21b6;
-      --radius: 6px;
-      --radius-lg: 8px;
-      --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.06);
+      --moodle-border-light: #e9ecef;
+      --moodle-text: #1d2125;
+      --moodle-muted: #6a737b;
+      --moodle-link: #80162b;
+      /* Colores auténticos de Moodle para entregas (mod/assign) */
+      --assign-green-bg: #cfefcf;
+      --assign-green-txt: #155724;
+      --assign-red-bg: #f5c6cb;
+      --assign-red-txt: #721c24;
+      --assign-yellow-bg: #fff3cd;
+      --assign-yellow-txt: #856404;
     }
 
     * {
@@ -46,99 +35,97 @@
     }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background-color: var(--moodle-bg);
-      color: var(--text-main);
-      font-size: 13.5px;
+      color: var(--moodle-text);
+      font-size: 14px;
       line-height: 1.5;
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      overflow: hidden;
     }
 
     /* ==========================================================================
-       1. BARRA SUPERIOR MOODLE UCH (campus.uch.edu.ar navbar)
+       BARRA SUPERIOR DEL CAMPUS VIRTUAL (Moodle 4 Navbar)
        ========================================================================== */
-    .moodle-navbar {
+    .campus-navbar {
       background: #ffffff;
       border-bottom: 1px solid var(--moodle-border);
       border-top: 4px solid var(--uch-bordeaux);
-      min-height: 60px;
-      padding: 4px 16px;
+      height: 62px;
+      padding: 0 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      flex-shrink: 0;
-      z-index: 40;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
     }
 
     .navbar-left {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 24px;
     }
 
-    .uch-brand {
+    .campus-logo {
       display: flex;
       align-items: center;
-      gap: 9px;
+      gap: 10px;
       text-decoration: none;
-      color: var(--uch-navy);
-      padding-right: 12px;
-      border-right: 1px solid var(--moodle-border);
-      white-space: nowrap;
+      color: var(--uch-bordeaux);
+      cursor: pointer;
     }
 
-    .uch-brand img {
-      width: 32px;
-      height: 32px;
+    .campus-logo img {
+      width: 36px;
+      height: 36px;
       object-fit: contain;
     }
 
-    .uch-brand-text .title {
-      font-weight: 700;
-      font-size: 13.5px;
-      color: var(--uch-bordeaux);
-      letter-spacing: -0.2px;
+    .campus-logo-text {
       line-height: 1.2;
     }
 
-    .uch-brand-text .url {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      color: var(--text-muted);
+    .campus-logo-text strong {
+      display: block;
+      font-size: 15px;
+      color: var(--uch-bordeaux);
+      font-weight: 700;
     }
 
-    .moodle-primary-nav {
+    .campus-logo-text span {
+      font-size: 11.5px;
+      color: var(--moodle-muted);
+    }
+
+    .campus-nav-links {
       display: flex;
-      align-items: center;
-      gap: 2px;
       list-style: none;
+      gap: 4px;
+      height: 58px;
     }
 
-    .moodle-primary-nav li a {
+    .campus-nav-links li a {
       display: flex;
       align-items: center;
-      gap: 5px;
-      padding: 12px 9px;
-      color: var(--text-secondary);
+      height: 100%;
+      padding: 0 14px;
+      color: #343a40;
       text-decoration: none;
+      font-size: 13.5px;
       font-weight: 500;
-      font-size: 12.5px;
       border-bottom: 3px solid transparent;
       cursor: pointer;
-      white-space: nowrap;
-      transition: all 0.15s;
     }
 
-    .moodle-primary-nav li a:hover {
+    .campus-nav-links li a:hover {
+      background-color: #f8f9fa;
       color: var(--uch-bordeaux);
-      background: var(--moodle-gray-row);
     }
 
-    .moodle-primary-nav li a.active {
+    .campus-nav-links li a.active {
       color: var(--uch-bordeaux);
       border-bottom-color: var(--uch-bordeaux);
       font-weight: 600;
@@ -147,28 +134,33 @@
     .navbar-right {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 16px;
     }
 
-    /* Selector "Cambiar rol a..." estilo Moodle */
-    .moodle-role-switcher {
+    .campus-icons {
       display: flex;
       align-items: center;
-      gap: 6px;
-      background: var(--moodle-gray-row);
-      border: 1px solid var(--moodle-border-dark);
-      padding: 4px 8px;
-      border-radius: var(--radius);
-      font-size: 12px;
+      gap: 12px;
+      color: var(--moodle-muted);
+      font-size: 16px;
     }
 
-    .moodle-role-switcher label {
-      color: var(--text-muted);
-      font-weight: 600;
-      font-size: 11.5px;
+    .role-selector-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #f8f9fa;
+      border: 1px solid var(--moodle-border);
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-size: 12.5px;
     }
 
-    .moodle-role-select {
+    .role-selector-wrap span {
+      color: var(--moodle-muted);
+    }
+
+    .role-selector-wrap select {
       border: none;
       background: transparent;
       font-family: inherit;
@@ -179,156 +171,85 @@
       outline: none;
     }
 
-    .user-profile-menu {
+    .user-menu {
       display: flex;
       align-items: center;
-      gap: 8px;
-      padding-left: 10px;
+      gap: 9px;
+      padding-left: 12px;
       border-left: 1px solid var(--moodle-border);
-      white-space: nowrap;
     }
 
-    .user-initials {
-      width: 32px;
-      height: 32px;
+    .user-avatar {
+      width: 34px;
+      height: 34px;
       border-radius: 50%;
       background: var(--uch-bordeaux);
       color: #fff;
+      font-size: 12.5px;
       font-weight: 700;
-      font-size: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
     /* ==========================================================================
-       2. BARRA COMPACTA DE DEMO (DEFENSA ORAL 5 MINUTOS)
+       ESTRUCTURA DEL CAMPUS (ÍNDICE IZQUIERDO DE MOODLE + CONTENIDO CENTRAL)
        ========================================================================== */
-    .defense-toolbar {
-      background: var(--uch-navy);
-      color: #f8fafc;
-      padding: 5px 18px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 11.5px;
-      flex-shrink: 0;
-    }
-
-    .defense-buttons {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      flex-wrap: wrap;
-    }
-
-    .def-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      font-weight: 700;
-      text-transform: uppercase;
-      background: rgba(198, 146, 20, 0.25);
-      color: #fcd34d;
-      border: 1px solid rgba(252, 211, 77, 0.4);
-      padding: 2px 7px;
-      border-radius: 4px;
-    }
-
-    .def-btn {
-      background: rgba(255, 255, 255, 0.1);
-      color: #e2e8f0;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      padding: 3px 9px;
-      border-radius: 4px;
-      font-size: 11px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.12s;
-    }
-
-    .def-btn:hover {
-      background: rgba(255, 255, 255, 0.2);
-      color: #fff;
-    }
-
-    .def-btn.active {
-      background: var(--uch-bordeaux);
-      border-color: #f43f5e;
-      color: #fff;
-      font-weight: 600;
-    }
-
-    .def-btn.gemini {
-      background: linear-gradient(135deg, #4f46e5, #7c3aed);
-      border-color: #a78bfa;
-      color: #fff;
-      font-weight: 600;
-    }
-
-    /* ==========================================================================
-       3. LAYOUT DE 3 COLUMNAS MOODLE 4 (ÍNDICE DEL CURSO + PÁGINA + BLOQUES)
-       ========================================================================== */
-    .moodle-layout {
+    .campus-body {
       display: flex;
       flex: 1;
-      overflow: hidden;
+      max-width: 1440px;
+      width: 100%;
+      margin: 0 auto;
     }
 
-    /* Columna Izquierda: Cajón de Índice del Curso Moodle */
-    .course-index-drawer {
-      width: 255px;
+    /* Cajón lateral izquierdo estilo Moodle 4 ("Índice del curso") */
+    .moodle-drawer {
+      width: 260px;
       background: #ffffff;
       border-right: 1px solid var(--moodle-border);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      padding: 18px 12px;
       flex-shrink: 0;
-      overflow-y: auto;
-      padding: 14px 10px;
     }
 
-    .drawer-header {
-      font-size: 11.5px;
-      font-weight: 700;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      padding: 4px 10px 10px;
-      border-bottom: 1px solid var(--moodle-border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .index-section {
-      margin-top: 10px;
-    }
-
-    .index-section-title {
-      font-size: 12.5px;
-      font-weight: 700;
-      color: var(--text-main);
-      padding: 6px 10px;
-      border-radius: var(--radius);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      background: var(--moodle-gray-row);
-    }
-
-    .index-activities {
-      list-style: none;
-      margin-top: 4px;
-      padding-left: 8px;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .index-activity {
-      padding: 6px 10px;
-      border-radius: var(--radius);
+    .drawer-title {
       font-size: 12px;
-      color: var(--text-secondary);
+      font-weight: 700;
+      color: var(--moodle-muted);
+      text-transform: uppercase;
+      padding: 0 10px 10px;
+      border-bottom: 1px solid var(--moodle-border-light);
+      margin-bottom: 10px;
+    }
+
+    .course-tree-group {
+      margin-bottom: 12px;
+    }
+
+    .course-tree-section {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--moodle-text);
+      padding: 6px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .course-tree-section:hover {
+      background: #f1f3f5;
+    }
+
+    .course-tree-items {
+      list-style: none;
+      padding-left: 12px;
+      margin-top: 3px;
+    }
+
+    .course-tree-items li {
+      padding: 6px 10px;
+      font-size: 12.5px;
+      color: #495057;
+      border-radius: 5px;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -336,518 +257,375 @@
       gap: 6px;
     }
 
-    .index-activity:hover {
-      background: #f1f3f5;
+    .course-tree-items li:hover {
+      background: #f8f9fa;
       color: var(--uch-bordeaux);
     }
 
-    .index-activity.active {
-      background: var(--uch-bordeaux-light);
+    .course-tree-items li.active {
+      background: #fdf2f4;
       color: var(--uch-bordeaux);
       font-weight: 600;
-      border-left: 3px solid var(--uch-bordeaux);
     }
 
-    .completion-dot {
-      width: 9px;
-      height: 9px;
+    .status-circle {
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
       flex-shrink: 0;
     }
 
-    .dot-done { background: #198754; }
-    .dot-overdue { background: #dc3545; }
-    .dot-pending { background: #adb5bd; }
-    .dot-sita { background: #6f42c1; }
+    .st-done { background: #198754; }
+    .st-late { background: #dc3545; }
+    .st-todo { background: #adb5bd; }
 
-    /* Columna Central: Área Principal del Curso Moodle */
-    .moodle-main-region {
+    /* Contenedor Principal de Página Moodle */
+    .moodle-page-content {
       flex: 1;
-      overflow-y: auto;
-      padding: 18px 26px 32px;
+      padding: 22px 32px 48px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 18px;
     }
 
-    /* Cabecera de Curso + Migas de Pan (Breadcrumbs Moodle) */
-    .moodle-course-header {
+    /* Migas de pan y encabezado del curso */
+    .moodle-header-card {
       background: #ffffff;
       border: 1px solid var(--moodle-border);
-      border-radius: var(--radius-lg);
-      padding: 16px 20px 0;
-      box-shadow: var(--shadow-card);
+      border-radius: 6px;
+      padding: 18px 24px 0;
     }
 
-    .moodle-breadcrumbs {
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-bottom: 6px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      flex-wrap: wrap;
+    .breadcrumb-nav {
+      font-size: 12.5px;
+      color: var(--moodle-muted);
+      margin-bottom: 8px;
     }
 
-    .moodle-breadcrumbs a {
+    .breadcrumb-nav a {
       color: var(--uch-bordeaux);
       text-decoration: none;
       cursor: pointer;
     }
 
-    .moodle-breadcrumbs a:hover {
+    .breadcrumb-nav a:hover {
       text-decoration: underline;
     }
 
-    .course-header-top {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 16px;
-      padding-bottom: 12px;
-    }
-
-    .course-header-top h1 {
-      font-size: 20px;
+    .course-main-title {
+      font-size: 22px;
       font-weight: 700;
-      color: var(--text-main);
+      color: var(--moodle-text);
+      margin-bottom: 4px;
     }
 
-    .url-pill {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      background: var(--moodle-gray-row);
-      border: 1px solid var(--moodle-border-dark);
-      color: var(--text-secondary);
-      padding: 4px 10px;
-      border-radius: 20px;
-      white-space: nowrap;
+    .course-teachers-sub {
+      font-size: 13px;
+      color: var(--moodle-muted);
+      padding-bottom: 14px;
     }
 
-    /* Pestañas Secundarias de Curso Moodle 4 */
-    .moodle-secondary-tabs {
+    /* Pestañas secundarias dentro del curso (Curso | Participantes | Calificaciones | Tutorías) */
+    .course-nav-tabs {
       display: flex;
       gap: 4px;
-      border-top: 1px solid var(--moodle-border);
-      padding-top: 2px;
-      overflow-x: auto;
+      border-top: 1px solid var(--moodle-border-light);
     }
 
-    .moodle-tab {
+    .course-tab-btn {
       background: transparent;
       border: none;
       border-bottom: 3px solid transparent;
-      padding: 9px 11px;
+      padding: 11px 16px;
       font-family: inherit;
-      font-size: 12.5px;
+      font-size: 13.5px;
       font-weight: 500;
-      color: var(--text-secondary);
+      color: #495057;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      white-space: nowrap;
     }
 
-    .moodle-tab:hover {
+    .course-tab-btn:hover {
       color: var(--uch-bordeaux);
-      background: var(--moodle-gray-row);
+      background: #f8f9fa;
     }
 
-    .moodle-tab.active {
+    .course-tab-btn.active {
       color: var(--uch-bordeaux);
       border-bottom-color: var(--uch-bordeaux);
-      font-weight: 700;
+      font-weight: 600;
     }
 
-    .tab-counter {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10.5px;
-      padding: 1px 6px;
-      border-radius: 10px;
-      background: var(--uch-bordeaux-light);
-      color: var(--uch-bordeaux);
-      font-weight: 700;
-    }
-
-    /* Vistas de Pestañas */
-    .moodle-tab-pane {
+    /* Vistas de página */
+    .campus-view {
       display: none;
       flex-direction: column;
-      gap: 16px;
+      gap: 18px;
     }
 
-    .moodle-tab-pane.active {
+    .campus-view.active {
       display: flex;
     }
 
     /* ==========================================================================
-       ESTILOS AUTÉNTICOS DE /mod/assign/view.php (TAREAS Y ENTREGAS MOODLE)
+       TARJETAS Y TABLAS DE MOODLE (course/view.php & mod/assign/view.php)
        ========================================================================== */
-    .assign-box {
+    .moodle-section-card {
       background: #ffffff;
       border: 1px solid var(--moodle-border);
-      border-radius: var(--radius-lg);
-      padding: 20px;
-      box-shadow: var(--shadow-card);
+      border-radius: 6px;
+      padding: 20px 24px;
     }
 
-    .assign-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding-bottom: 14px;
-      border-bottom: 1px solid var(--moodle-border);
+    .moodle-section-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--moodle-text);
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--moodle-border-light);
       margin-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
-    .assign-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 8px;
-      background: #e63946;
-      color: #fff;
+    /* Ítems de recursos/actividades dentro de una Unidad de Moodle */
+    .moodle-activity-item {
       display: flex;
       align-items: center;
-      justify-content: center;
-      font-size: 19px;
-      flex-shrink: 0;
-    }
-
-    .assign-dates {
-      background: var(--moodle-gray-row);
-      border: 1px solid var(--moodle-border);
-      border-radius: var(--radius);
-      padding: 10px 14px;
-      margin-bottom: 16px;
-      font-size: 12.5px;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    /* Tabla Clásica de Moodle: "Estado de la entrega" (generaltable) */
-    table.moodle-generaltable {
-      width: 100%;
-      border-collapse: collapse;
-      border: 1px solid var(--moodle-border);
-      font-size: 13px;
-    }
-
-    table.moodle-generaltable th,
-    table.moodle-generaltable td {
-      padding: 10px 14px;
-      border: 1px solid var(--moodle-border);
-      text-align: left;
-      vertical-align: middle;
-    }
-
-    table.moodle-generaltable tbody tr:nth-child(odd) th {
-      background: var(--moodle-gray-row);
-    }
-
-    table.moodle-generaltable th.cell-c0 {
-      width: 28%;
-      font-weight: 700;
-      color: var(--text-main);
-      background: #f8f9fa;
-    }
-
-    td.submission-overdue {
-      background-color: var(--moodle-overdue-bg) !important;
-      color: var(--moodle-overdue-text) !important;
-      font-weight: 600;
-    }
-
-    td.submission-done {
-      background-color: var(--moodle-submitted-bg) !important;
-      color: var(--moodle-submitted-text) !important;
-      font-weight: 600;
-    }
-
-    td.submission-warn {
-      background-color: var(--moodle-warn-bg) !important;
-      color: var(--moodle-warn-text) !important;
-      font-weight: 600;
-    }
-
-    /* Secciones del Curso (Vista Aula Virtual) */
-    .course-topic-card {
+      justify-content: space-between;
+      padding: 12px 14px;
+      border: 1px solid var(--moodle-border-light);
+      border-radius: 6px;
+      margin-bottom: 10px;
       background: #ffffff;
-      border: 1px solid var(--moodle-border);
-      border-radius: var(--radius-lg);
-      padding: 16px 20px;
-      box-shadow: var(--shadow-card);
     }
 
-    .course-topic-card h3 {
-      font-size: 15.5px;
-      font-weight: 700;
-      color: var(--uch-bordeaux);
-      padding-bottom: 8px;
-      border-bottom: 1px solid var(--moodle-border);
-      margin-bottom: 12px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    .moodle-activity-item:hover {
+      border-color: #ced4da;
+      background: #fcfcfd;
     }
 
-    .activity-row {
+    .activity-item-left {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 9px 12px;
-      border: 1px solid var(--moodle-border);
-      border-radius: var(--radius);
-      margin-bottom: 8px;
-      background: #fff;
-      transition: background 0.12s;
+      gap: 14px;
     }
 
-    .activity-row:hover {
-      background: var(--moodle-gray-row);
-    }
-
-    .activity-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .act-badge-icon {
-      width: 32px;
-      height: 32px;
+    .mod-icon {
+      width: 38px;
+      height: 38px;
       border-radius: 6px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 15px;
+      font-size: 17px;
       color: #fff;
       flex-shrink: 0;
     }
 
-    /* ==========================================================================
-       4. MÓDULO PLUGIN SITA-IA INTEGRADO EN MOODLE (local/sitaia)
-       ========================================================================== */
-    .sita-kpi-row {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-    }
+    .icon-assign { background: #e03131; }
+    .icon-pdf { background: #1971c2; }
+    .icon-forum { background: #f08c00; }
+    .icon-quiz { background: #2f9e44; }
+    .icon-tutor { background: var(--uch-bordeaux); }
 
-    .sita-kpi {
-      background: #ffffff;
-      border: 1px solid var(--moodle-border);
-      border-top: 3px solid var(--uch-bordeaux);
-      border-radius: var(--radius);
-      padding: 12px 14px;
-      box-shadow: var(--shadow-card);
-    }
-
-    .sita-kpi .lbl {
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
-
-    .sita-kpi .val {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 21px;
-      font-weight: 700;
-      color: var(--uch-navy);
-      margin: 3px 0;
-    }
-
-    .sita-kpi .sub {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .sita-split-view {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 16px;
-      align-items: start;
-    }
-
-    .moodle-box {
-      background: #ffffff;
-      border: 1px solid var(--moodle-border);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-card);
-      overflow: hidden;
-    }
-
-    .moodle-box-header {
-      padding: 12px 16px;
-      background: var(--moodle-gray-row);
-      border-bottom: 1px solid var(--moodle-border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .moodle-box-header h3 {
+    .activity-link {
+      font-weight: 600;
+      color: var(--uch-bordeaux);
+      text-decoration: none;
+      cursor: pointer;
       font-size: 14px;
-      font-weight: 700;
-      color: var(--uch-navy);
     }
 
-    .table-wrapper {
-      max-height: 500px;
-      overflow-y: auto;
+    .activity-link:hover {
+      text-decoration: underline;
     }
 
-    table.sita-table {
+    .completion-pill {
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    .pill-done { background: var(--assign-green-bg); color: var(--assign-green-txt); }
+    .pill-late { background: var(--assign-red-bg); color: var(--assign-red-txt); }
+    .pill-info { background: #e7f5ff; color: #1864ab; }
+    .pill-warn { background: var(--assign-yellow-bg); color: var(--assign-yellow-txt); }
+
+    /* Tabla idéntica a https://campus.uch.edu.ar/mod/assign/view.php */
+    .assign-dates-block {
+      background: #f8f9fa;
+      border: 1px solid var(--moodle-border-light);
+      border-radius: 6px;
+      padding: 14px 18px;
+      margin-bottom: 18px;
+      font-size: 13.5px;
+    }
+
+    .assign-dates-block div {
+      margin-bottom: 4px;
+    }
+
+    table.generaltable {
       width: 100%;
       border-collapse: collapse;
-      font-size: 12.5px;
+      margin-top: 8px;
+      font-size: 13.5px;
     }
 
-    table.sita-table th {
-      position: sticky;
-      top: 0;
-      background: #f1f3f5;
-      color: var(--text-secondary);
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      padding: 9px 10px;
-      text-align: left;
-      border-bottom: 2px solid var(--moodle-border-dark);
-      z-index: 2;
-    }
-
-    table.sita-table td {
-      padding: 9px 10px;
+    table.generaltable th,
+    table.generaltable td {
+      padding: 11px 14px;
+      border-top: 1px solid var(--moodle-border);
       border-bottom: 1px solid var(--moodle-border);
+      text-align: left;
       vertical-align: middle;
     }
 
-    table.sita-table tr.clickable-row {
-      cursor: pointer;
+    table.generaltable tbody tr:nth-child(odd) {
+      background-color: #f8f9fa;
     }
 
-    table.sita-table tr.clickable-row:hover {
-      background: var(--moodle-gray-row);
-    }
-
-    table.sita-table tr.clickable-row.selected {
-      background: var(--uch-bordeaux-light);
-      border-left: 3px solid var(--uch-bordeaux);
-    }
-
-    /* Píldoras de Estado Moodle/SITA */
-    .m-badge {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11.5px;
+    table.generaltable th.c0 {
+      width: 30%;
       font-weight: 700;
-      padding: 2px 8px;
-      border-radius: 4px;
-      display: inline-block;
+      color: #343a40;
     }
 
-    .m-badge-danger { background: var(--moodle-overdue-bg); color: var(--moodle-overdue-text); }
-    .m-badge-warn { background: var(--moodle-warn-bg); color: var(--moodle-warn-text); }
-    .m-badge-success { background: var(--moodle-submitted-bg); color: var(--moodle-submitted-text); }
-    .m-badge-purple { background: var(--moodle-purple-bg); color: var(--moodle-purple-text); }
-    .m-badge-neutral { background: #e9ecef; color: #495057; }
+    td.submissionstatussubmitted,
+    td.earlysubmission {
+      background-color: var(--assign-green-bg) !important;
+      color: var(--assign-green-txt) !important;
+    }
 
-    /* Botones Estilo Moodle 4 */
+    td.overduesubmission {
+      background-color: var(--assign-red-bg) !important;
+      color: var(--assign-red-txt) !important;
+    }
+
+    /* Grilla de Tarjetas de Materias (Área Personal / Mis Cursos) */
+    .courses-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .moodle-course-card {
+      background: #ffffff;
+      border: 1px solid var(--moodle-border);
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: box-shadow 0.15s;
+    }
+
+    .moodle-course-card:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .course-card-banner {
+      height: 82px;
+      padding: 14px 16px;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .course-card-body {
+      padding: 16px;
+    }
+
+    .course-card-body h4 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--uch-bordeaux);
+      margin-bottom: 6px;
+    }
+
+    /* Botones estándar de Moodle */
     .btn-moodle {
-      padding: 6px 12px;
-      border-radius: var(--radius);
+      padding: 8px 15px;
+      border-radius: 5px;
       font-family: inherit;
-      font-size: 12.5px;
+      font-size: 13px;
       font-weight: 600;
       cursor: pointer;
       border: 1px solid transparent;
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      transition: all 0.15s;
     }
 
     .btn-moodle-primary {
-      background: var(--uch-bordeaux);
+      background-color: var(--uch-bordeaux);
       color: #ffffff;
     }
 
     .btn-moodle-primary:hover {
-      background: var(--uch-bordeaux-dark);
+      background-color: var(--uch-bordeaux-hover);
     }
 
     .btn-moodle-secondary {
-      background: #ffffff;
-      border-color: var(--moodle-border-dark);
-      color: var(--text-main);
+      background-color: #e9ecef;
+      color: #212529;
+      border-color: #ced4da;
     }
 
     .btn-moodle-secondary:hover {
-      background: var(--moodle-gray-row);
+      background-color: #dee2e6;
     }
 
-    .btn-moodle-gemini {
-      background: linear-gradient(135deg, #4f46e5, #7c3aed);
-      color: #ffffff;
+    /* Layout del espacio de Tutorías (Listado + Ficha del Alumno) */
+    .tutoria-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 20px;
+      align-items: start;
     }
 
-    .moodle-alert {
-      padding: 12px 16px;
-      border-radius: var(--radius);
-      border-left: 4px solid;
-      font-size: 13px;
+    .student-tr {
+      cursor: pointer;
+    }
+
+    .student-tr:hover {
+      background-color: #f1f3f5 !important;
+    }
+
+    .student-tr.selected {
+      background-color: #fdf2f4 !important;
+      border-left: 3px solid var(--uch-bordeaux);
+    }
+
+    .notice-box {
+      padding: 13px 18px;
+      border-radius: 6px;
+      border: 1px solid;
+      font-size: 13.5px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
+      gap: 14px;
     }
 
-    .moodle-alert-danger {
-      background: #f8d7da;
-      border-left-color: #dc3545;
-      color: #721c24;
-    }
+    .notice-info { background: #e7f5ff; border-color: #a5d8ff; color: #1864ab; }
+    .notice-warn { background: #fff3cd; border-color: #ffeec2; color: #856404; }
+    .notice-danger { background: #f8d7da; border-color: #f5c2c7; color: #842029; }
 
-    .moodle-alert-warn {
-      background: #fff3cd;
-      border-left-color: #ffc107;
-      color: #856404;
-    }
-
-    .moodle-alert-info {
-      background: #cff4fc;
-      border-left-color: #0dcaf0;
-      color: #055160;
-    }
-
-    .xai-bar-wrap {
-      height: 6px;
-      background: #e9ecef;
-      border-radius: 4px;
-      overflow: hidden;
-      margin-top: 3px;
-    }
-
-    .xai-bar-inner {
-      height: 100%;
-      background: var(--uch-bordeaux);
-    }
-
-    .moodle-toast {
+    .toast-msg {
       position: fixed;
-      bottom: 18px;
-      right: 18px;
-      background: var(--uch-navy);
-      color: #fff;
-      padding: 11px 16px;
-      border-radius: var(--radius);
-      border-left: 4px solid var(--uch-gold);
-      box-shadow: 0 6px 18px rgba(0,0,0,0.2);
-      font-size: 12.5px;
+      bottom: 20px;
+      right: 20px;
+      background: #212529;
+      color: #ffffff;
+      padding: 12px 18px;
+      border-radius: 6px;
+      font-size: 13px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.18);
       z-index: 100;
       display: none;
     }
@@ -856,523 +634,534 @@
 <body>
 
   <!-- ========================================================================
-       1. BARRA SUPERIOR CAMPUS VIRTUAL UCH (campus.uch.edu.ar)
+       BARRA DE NAVEGACIÓN DEL CAMPUS VIRTUAL UCH
        ======================================================================== -->
-  <nav class="moodle-navbar">
+  <header class="campus-navbar">
     <div class="navbar-left">
-      <div class="uch-brand">
+      <a class="campus-logo" onclick="mostrarVista('mis-cursos')">
         <img src="logo_uch.png" onerror="this.src='views/logo_uch.png'" alt="UCH" />
-        <div class="uch-brand-text">
-          <div class="title">Universidad Champagnat</div>
-          <div class="url">campus.uch.edu.ar · Moodle 4.3</div>
+        <div class="campus-logo-text">
+          <strong>Universidad Champagnat</strong>
+          <span>Campus Virtual · Facultad de Informática</span>
         </div>
-      </div>
+      </a>
 
-      <ul class="moodle-primary-nav">
-        <li><a id="top-nav-aula" onclick="abrirPestanaMoodle('aula')">🏠 Área personal y Curso</a></li>
-        <li><a id="top-nav-assign" class="active" onclick="abrirPestanaMoodle('assign')">📤 Entregas (mod/assign)</a></li>
-        <li><a id="top-nav-participantes" onclick="abrirPestanaMoodle('participantes')">👥 Participantes (120)</a></li>
-        <li><a id="top-nav-sita" onclick="abrirPestanaMoodle('sita')">🛡️ SITA-IA (Alerta Temprana)</a></li>
-        <li><a id="top-nav-gov" onclick="abrirPestanaMoodle('gov')">⚖️ Gobernanza N1–N8</a></li>
+      <ul class="campus-nav-links">
+        <li><a id="nav-mis-cursos" onclick="mostrarVista('mis-cursos')">Área personal / Mis cursos</a></li>
+        <li><a id="nav-curso" onclick="mostrarVista('curso')">Aula: Algoritmos y Programación I</a></li>
+        <li><a id="nav-assign" class="active" onclick="mostrarVista('assign')">Entregas (Trabajos Prácticos)</a></li>
+        <li><a id="nav-participantes" onclick="mostrarVista('participantes')">Participantes y Asistencia</a></li>
+        <li><a id="nav-tutorias" onclick="mostrarVista('tutorias')">Programa de Tutorías (SITA)</a></li>
       </ul>
     </div>
 
     <div class="navbar-right">
-      <div class="moodle-role-switcher" title="Función nativa de Moodle para cambiar el rol de visualización">
-        <label for="moodle-role-select">Cambiar rol a:</label>
-        <select id="moodle-role-select" class="moodle-role-select" onchange="cambiarRolMoodle(this.value)">
-          <option value="ALUMNO">🎓 Estudiante (Lucas González #24901)</option>
-          <option value="DOCENTE">📘 Profesor de Cátedra (Ing. Méndez · Regla C1)</option>
-          <option value="TUTOR" selected>🛡️ Tutor Pedagógico SITA (Prof. Joel Aisama)</option>
-          <option value="COORDINACION">⚖️ Coordinación Académica (Bautista Navarro)</option>
+      <div class="role-selector-wrap">
+        <span>Viendo como:</span>
+        <select id="role-select" onchange="cambiarUsuarioActivo(this.value)">
+          <option value="ALUMNO" selected>Estudiante: González, Lucas (#24901)</option>
+          <option value="DOCENTE">Docente Titular: Ing. Carlos Méndez</option>
+          <option value="TUTOR">Tutor 1° Año: Prof. Joel Aisama</option>
+          <option value="COORDINACION">Secretaría Académica: Bautista Navarro</option>
         </select>
       </div>
 
-      <div class="user-profile-menu">
-        <div class="user-initials" id="nav-user-initials">JA</div>
-        <div style="font-size:12px; line-height:1.25;">
-          <div style="font-weight:700;" id="nav-user-name">Prof. Joel Aisama</div>
-          <div style="font-size:11px; color:var(--text-muted);" id="nav-user-role">Tutor Pedagógico (N1–N4)</div>
+      <div class="user-menu">
+        <div class="user-avatar" id="header-avatar">LG</div>
+        <div style="font-size:12.5px; line-height:1.25;">
+          <div style="font-weight:700;" id="header-username">Lucas González</div>
+          <div style="font-size:11px; color:var(--moodle-muted);" id="header-userrole">Ing. en Sistemas · 1° Año</div>
         </div>
       </div>
     </div>
-  </nav>
+  </header>
 
   <!-- ========================================================================
-       2. BARRA DE ESCENARIOS RÁPIDOS PARA LA DEFENSA ORAL (5 MIN)
+       CUERPO DEL CAMPUS (CAJÓN LATERAL DEL CURSO + PÁGINA PRINCIPAL)
        ======================================================================== -->
-  <div class="defense-toolbar">
-    <div class="defense-buttons">
-      <span class="def-label">Defensa 5 Min</span>
-      <button class="def-btn" id="btn-sc-assign" onclick="ejecutarEscenarioMoodle('assign')">📄 Vista Moodle /mod/assign (Alumno Lucas)</button>
-      <button class="def-btn active" id="btn-sc-sita" onclick="ejecutarEscenarioMoodle('sita')">🚨 Bandeja SITA-IA + Caso Lucas (82/100)</button>
-      <button class="def-btn gemini" id="btn-sc-gemini" onclick="ejecutarEscenarioMoodle('gemini')">✨ Asistente Gemini 1.5 Flash (Guía N2)</button>
-      <button class="def-btn" id="btn-sc-c1" onclick="ejecutarEscenarioMoodle('c1')">🔒 Rol Docente: Bloqueo Anti-Sesgo (C1)</button>
-      <button class="def-btn" id="btn-sc-f1" onclick="ejecutarEscenarioMoodle('f1')">⚠️ Falla F1: Caída de Campus (Sin Evaluar)</button>
-      <button class="def-btn" id="btn-sc-f3" onclick="ejecutarEscenarioMoodle('f3')">🔍 Falla F3: Contradicción (Mateo 92% vs 14d)</button>
-      <button class="def-btn" id="btn-sc-gov" onclick="ejecutarEscenarioMoodle('gov')">⚖️ Escalamiento F2 (10d) + Sesgo Turnos (N7)</button>
-    </div>
-    <div style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#cbd5e1;" id="backend-status-text">
-      ● MVC Activo (A1 → A2 → A3 + Gemini API)
-    </div>
-  </div>
+  <div class="campus-body">
 
-  <!-- ========================================================================
-       3. CUERPO PRINCIPAL DE MOODLE (ÍNDICE DEL CURSO + REGIÓN CENTRAL)
-       ======================================================================== -->
-  <div class="moodle-layout">
+    <!-- Cajón Izquierdo: Índice de la Materia (Moodle Course Index) -->
+    <aside class="moodle-drawer">
+      <div class="drawer-title">Índice de la Asignatura</div>
 
-    <!-- CAJÓN IZQUIERDO: ÍNDICE DEL CURSO MOODLE (Course Index Drawer) -->
-    <aside class="course-index-drawer">
-      <div>
-        <div class="drawer-header">
-          <span>📑 Índice del curso</span>
-          <span style="font-family:'JetBrains Mono',monospace; font-size:10px;">INF-101</span>
-        </div>
-
-        <div class="index-section">
-          <div class="index-section-title">▾ General · 1° Año UCH</div>
-          <ul class="index-activities">
-            <li class="index-activity" onclick="abrirPestanaMoodle('aula')">
-              <span>📢 Avisos de Cátedra y Tutoría</span>
-              <span class="completion-dot dot-done" title="Completado"></span>
-            </li>
-            <li class="index-activity" onclick="abrirPestanaMoodle('aula')">
-              <span>📋 Consentimiento Informado (N8)</span>
-              <span class="completion-dot dot-done" title="Firmado"></span>
-            </li>
-          </ul>
-        </div>
-
-        <div class="index-section">
-          <div class="index-section-title">▾ Trabajos Prácticos (mod/assign)</div>
-          <ul class="index-activities">
-            <li class="index-activity" id="idx-tp1" onclick="seleccionarTareaMoodle(1)">
-              <span>📄 TP N° 1: Algoritmos Básicos</span>
-              <span class="completion-dot dot-done" title="Entregado"></span>
-            </li>
-            <li class="index-activity" id="idx-tp2" onclick="seleccionarTareaMoodle(2)">
-              <span>📄 TP N° 2: Estructuras Condicionales</span>
-              <span class="completion-dot dot-overdue" title="Sin entregar (Vencido)"></span>
-            </li>
-            <li class="index-activity active" id="idx-tp3" onclick="seleccionarTareaMoodle(3)">
-              <span>📄 TP N° 3: Lazos e Iteración (id=560274)</span>
-              <span class="completion-dot dot-overdue" title="Sin entregar (Vencido)"></span>
-            </li>
-            <li class="index-activity" id="idx-tp4" onclick="seleccionarTareaMoodle(4)">
-              <span>📄 TP N° 4: Funciones y Arreglos</span>
-              <span class="completion-dot dot-done" title="Entregado"></span>
-            </li>
-          </ul>
-        </div>
-
-        <div class="index-section">
-          <div class="index-section-title">▾ Evaluación Parcial</div>
-          <ul class="index-activities">
-            <li class="index-activity" onclick="abrirPestanaMoodle('participantes')">
-              <span>📝 1° Examen Parcial (Nota: 3,50)</span>
-              <span class="completion-dot dot-overdue"></span>
-            </li>
-            <li class="index-activity" onclick="abrirPestanaMoodle('participantes')">
-              <span>📅 Registro de Asistencia Presencial</span>
-              <span class="completion-dot dot-overdue"></span>
-            </li>
-          </ul>
-        </div>
-
-        <div class="index-section">
-          <div class="index-section-title">▾ Plugin Institucional SITA-IA</div>
-          <ul class="index-activities">
-            <li class="index-activity" id="idx-sita" onclick="abrirPestanaMoodle('sita')">
-              <span>🛡️ Monitor Multiagente A1–A3</span>
-              <span class="completion-dot dot-sita"></span>
-            </li>
-            <li class="index-activity" onclick="ejecutarEscenarioMoodle('gemini')">
-              <span>✨ Guía Entrevista Gemini 1.5</span>
-              <span class="completion-dot dot-sita"></span>
-            </li>
-            <li class="index-activity" onclick="abrirPestanaMoodle('gov')">
-              <span>⚖️ Auditoría N1–N8 y Prometheus</span>
-              <span class="completion-dot dot-sita"></span>
-            </li>
-          </ul>
-        </div>
+      <div class="course-tree-group">
+        <div class="course-tree-section" onclick="mostrarVista('curso')">▾ General</div>
+        <ul class="course-tree-items">
+          <li onclick="mostrarVista('curso')">
+            <span>📢 Avisos de la Cátedra</span>
+            <span class="status-circle st-done"></span>
+          </li>
+          <li onclick="mostrarVista('curso')">
+            <span>📄 Programa y Régimen de Cursada</span>
+            <span class="status-circle st-done"></span>
+          </li>
+          <li onclick="mostrarVista('curso')">
+            <span>📋 Consentimiento Tutorías (N8)</span>
+            <span class="status-circle st-done"></span>
+          </li>
+        </ul>
       </div>
 
-      <div style="background:var(--moodle-gray-row); border:1px solid var(--moodle-border); border-radius:var(--radius); padding:10px; font-size:11px; color:var(--text-secondary);">
-        <strong style="color:var(--uch-bordeaux);">🔒 Regla Institucional N1–N8:</strong><br>
-        La telemetría de este campus alimenta al <strong>Agente A1</strong> cada semana. Ningún algoritmo sanciona ni envía mensajes automáticos al alumno.
+      <div class="course-tree-group">
+        <div class="course-tree-section" onclick="mostrarVista('curso')">▾ Unidad 1: Algoritmos Básicos</div>
+        <ul class="course-tree-items">
+          <li onclick="mostrarVista('curso')">
+            <span>📘 Apunte de Cátedra U1 (PDF)</span>
+            <span class="status-circle st-done"></span>
+          </li>
+          <li id="tree-tp1" onclick="abrirEntregaTP(1)">
+            <span>📤 Trabajo Práctico N° 1</span>
+            <span class="status-circle st-done" title="Entregado"></span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="course-tree-group">
+        <div class="course-tree-section" onclick="mostrarVista('curso')">▾ Unidad 2: Condicionales</div>
+        <ul class="course-tree-items">
+          <li onclick="mostrarVista('curso')">
+            <span>📘 Guía de Ejercicios U2 (PDF)</span>
+            <span class="status-circle st-done"></span>
+          </li>
+          <li id="tree-tp2" onclick="abrirEntregaTP(2)">
+            <span>📤 Trabajo Práctico N° 2</span>
+            <span class="status-circle st-late" title="Sin entregar (Vencido)"></span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="course-tree-group">
+        <div class="course-tree-section" onclick="mostrarVista('curso')">▾ Unidad 3: Ciclos e Iteración</div>
+        <ul class="course-tree-items">
+          <li onclick="mostrarVista('curso')">
+            <span>📘 Material Teórico Ciclos (PDF)</span>
+            <span class="status-circle st-todo"></span>
+          </li>
+          <li id="tree-tp3" class="active" onclick="abrirEntregaTP(3)">
+            <span>📤 Trabajo Práctico N° 3</span>
+            <span class="status-circle st-late" title="Sin entregar (Vencido)"></span>
+          </li>
+          <li id="tree-tp4" onclick="abrirEntregaTP(4)">
+            <span>📤 Trabajo Práctico N° 4</span>
+            <span class="status-circle st-done" title="Entregado"></span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="course-tree-group">
+        <div class="course-tree-section" onclick="mostrarVista('participantes')">▾ Evaluaciones y Regularidad</div>
+        <ul class="course-tree-items">
+          <li onclick="mostrarVista('participantes')">
+            <span>📝 1° Examen Parcial</span>
+            <span class="status-circle st-late"></span>
+          </li>
+          <li onclick="mostrarVista('participantes')">
+            <span>📅 Asistencia a Clases Prácticas</span>
+            <span class="status-circle st-late"></span>
+          </li>
+          <li onclick="mostrarVista('tutorias')">
+            <span>🤝 Tutoría y Acompañamiento</span>
+            <span class="status-circle st-done"></span>
+          </li>
+        </ul>
       </div>
     </aside>
 
-    <!-- REGIÓN CENTRAL: CABECERA DE CURSO MOODLE + PESTAÑAS -->
-    <main class="moodle-main-region">
+    <!-- Página Principal de Contenido -->
+    <main class="moodle-page-content">
 
-      <!-- Cabecera de Curso Estilo campus.uch.edu.ar -->
-      <header class="moodle-course-header">
-        <div class="moodle-breadcrumbs" id="moodle-breadcrumb-bar">
-          <a onclick="abrirPestanaMoodle('aula')">Área personal</a> <span>/</span>
-          <a onclick="abrirPestanaMoodle('aula')">Mis cursos</a> <span>/</span>
-          <a onclick="abrirPestanaMoodle('aula')">2026 · 1° Año Ingeniería en Sistemas (Comisión 1 - Noche)</a> <span>/</span>
-          <strong id="breadcrumb-current">Trabajo Práctico N° 3 (mod/assign/view.php?id=560274)</strong>
+      <!-- Cabecera de Curso Estilo Campus UCH -->
+      <div class="moodle-header-card">
+        <div class="breadcrumb-nav">
+          <a onclick="mostrarVista('mis-cursos')">Área personal</a> /
+          <a onclick="mostrarVista('mis-cursos')">Mis cursos</a> /
+          <a onclick="mostrarVista('curso')">2026 - 1° Año - Ingeniería en Sistemas (Comisión 1 Noche)</a> /
+          <span id="breadcrumb-actual">Trabajo Práctico N° 3</span>
         </div>
 
-        <div class="course-header-top">
-          <div>
-            <h1>Algoritmos y Programación I · Aula Virtual y Módulo de Tutorías SITA-IA</h1>
-            <p style="font-size:12.5px; color:var(--text-muted); margin-top:2px;">
-              Titular: <strong>Prof. Ing. Carlos Méndez</strong> · JTP: <strong>Lic. Sofía Alarcón</strong> · Tutor SITA Asignado: <strong>Prof. Joel Aisama</strong> · Coordinación: <strong>Bautista Navarro</strong>
-            </p>
-          </div>
-          <span class="url-pill" id="simulated-url-pill">https://campus.uch.edu.ar/local/sitaia/view.php?courseid=101</span>
+        <div class="course-main-title" id="page-main-heading">Algoritmos y Programación I - Comisión 1 (Turno Noche)</div>
+        <div class="course-teachers-sub">
+          Cátedra: <strong>Prof. Ing. Carlos Méndez</strong> (Titular) · <strong>Lic. Sofía Alarcón</strong> (JTP) · Tutor Académico de 1° Año: <strong>Prof. Joel Aisama</strong>
         </div>
 
-        <!-- Barra de Pestañas Secundarias de Moodle 4 -->
-        <div class="moodle-secondary-tabs">
-          <button class="moodle-tab" id="tab-btn-aula" onclick="abrirPestanaMoodle('aula')">
-            📚 Curso (Unidades y Materias)
-          </button>
-          <button class="moodle-tab" id="tab-btn-assign" onclick="abrirPestanaMoodle('assign')">
-            📤 Tarea / Entregas (mod/assign?id=560274) <span class="tab-counter">2 Adeudados</span>
-          </button>
-          <button class="moodle-tab" id="tab-btn-participantes" onclick="abrirPestanaMoodle('participantes')">
-            👥 Participantes, Asistencia y Notas <span class="tab-counter">120</span>
-          </button>
-          <button class="moodle-tab active" id="tab-btn-sita" onclick="abrirPestanaMoodle('sita')">
-            🛡️ Alerta Temprana SITA-IA (XAI + Gemini) <span class="tab-counter">12 / 15</span>
-          </button>
-          <button class="moodle-tab" id="tab-btn-gov" onclick="abrirPestanaMoodle('gov')">
-            ⚖️ Gobernanza y Auditoría (N1–N8)
-          </button>
+        <div class="course-nav-tabs">
+          <button class="course-tab-btn" id="tab-curso" onclick="mostrarVista('curso')">Curso</button>
+          <button class="course-tab-btn active" id="tab-assign" onclick="mostrarVista('assign')">Tareas / Entregas</button>
+          <button class="course-tab-btn" id="tab-participantes" onclick="mostrarVista('participantes')">Participantes y Asistencia</button>
+          <button class="course-tab-btn" id="tab-tutorias" onclick="mostrarVista('tutorias')">Acompañamiento y Tutorías (SITA)</button>
+          <button class="course-tab-btn" id="tab-secretaria" onclick="mostrarVista('secretaria')">Secretaría Académica</button>
         </div>
-      </header>
+      </div>
 
-      <!-- Banner Contextual Dinámico (F1 / C1 / Aviso de Rol) -->
-      <div id="moodle-context-banner"></div>
+      <!-- Aviso Contextual según Rol o Estado del Campus -->
+      <div id="campus-banner-area"></div>
 
       <!-- ====================================================================
-           PESTAÑA 1: VISTA DE ENTREGA MOODLE (/mod/assign/view.php?id=560274)
+           VISTA 1: ENTREGA DE TAREA (https://campus.uch.edu.ar/mod/assign/view.php?id=560274)
            ==================================================================== -->
-      <section class="moodle-tab-pane" id="pane-assign">
-        <div class="assign-box">
-          <div class="assign-header">
-            <div class="assign-icon">📤</div>
-            <div style="flex:1;">
-              <div style="font-size:11.5px; color:var(--text-muted); font-weight:600; text-transform:uppercase;">Actividad de Entrega · Módulo Tarea (mod_assign · ID #560274)</div>
-              <h2 style="font-size:18px; font-weight:700; color:var(--text-main);" id="assign-title-heading">Trabajo Práctico N° 3: Estructuras Iterativas y Seguimiento de Variables</h2>
+      <section class="campus-view active" id="view-assign">
+        <div class="moodle-section-card">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:16px; margin-bottom:16px;">
+            <div style="display:flex; align-items:center; gap:14px;">
+              <div class="mod-icon icon-assign">📤</div>
+              <div>
+                <div style="font-size:12px; color:var(--moodle-muted); text-transform:uppercase; font-weight:600;">Tarea</div>
+                <h2 style="font-size:20px; font-weight:700; color:var(--moodle-text);" id="assign-view-title">Trabajo Práctico N° 3: Estructuras Iterativas (Ciclos while y for)</h2>
+              </div>
             </div>
-            <div style="display:flex; gap:8px;">
-              <button class="btn-moodle btn-moodle-secondary" onclick="seleccionarTareaMoodle(1)">TP 1 (Entregado)</button>
-              <button class="btn-moodle btn-moodle-secondary" onclick="seleccionarTareaMoodle(2)">TP 2 (Vencido)</button>
-              <button class="btn-moodle btn-moodle-primary" onclick="seleccionarTareaMoodle(3)">TP 3 (id=560274)</button>
-            </div>
-          </div>
-
-          <div class="assign-dates" id="assign-dates-box">
-            <div><strong>Apertura:</strong> Lunes, 12 de octubre de 2026, 08:00</div>
-            <div><strong>Fecha de entrega:</strong> Martes, 27 de octubre de 2026, 23:59</div>
-            <div style="color:var(--text-secondary); margin-top:4px;">
-              <strong>Consigna:</strong> Resolver en lenguaje Python los 5 ejercicios de ciclos <code>while</code> y <code>for</code> detallados en la guía PDF de la Unidad 3 y subir el archivo <code>.py</code> junto con el informe de pruebas. <em>(Esta actividad es monitoreada semanalmente por el Agente A1 del sistema institucional SITA-IA).</em>
+            <div style="display:flex; gap:6px;">
+              <button class="btn-moodle btn-moodle-secondary" onclick="abrirEntregaTP(1)">TP N° 1</button>
+              <button class="btn-moodle btn-moodle-secondary" onclick="abrirEntregaTP(2)">TP N° 2</button>
+              <button class="btn-moodle btn-moodle-primary" onclick="abrirEntregaTP(3)">TP N° 3</button>
+              <button class="btn-moodle btn-moodle-secondary" onclick="abrirEntregaTP(4)">TP N° 4</button>
             </div>
           </div>
 
-          <!-- Sumario para Docentes/Tutores en mod/assign -->
-          <div id="assign-grading-summary"></div>
+          <div class="assign-dates-block" id="assign-dates-info"></div>
 
-          <!-- Tabla Clásica de Moodle: "Estado de la entrega" -->
-          <h3 style="font-size:15px; font-weight:700; margin: 14px 0 10px; color:var(--text-main);">
-            Estado de la entrega · Estudiante: <span id="assign-student-label" style="color:var(--uch-bordeaux);">González, Lucas (#24901 · Comisión 1 Noche)</span>
-          </h3>
+          <div style="margin-bottom:20px; font-size:13.5px; color:#343a40;">
+            <p><strong>Instrucciones de la actividad:</strong> Descargue el enunciado adjunto, resuelva los ejercicios prácticos en Python 3 y suba su archivo <code>.py</code> antes de la fecha límite establecida por la cátedra.</p>
+            <div style="margin-top:8px;">
+              <a class="activity-link" onclick="notificar('📄 Descargando Guia_Ejercicios_Practicos_UCH.pdf...')">📄 Guia_Ejercicios_Practicos_UCH.pdf (245 KB)</a>
+            </div>
+          </div>
 
-          <table class="moodle-generaltable" id="assign-status-table"></table>
+          <!-- Sumario de Calificaciones (Visible para Docente / Tutor / Secretaría) -->
+          <div id="assign-teacher-summary"></div>
 
-          <!-- Tarjeta de Acompañamiento Pedagógico Humano (Punto N2) integrada en Moodle -->
-          <div id="assign-tutor-support-box" style="margin-top:18px;"></div>
+          <!-- Tabla "Estado de la entrega" idéntica a Moodle -->
+          <h3 style="font-size:16.5px; font-weight:700; margin: 18px 0 10px;">Estado de la entrega</h3>
+          <table class="generaltable" id="moodle-assign-table"></table>
+
+          <div style="margin-top:18px; display:flex; gap:10px;" id="assign-action-buttons">
+            <button class="btn-moodle btn-moodle-primary" onclick="notificar('📤 Formulario de subida de archivos abierto.')">Agregar entrega</button>
+          </div>
+        </div>
+
+        <!-- Mensaje del Tutor Académico cuando el alumno adeuda entregas -->
+        <div class="moodle-section-card" id="student-tutor-invitation"></div>
+      </section>
+
+      <!-- ====================================================================
+           VISTA 2: AULA VIRTUAL DE LA MATERIA (Unidades, Apuntes, TPs y Parciales)
+           ==================================================================== -->
+      <section class="campus-view" id="view-curso">
+        <div class="moodle-section-card">
+          <div class="moodle-section-title">
+            <span>General y Avisos de Cátedra</span>
+            <span class="completion-pill pill-done">Cursada 1° Cuatrimestre</span>
+          </div>
+          <div class="moodle-activity-item">
+            <div class="activity-item-left">
+              <div class="mod-icon icon-forum">📢</div>
+              <div>
+                <a class="activity-link" onclick="notificar('Abriendo foro de avisos de la cátedra...')">Avisos de la Cátedra y Fechas de Recuperatorios</a>
+                <div style="font-size:12.5px; color:var(--moodle-muted);">Publicado por Prof. Ing. Carlos Méndez · Incluye cronograma de consultas con JTP</div>
+              </div>
+            </div>
+            <span class="completion-pill pill-info">Foro general</span>
+          </div>
+
+          <div class="moodle-activity-item">
+            <div class="activity-item-left">
+              <div class="mod-icon icon-pdf">📄</div>
+              <div>
+                <a class="activity-link" onclick="notificar('Abriendo Programa_Algoritmos_y_Programacion_I.pdf...')">Programa Analítico y Régimen de Regularidad (Asistencia mínima 75%)</a>
+                <div style="font-size:12.5px; color:var(--moodle-muted);">Documento oficial de la Facultad de Informática · Consentimiento de seguimiento académico activo (N8)</div>
+              </div>
+            </div>
+            <span class="completion-pill pill-done">Leído</span>
+          </div>
+        </div>
+
+        <div class="moodle-section-card">
+          <div class="moodle-section-title">
+            <span>Unidad 1 y Unidad 2: Algoritmos Secuenciales y Estructuras Condicionales</span>
+          </div>
+          <div class="moodle-activity-item" onclick="abrirEntregaTP(1)">
+            <div class="activity-item-left">
+              <div class="mod-icon icon-assign">📤</div>
+              <div>
+                <a class="activity-link">Trabajo Práctico N° 1: Algoritmos Secuenciales y Variables</a>
+                <div style="font-size:12.5px; color:var(--moodle-muted);">Vencimiento: 29 de septiembre de 2026</div>
+              </div>
+            </div>
+            <span class="completion-pill pill-done">Enviado · Calificación: 7,00</span>
+          </div>
+
+          <div class="moodle-activity-item" onclick="abrirEntregaTP(2)">
+            <div class="activity-item-left">
+              <div class="mod-icon icon-assign">📤</div>
+              <div>
+                <a class="activity-link">Trabajo Práctico N° 2: Estructuras Condicionales (if / else)</a>
+                <div style="font-size:12.5px; color:var(--moodle-muted);">Vencimiento: 13 de octubre de 2026</div>
+              </div>
+            </div>
+            <span class="completion-pill pill-late">Sin entregar (Retrasado 23 días)</span>
+          </div>
+        </div>
+
+        <div class="moodle-section-card">
+          <div class="moodle-section-title">
+            <span>Unidad 3: Estructuras Iterativas y 1° Evaluación Parcial</span>
+          </div>
+          <div class="moodle-activity-item" onclick="abrirEntregaTP(3)">
+            <div class="activity-item-left">
+              <div class="mod-icon icon-assign">📤</div>
+              <div>
+                <a class="activity-link">Trabajo Práctico N° 3: Lazos e Iteración (mod/assign/view.php?id=560274)</a>
+                <div style="font-size:12.5px; color:var(--moodle-muted);">Vencimiento: 27 de octubre de 2026</div>
+              </div>
+            </div>
+            <span class="completion-pill pill-late">Sin entregar (Retrasado 9 días)</span>
+          </div>
+
+          <div class="moodle-activity-item" onclick="mostrarVista('participantes')">
+            <div class="activity-item-left">
+              <div class="mod-icon icon-quiz">📝</div>
+              <div>
+                <a class="activity-link">1° Examen Parcial Presencial y Estado de Asistencia</a>
+                <div style="font-size:12.5px; color:var(--moodle-muted);">Evaluado por Prof. Ing. Carlos Méndez · Instancia de recuperación disponible</div>
+              </div>
+            </div>
+            <span class="completion-pill pill-warn">Parcial 1: 3,50 · Asistencia: 40%</span>
+          </div>
         </div>
       </section>
 
       <!-- ====================================================================
-           PESTAÑA 2: AULA VIRTUAL Y UNIDADES DEL CURSO (course/view.php)
+           VISTA 3: ÁREA PERSONAL / MIS CURSOS DE LA FACULTAD
            ==================================================================== -->
-      <section class="moodle-tab-pane" id="pane-aula">
-        <div class="course-topic-card">
-          <h3>
-            <span>📌 Información General de la Cursada y Materias de 1° Año</span>
-            <span class="m-badge m-badge-success">Consentimiento Informado N8 Registrado</span>
-          </h3>
-          <p style="font-size:13px; color:var(--text-secondary); margin-bottom:12px;">
-            Bienvenido al Campus Virtual de la <strong>Facultad de Informática (Universidad Champagnat)</strong>. Desde este entorno se gestionan las entregas de trabajos prácticos, el registro de asistencia presencial y la articulación con el <strong>Sistema Institucional de Tutorías y Alerta Temprana (SITA-IA)</strong>.
-          </p>
-          <div class="activity-row" onclick="abrirPestanaMoodle('assign')">
-            <div class="activity-left">
-              <div class="act-badge-icon" style="background:#e63946;">📤</div>
-              <div>
-                <div style="font-weight:700; color:var(--uch-bordeaux);">Trabajo Práctico N° 3: Lazos e Iteración (mod/assign/view.php?id=560274)</div>
-                <div style="font-size:12px; color:var(--text-muted);">Fecha límite vencida hace 9 días · Impacta en el factor de entregas del Agente A2 (+27 pts XAI)</div>
-              </div>
-            </div>
-            <span class="m-badge m-badge-danger">Sin entregar (TP 2 y TP 3 adeudados)</span>
+      <section class="campus-view" id="view-mis-cursos">
+        <div class="moodle-section-card">
+          <div class="moodle-section-title">
+            <span>Mis Cursos Activos · 1° Año Facultad de Informática (Ciclo Lectivo 2026)</span>
           </div>
-
-          <div class="activity-row" onclick="abrirPestanaMoodle('participantes')">
-            <div class="activity-left">
-              <div class="act-badge-icon" style="background:#1d4ed8;">📅</div>
-              <div>
-                <div style="font-weight:700;">Registro de Asistencia Presencial y 1° Examen Parcial</div>
-                <div style="font-size:12px; color:var(--text-muted);">Cargado semanalmente por el Prof. Ing. Carlos Méndez (P msj. 1 · Sujeto a Regla C1 Anti-Sesgo)</div>
-              </div>
-            </div>
-            <span class="m-badge m-badge-warn">Asistencia Lucas: 40% · Parcial 1: 3,50</span>
-          </div>
-
-          <div class="activity-row" onclick="abrirPestanaMoodle('sita')">
-            <div class="activity-left">
-              <div class="act-badge-icon" style="background:#6d28d9;">🛡️</div>
-              <div>
-                <div style="font-weight:700;">Módulo de Acompañamiento Pedagógico SITA-IA (Tutor: Prof. Joel Aisama)</div>
-                <div style="font-size:12px; color:var(--text-muted);">Detección temprana con 4 semanas de anticipación · Guía de entrevista empática generada con Gemini 1.5 Flash</div>
-              </div>
-            </div>
-            <span class="m-badge m-badge-purple">Intervención Humana N1–N4</span>
-          </div>
-        </div>
-
-        <!-- Otras materias que cursa el alumno en 1° Año -->
-        <div class="course-topic-card">
-          <h3><span>📚 Mis Otros Cursos de 1° Año en campus.uch.edu.ar</span></h3>
-          <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:12px;" id="other-courses-cards"></div>
+          <div class="courses-cards-grid" id="mis-cursos-grid"></div>
         </div>
       </section>
 
       <!-- ====================================================================
-           PESTAÑA 3: PARTICIPANTES, ASISTENCIA Y PLANILLA DOCENTE (user/index.php)
+           VISTA 4: PARTICIPANTES, ASISTENCIA Y PLANILLA DE CÁTEDRA
            ==================================================================== -->
-      <section class="moodle-tab-pane" id="pane-participantes">
-        <div class="moodle-box">
-          <div class="moodle-box-header">
+      <section class="campus-view" id="view-participantes">
+        <div class="moodle-section-card">
+          <div class="moodle-section-title">
             <div>
-              <h3>👥 Participantes Matriculados, Último Acceso a Moodle y Planilla de Cátedra (120 estudiantes)</h3>
-              <p style="font-size:12px; color:var(--text-muted);">En vista <strong>Docente de Cátedra (Prof. Méndez)</strong>, la columna de riesgo SITA-IA permanece bloqueada por la <strong>Regla Ética C1</strong> para evitar sesgos al calificar.</p>
+              <span>Listado de Participantes, Asistencia y Calificaciones (120 inscriptos)</span>
+              <div style="font-size:12.5px; font-weight:400; color:var(--moodle-muted); margin-top:2px;">
+                Los profesores de cátedra registran asistencias y notas de parciales, pero no visualizan el índice de vulnerabilidad de tutorías (Regla C1) para preservar la imparcialidad académica.
+              </div>
             </div>
-            <button class="btn-moodle btn-moodle-primary" onclick="mostrarNotificacion('📤 Planilla semanal de asistencia y notas transmitida al Agente A1 (P msj. 1).')">
-              📤 Enviar Planilla Semanal a Agente A1 (P msj. 1)
+            <button class="btn-moodle btn-moodle-primary" onclick="notificar('✅ Planilla semanal de cátedra guardada y sincronizada con el sistema de seguimiento (P msj. 1).')">
+              Guardar Planilla de Cátedra
             </button>
           </div>
-          <div class="table-wrapper">
-            <table class="sita-table">
-              <thead>
-                <tr>
-                  <th>Legajo</th>
-                  <th>Apellido y Nombre</th>
-                  <th>Rol / Comisión</th>
-                  <th>Último acceso a Moodle</th>
-                  <th>Asistencia Presencial</th>
-                  <th>Envíos mod/assign</th>
-                  <th>Nota Parcial 1</th>
-                  <th>Score SITA-IA (Regla C1)</th>
-                </tr>
-              </thead>
-              <tbody id="participants-tbody"></tbody>
-            </table>
-          </div>
+
+          <table class="generaltable">
+            <thead>
+              <tr>
+                <th>Legajo</th>
+                <th>Apellido y Nombre</th>
+                <th>Comisión / Turno</th>
+                <th>Último acceso al Campus</th>
+                <th>Asistencia</th>
+                <th>TPs Entregados</th>
+                <th>1° Parcial</th>
+                <th>Seguimiento Tutorías (Regla C1)</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-participantes-body"></tbody>
+          </table>
         </div>
       </section>
 
       <!-- ====================================================================
-           PESTAÑA 4: PLUGIN SITA-IA · MONITOR DE ALERTA TEMPRANA (local/sitaia)
+           VISTA 5: PROGRAMA DE TUTORÍAS Y ALERTA TEMPRANA (SITA-IA)
            ==================================================================== -->
-      <section class="moodle-tab-pane active" id="pane-sita">
-        <!-- 4 KPIs del Pipeline Multiagente -->
-        <div class="sita-kpi-row">
-          <div class="sita-kpi">
-            <div class="lbl">Agente A1 · Ingesta Moodle + SIU</div>
-            <div class="val" id="kpi-a1-val">120 alumnos</div>
-            <div class="sub" id="kpi-a1-sub">Completitud: 100% (3/3 fuentes activas)</div>
-          </div>
-          <div class="sita-kpi">
-            <div class="lbl">Agente A2 · Regresión Logística XAI</div>
-            <div class="val" id="kpi-a2-val">Score 0–100</div>
-            <div class="sub">Caso crítico #24901: 82/100 (+3 factores)</div>
-          </div>
-          <div class="sita-kpi">
-            <div class="lbl">Agente A3 · Bandeja del Tutor (O4)</div>
-            <div class="val" id="kpi-a3-val">12 / 15 máx.</div>
-            <div class="sub">11 Riesgo Alto + 1 En Revisión (Regla F3)</div>
-          </div>
-          <div class="sita-kpi">
-            <div class="lbl">Auditoría Equidad Turnos (N7)</div>
-            <div class="val" style="color:#155724;">Δ 3.8 pts</div>
-            <div class="sub">Cumple umbral institucional ≤ 10 pts</div>
-          </div>
-        </div>
-
-        <!-- Vista Dividida: Bandeja Priorizada + Expediente Pedagógico XAI & Gemini -->
-        <div class="sita-split-view">
-
-          <!-- Columna Izquierda: Bandeja Priorizada por A3 -->
-          <div class="moodle-box">
-            <div class="moodle-box-header">
-              <h3>📋 Bandeja Semanal Priorizada por Agente A3</h3>
-              <div style="display:flex; gap:6px;">
-                <button class="btn-moodle btn-moodle-primary" id="flt-bandeja" style="padding:4px 9px; font-size:11.5px;" onclick="cambiarFiltroSita('BANDEJA')">Bandeja Tutor (12)</button>
-                <button class="btn-moodle btn-moodle-secondary" id="flt-f3" style="padding:4px 9px; font-size:11.5px;" onclick="cambiarFiltroSita('F3')">Caso F3 (Mateo)</button>
-                <button class="btn-moodle btn-moodle-secondary" id="flt-todos" style="padding:4px 9px; font-size:11.5px;" onclick="cambiarFiltroSita('TODOS')">Todos (120)</button>
-              </div>
-            </div>
-
-            <div style="padding:8px 12px; border-bottom:1px solid var(--moodle-border); background:#fff;">
-              <input type="text" id="sita-search-input" placeholder="Filtrar estudiante por nombre o legajo (#24901, #24945)..." oninput="renderizarTablaSita()" style="width:100%; padding:6px 10px; border:1px solid var(--moodle-border-dark); border-radius:4px; font-size:12.5px;" />
-            </div>
-
-            <div class="table-wrapper">
-              <table class="sita-table">
-                <thead>
-                  <tr>
-                    <th>Legajo</th>
-                    <th>Estudiante</th>
-                    <th>Asist.</th>
-                    <th>Moodle</th>
-                    <th>Tareas</th>
-                    <th>Score A2</th>
-                    <th>Estado A3</th>
-                  </tr>
-                </thead>
-                <tbody id="sita-roster-tbody"></tbody>
-              </table>
-            </div>
-          </div>
-
-          <!-- Columna Derecha: Expediente Individual XAI + Gemini 1.5 Flash + N1-N4 -->
-          <div class="moodle-box">
-            <div class="moodle-box-header">
-              <h3>🗂️ Expediente Pedagógico SITA-IA</h3>
-              <div style="display:flex; gap:6px; align-items:center;">
-                <button class="btn-moodle btn-moodle-secondary" style="padding:3px 8px; font-size:11px;" onclick="abrirPestanaMoodle('assign')">Ver en mod/assign ↗</button>
-                <button class="btn-moodle btn-moodle-secondary" style="padding:3px 8px; font-size:11px;" onclick="abrirModalJson()">🔎 JSON API Gemini</button>
-              </div>
-            </div>
-            <div style="padding:16px; display:flex; flex-direction:column; gap:14px;" id="sita-dossier-container"></div>
-          </div>
-
-        </div>
+      <section class="campus-view" id="view-tutorias">
+        <div id="tutorias-main-container"></div>
       </section>
 
       <!-- ====================================================================
-           PESTAÑA 5: GOBERNANZA Y AUDITORÍA (COORDINACIÓN N1-N8 + PROMETHEUS)
+           VISTA 6: SECRETARÍA ACADÉMICA Y COORDINACIÓN (N3, N5, N6, N7, N8)
            ==================================================================== -->
-      <section class="moodle-tab-pane" id="pane-gov">
-        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px;" id="gov-cards-container"></div>
+      <section class="campus-view" id="view-secretaria">
+        <div id="secretaria-main-container"></div>
       </section>
 
     </main>
   </div>
 
-  <!-- Modal de Evidencia Técnica JSON (Google AI Studio · Gemini 1.5 Flash) -->
-  <div id="modal-gemini-json" style="display:none; position:fixed; inset:0; background:rgba(15,23,42,0.65); z-index:95; align-items:center; justify-content:center; padding:20px;">
-    <div style="background:#fff; width:100%; max-width:760px; border-radius:8px; overflow:hidden; box-shadow:0 20px 40px rgba(0,0,0,0.3);">
-      <div style="background:var(--uch-bordeaux); color:#fff; padding:12px 18px; display:flex; justify-content:space-between; align-items:center;">
-        <strong style="font-size:13.5px;">⚡ Evidencia de Integración · Google AI Studio API (gemini-1.5-flash)</strong>
-        <button class="btn-moodle btn-moodle-secondary" style="padding:2px 8px; font-size:11px;" onclick="cerrarModalJson()">Cerrar ✕</button>
+  <!-- Modal para inspeccionar la llamada a la API de Google AI Studio (Gemini 1.5 Flash) -->
+  <div id="gemini-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:90; align-items:center; justify-content:center; padding:20px;">
+    <div style="background:#fff; width:100%; max-width:740px; border-radius:6px; overflow:hidden; box-shadow:0 12px 32px rgba(0,0,0,0.25);">
+      <div style="background:var(--uch-bordeaux); color:#fff; padding:14px 20px; display:flex; justify-content:space-between; align-items:center;">
+        <strong>Asistente Pedagógico para Tutores · Integración Google AI Studio (Gemini 1.5 Flash API)</strong>
+        <button class="btn-moodle btn-moodle-secondary" style="padding:3px 10px; font-size:12px;" onclick="cerrarModalGemini()">Cerrar</button>
       </div>
-      <div style="padding:16px; max-height:75vh; overflow-y:auto; display:flex; flex-direction:column; gap:10px;">
+      <div style="padding:20px; max-height:75vh; overflow-y:auto; display:flex; flex-direction:column; gap:12px;">
+        <p style="font-size:13px; color:#495057;">
+          El módulo de tutorías consulta el modelo <code>gemini-1.5-flash</code> enviando únicamente indicadores académicos desidentificados (sin DNI ni datos personales sensibles) para sugerir preguntas empáticas previas a la entrevista del tutor humano (Punto N2).
+        </p>
         <div style="display:flex; gap:8px;">
-          <input type="password" id="live-api-key-input" placeholder="Opcional: Pegar GEMINI_API_KEY de Google AI Studio para llamada HTTP en vivo..." style="flex:1; padding:6px 10px; border:1px solid var(--moodle-border-dark); border-radius:4px; font-size:12px;" />
-          <button class="btn-moodle btn-moodle-gemini" onclick="generarGuiaGemini(true)">Ejecutar Request en Vivo</button>
+          <input type="password" id="input-gemini-key" placeholder="Opcional: Ingresar GEMINI_API_KEY de Google AI Studio para consulta en vivo..." style="flex:1; padding:8px 10px; border:1px solid var(--moodle-border); border-radius:5px; font-size:13px;" />
+          <button class="btn-moodle btn-moodle-primary" onclick="solicitarGuiaGemini(true)">Consultar API</button>
         </div>
-        <pre id="modal-json-content" style="background:#1e293b; color:#f8fafc; padding:14px; border-radius:6px; font-family:'JetBrains Mono',monospace; font-size:11.5px; overflow-x:auto; white-space:pre-wrap;"></pre>
+        <pre id="gemini-json-viewer" style="background:#212529; color:#f8f9fa; padding:14px; border-radius:6px; font-size:12px; overflow-x:auto; white-space:pre-wrap;"></pre>
       </div>
     </div>
   </div>
 
-  <div class="moodle-toast" id="moodle-toast"></div>
+  <div class="toast-msg" id="toast-msg"></div>
 
   <!-- ========================================================================
-       4. LÓGICA DEL CLIENTE Y MOTOR AUTÓNOMO MVC
+       CONTROLADOR DE VISTAS Y DATOS DEL CAMPUS
        ======================================================================== -->
   <script>
     let STATE = {
-      rol: 'TUTOR',             // 'ALUMNO' | 'DOCENTE' | 'TUTOR' | 'COORDINACION'
-      pestana: 'sita',          // 'aula' | 'assign' | 'participantes' | 'sita' | 'gov'
-      filtroSita: 'BANDEJA',    // 'BANDEJA' | 'F3' | 'TODOS'
-      tpSeleccionado: 3,        // 1 | 2 | 3 | 4
-      legajoActual: '24901',
-      fallaF1: false,
-      diasInaccionF2: 0,
+      rol: 'ALUMNO',          // Abre por defecto como el Campus del Alumno (o cambia según selector)
+      vista: 'assign',        // 'mis-cursos' | 'curso' | 'assign' | 'participantes' | 'tutorias' | 'secretaria'
+      tpActual: 3,            // TP N° 3 (id=560274)
+      filtroTutoria: 'PRIORIZADOS', // 'PRIORIZADOS' | 'REVISION_F3' | 'TODOS'
+      legajoSeleccionado: '24901',
+      corteTelemetriaF1: false,
+      diasSinGestionF2: 0,
       tutorReasignadoN6: null,
-      recalibracionFirmadaN7: false,
-      intervenciones: {},
-      derivacionesN3: {},
+      recalibracionAprobadaN7: false,
+      actasTutoria: {},
+      solicitudesSecretariaN3: {},
       guiasGemini: {},
       estudiantes: [],
-      mensajesPrometheus: []
+      mensajesSistema: []
     };
 
-    const TAREAS_MOODLE = {
+    const CATALOGO_TPS = {
       1: {
         id: "560210",
-        titulo: "Trabajo Práctico N° 1: Algoritmos Secuenciales y Variables",
+        nombre: "Trabajo Práctico N° 1: Algoritmos Secuenciales y Variables",
         apertura: "Lunes, 14 de septiembre de 2026, 08:00",
         cierre: "Martes, 29 de septiembre de 2026, 23:59",
-        entregadoPorLucas: true,
-        calificacionLucas: "7,00 / 10,00 (Aprobado)",
-        tiempoRestante: "La tarea fue enviada 1 día 3 horas antes de la fecha límite",
-        archivo: "tp1_gonzalez_lucas.py (14 KB)"
+        entregado: true,
+        estadoCalificacion: "Calificado: 7,00 / 10,00 (Aprobado)",
+        tiempo: "La tarea fue enviada 1 día 3 horas antes de la fecha de entrega",
+        ultimaMod: "Lunes, 28 de septiembre de 2026, 20:41",
+        archivo: "tp1_algoritmos_gonzalez_lucas.py",
+        comentarios: "Comentarios (1): Buen manejo de entrada/salida y tipos de datos."
       },
       2: {
         id: "560241",
-        titulo: "Trabajo Práctico N° 2: Estructuras Condicionales (if / elif / else)",
+        nombre: "Trabajo Práctico N° 2: Estructuras Condicionales (if / elif / else)",
         apertura: "Lunes, 28 de septiembre de 2026, 08:00",
         cierre: "Martes, 13 de octubre de 2026, 23:59",
-        entregadoPorLucas: false,
-        calificacionLucas: "Sin calificar",
-        tiempoRestante: "La tarea está retrasada por: 23 días 15 horas",
-        archivo: "Sin archivos enviados"
+        entregado: false,
+        estadoCalificacion: "Sin calificar",
+        tiempo: "La tarea está retrasada por: 23 días 15 horas",
+        ultimaMod: "-",
+        archivo: "No se han subido archivos",
+        comentarios: "Comentarios (0)"
       },
       3: {
         id: "560274",
-        titulo: "Trabajo Práctico N° 3: Lazos e Iteración (mod/assign/view.php?id=560274)",
+        nombre: "Trabajo Práctico N° 3: Estructuras Iterativas (Ciclos while y for)",
         apertura: "Lunes, 12 de octubre de 2026, 08:00",
         cierre: "Martes, 27 de octubre de 2026, 23:59",
-        entregadoPorLucas: false,
-        calificacionLucas: "Sin calificar",
-        tiempoRestante: "La tarea está retrasada por: 9 días 15 horas",
-        archivo: "Sin archivos enviados"
+        entregado: false,
+        estadoCalificacion: "Sin calificar",
+        tiempo: "La tarea está retrasada por: 9 días 15 horas",
+        ultimaMod: "-",
+        archivo: "No se han subido archivos",
+        comentarios: "Comentarios (0)"
       },
       4: {
         id: "560299",
-        titulo: "Trabajo Práctico N° 4: Funciones y Modularización",
+        nombre: "Trabajo Práctico N° 4: Funciones y Modularización",
         apertura: "Lunes, 26 de octubre de 2026, 08:00",
         cierre: "Martes, 3 de noviembre de 2026, 23:59",
-        entregadoPorLucas: true,
-        calificacionLucas: "6,00 / 10,00 (En revisión JTP)",
-        tiempoRestante: "La tarea fue enviada 4 horas antes de la fecha límite",
-        archivo: "tp4_funciones_lucas.py (18 KB)"
+        entregado: true,
+        estadoCalificacion: "Enviado para calificar (En corrección por JTP)",
+        tiempo: "La tarea fue enviada 4 horas 12 minutos antes de la fecha de entrega",
+        ultimaMod: "Martes, 3 de noviembre de 2026, 19:47",
+        archivo: "tp4_funciones_gonzalez_lucas.py",
+        comentarios: "Comentarios (0)"
       }
     };
 
-    function generarCohorteLocal() {
-      const principales = [
+    const MATERIAS_PRIMER_ANIO = [
+      {
+        codigo: "INF-101",
+        nombre: "Algoritmos y Programación I",
+        comision: "Comisión 1 · Turno Noche",
+        docente: "Prof. Ing. Carlos Méndez · JTP Lic. Sofía Alarcón",
+        color: "#80162b",
+        progreso: "50% de trabajos prácticos entregados (2 de 4)"
+      },
+      {
+        codigo: "MAT-102",
+        nombre: "Álgebra y Geometría Analítica",
+        comision: "Comisión 1 · Turno Noche",
+        docente: "Dr. Roberto Quiroga · JTP Ing. Mariana Flores",
+        color: "#1d2b44",
+        progreso: "75% de guías prácticas completadas"
+      },
+      {
+        codigo: "SIS-103",
+        nombre: "Sistemas y Organizaciones",
+        comision: "Comisión 1 · Turno Noche",
+        docente: "Mg. Laura Pereyra · JTP Lic. Tomás Benítez",
+        color: "#2b580c",
+        progreso: "Trabajo integrador en curso"
+      },
+      {
+        codigo: "ARQ-104",
+        nombre: "Arquitectura de Computadoras",
+        comision: "Comisión Única · Sábados",
+        docente: "Ing. Darío Gómez · JTP Téc. Nicolás Vega",
+        color: "#495057",
+        progreso: "Prácticas de laboratorio al día"
+      },
+      {
+        codigo: "ING-105",
+        nombre: "Inglés Técnico I",
+        comision: "Modalidad Virtual Asincrónica",
+        docente: "Prof. Trad. Valeria Montes",
+        color: "#0b7285",
+        progreso: "Módulo 3 completado"
+      },
+      {
+        codigo: "TUT-100",
+        nombre: "Espacio de Tutoría Universitaria y Orientación",
+        comision: "Equipo de Acompañamiento a Ingresantes",
+        docente: "Tutor Titular: Prof. Joel Aisama · Coord.: Bautista Navarro",
+        color: "#5f3dc4",
+        progreso: "Seguimiento personalizado activo"
+      }
+    ];
+
+    function construirPadronEstudiantes() {
+      const prioritarios = [
         {
-          legajo: "24901", nombre: "González, Lucas (Caso X)", comision: "Comisión 1", turno: "Noche",
+          legajo: "24901", nombre: "González, Lucas", comision: "Comisión 1", turno: "Noche",
           carrera: "Ingeniería en Sistemas de Información", asistencia_pct: 40, faltas_ult_2sem: 4,
           dias_inactivo_campus: 12, tps_entregados: 2, tps_exigidos: 4, nota_parcial: 3.5,
           score_riesgo: 82, nivel_riesgo: "ALTO", en_bandeja_tutor: true, prioridad_orden: 1,
           regla_f3_revision: false, tutor_asignado: "Prof. Joel Aisama", historial: [35, 52, 68, 82],
           factores_detalle: [
-            { clave: "asistencia", texto: "Asistencia del 40 % con 4 faltas en las últimas dos semanas", aporte: 35 },
-            { clave: "entregas", texto: "2 de 4 trabajos prácticos sin entregar en mod/assign (TP 2 y TP 3)", aporte: 27 },
-            { clave: "campus", texto: "12 días sin ingresar a campus.uch.edu.ar", aporte: 20 }
+            { clave: "asistencia", texto: "Asistencia presencial del 40 % (4 inasistencias en las últimas 2 semanas)", aporte: 35 },
+            { clave: "entregas", texto: "Adeuda 2 de 4 Trabajos Prácticos en el Campus (TP N° 2 y TP N° 3)", aporte: 27 },
+            { clave: "campus", texto: "12 días corridos sin registrar actividad en el aula virtual", aporte: 20 }
           ]
         },
         {
-          legajo: "24945", nombre: "Fernández, Mateo (Caso F3)", comision: "Comisión 2", turno: "Mañana",
+          legajo: "24945", nombre: "Fernández, Mateo", comision: "Comisión 2", turno: "Mañana",
           carrera: "Licenciatura en Sistemas", asistencia_pct: 92, faltas_ult_2sem: 0,
           dias_inactivo_campus: 14, tps_entregados: 4, tps_exigidos: 4, nota_parcial: 8.0,
           score_riesgo: 48, nivel_riesgo: "EN REVISIÓN (F3)", en_bandeja_tutor: true, prioridad_orden: 12,
           regla_f3_revision: true, tutor_asignado: "Prof. Joel Aisama", historial: [18, 22, 31, 48],
           factores_detalle: [
-            { clave: "contradiccion", texto: "Asistencia presencial alta (92 %) vs. 14 días sin login en Moodle", aporte: 28 },
-            { clave: "regla_f3", texto: "Regla F3: no se promedian señales opuestas; requiere verificación del tutor", aporte: 20 }
+            { clave: "contradiccion", texto: "Asistencia presencial alta (92 %) pero lleva 14 días sin entrar al Campus Virtual", aporte: 28 },
+            { clave: "regla_f3", texto: "Señales opuestas (Regla F3): no se promedian; requiere consulta del tutor", aporte: 20 }
           ]
         },
         {
@@ -1382,9 +1171,9 @@
           score_riesgo: 90, nivel_riesgo: "ALTO", en_bandeja_tutor: true, prioridad_orden: 2,
           regla_f3_revision: false, tutor_asignado: "Prof. Joel Aisama", historial: [44, 62, 77, 90],
           factores_detalle: [
-            { clave: "asistencia", texto: "Asistencia del 35 % con 4 faltas recientes", aporte: 38 },
-            { clave: "entregas", texto: "3 de 4 trabajos prácticos sin entregar en Moodle", aporte: 30 },
-            { clave: "campus", texto: "16 días sin ingresar al campus virtual", aporte: 22 }
+            { clave: "asistencia", texto: "Asistencia presencial del 35 % con 4 faltas consecutivas", aporte: 38 },
+            { clave: "entregas", texto: "Adeuda 3 de 4 Trabajos Prácticos obligatorios", aporte: 30 },
+            { clave: "campus", texto: "16 días sin actividad en el Campus Virtual", aporte: 22 }
           ]
         },
         {
@@ -1394,9 +1183,9 @@
           score_riesgo: 84, nivel_riesgo: "ALTO", en_bandeja_tutor: true, prioridad_orden: 3,
           regla_f3_revision: false, tutor_asignado: "Prof. Joel Aisama", historial: [39, 55, 71, 84],
           factores_detalle: [
-            { clave: "entregas", texto: "3 de 4 trabajos prácticos sin entregar", aporte: 32 },
-            { clave: "asistencia", texto: "Asistencia del 45 % con 3 faltas recientes", aporte: 30 },
-            { clave: "campus", texto: "15 días sin ingresar al campus virtual", aporte: 22 }
+            { clave: "entregas", texto: "Adeuda 3 de 4 Trabajos Prácticos obligatorios", aporte: 32 },
+            { clave: "asistencia", texto: "Asistencia presencial del 45 % con 3 faltas recientes", aporte: 30 },
+            { clave: "campus", texto: "15 días sin ingresar al Campus Virtual", aporte: 22 }
           ]
         },
         {
@@ -1406,9 +1195,9 @@
           score_riesgo: 80, nivel_riesgo: "ALTO", en_bandeja_tutor: true, prioridad_orden: 4,
           regla_f3_revision: false, tutor_asignado: "Prof. Joel Aisama", historial: [34, 49, 65, 80],
           factores_detalle: [
-            { clave: "asistencia", texto: "Asistencia del 42 % con 3 faltas recientes", aporte: 34 },
-            { clave: "entregas", texto: "2 de 4 trabajos prácticos sin entregar", aporte: 26 },
-            { clave: "campus", texto: "13 días sin ingresar al campus virtual", aporte: 20 }
+            { clave: "asistencia", texto: "Asistencia del 42 % con 3 inasistencias recientes", aporte: 34 },
+            { clave: "entregas", texto: "Adeuda 2 de 4 Trabajos Prácticos", aporte: 26 },
+            { clave: "campus", texto: "13 días sin ingresar al Campus Virtual", aporte: 20 }
           ]
         },
         {
@@ -1419,8 +1208,8 @@
           regla_f3_revision: false, tutor_asignado: "Prof. Joel Aisama", historial: [30, 45, 61, 76],
           factores_detalle: [
             { clave: "asistencia", texto: "Asistencia del 48 % con 3 faltas recientes", aporte: 32 },
-            { clave: "entregas", texto: "2 de 4 trabajos prácticos sin entregar", aporte: 24 },
-            { clave: "campus", texto: "11 días sin ingresar al campus virtual", aporte: 20 }
+            { clave: "entregas", texto: "Adeuda 2 de 4 Trabajos Prácticos", aporte: 24 },
+            { clave: "campus", texto: "11 días sin ingresar al Campus Virtual", aporte: 20 }
           ]
         },
         {
@@ -1431,8 +1220,8 @@
           regla_f3_revision: false, tutor_asignado: "Prof. Joel Aisama", historial: [29, 44, 59, 74],
           factores_detalle: [
             { clave: "asistencia", texto: "Asistencia del 50 % con 3 faltas recientes", aporte: 31 },
-            { clave: "entregas", texto: "2 de 4 trabajos prácticos sin entregar", aporte: 24 },
-            { clave: "campus", texto: "11 días sin ingresar al campus virtual", aporte: 19 }
+            { clave: "entregas", texto: "Adeuda 2 de 4 Trabajos Prácticos", aporte: 24 },
+            { clave: "campus", texto: "11 días sin ingresar al Campus Virtual", aporte: 19 }
           ]
         },
         {
@@ -1443,8 +1232,8 @@
           regla_f3_revision: false, tutor_asignado: "Prof. Joel Aisama", historial: [28, 42, 57, 72],
           factores_detalle: [
             { clave: "asistencia", texto: "Asistencia del 52 % con 2 faltas recientes", aporte: 28 },
-            { clave: "entregas", texto: "2 de 4 trabajos prácticos sin entregar", aporte: 24 },
-            { clave: "campus", texto: "12 días sin ingresar al campus virtual", aporte: 20 }
+            { clave: "entregas", texto: "Adeuda 2 de 4 Trabajos Prácticos", aporte: 24 },
+            { clave: "campus", texto: "12 días sin ingresar al Campus Virtual", aporte: 20 }
           ]
         },
         {
@@ -1455,8 +1244,8 @@
           regla_f3_revision: false, tutor_asignado: "Prof. Joel Aisama", historial: [27, 41, 56, 71],
           factores_detalle: [
             { clave: "asistencia", texto: "Asistencia del 54 % con 3 faltas recientes", aporte: 30 },
-            { clave: "entregas", texto: "2 de 4 trabajos prácticos sin entregar", aporte: 23 },
-            { clave: "campus", texto: "10 días sin ingresar al campus virtual", aporte: 18 }
+            { clave: "entregas", texto: "Adeuda 2 de 4 Trabajos Prácticos", aporte: 23 },
+            { clave: "campus", texto: "10 días sin ingresar al Campus Virtual", aporte: 18 }
           ]
         },
         {
@@ -1467,8 +1256,8 @@
           regla_f3_revision: false, tutor_asignado: "Prof. Joel Aisama", historial: [26, 40, 55, 70],
           factores_detalle: [
             { clave: "asistencia", texto: "Asistencia del 55 % con 2 faltas recientes", aporte: 27 },
-            { clave: "entregas", texto: "2 de 4 trabajos prácticos sin entregar", aporte: 23 },
-            { clave: "campus", texto: "11 días sin ingresar al campus virtual", aporte: 20 }
+            { clave: "entregas", texto: "Adeuda 2 de 4 Trabajos Prácticos", aporte: 23 },
+            { clave: "campus", texto: "11 días sin ingresar al Campus Virtual", aporte: 20 }
           ]
         },
         {
@@ -1479,8 +1268,8 @@
           regla_f3_revision: false, tutor_asignado: "Prof. Joel Aisama", historial: [25, 38, 52, 66],
           factores_detalle: [
             { clave: "asistencia", texto: "Asistencia del 58 % con 2 faltas recientes", aporte: 25 },
-            { clave: "entregas", texto: "2 de 4 trabajos prácticos sin entregar", aporte: 23 },
-            { clave: "campus", texto: "9 días sin ingresar al campus virtual", aporte: 18 }
+            { clave: "entregas", texto: "Adeuda 2 de 4 Trabajos Prácticos", aporte: 23 },
+            { clave: "campus", texto: "9 días sin ingresar al Campus Virtual", aporte: 18 }
           ]
         },
         {
@@ -1491,425 +1280,345 @@
           regla_f3_revision: false, tutor_asignado: "Prof. Joel Aisama", historial: [22, 33, 45, 58],
           factores_detalle: [
             { clave: "asistencia", texto: "Asistencia del 60 % con 2 faltas recientes", aporte: 25 },
-            { clave: "campus", texto: "8 días sin ingresar al campus virtual", aporte: 18 },
-            { clave: "entregas", texto: "1 de 4 trabajos prácticos sin entregar", aporte: 15 }
+            { clave: "campus", texto: "8 días sin ingresar al Campus Virtual", aporte: 18 },
+            { clave: "entregas", texto: "Adeuda 1 de 4 Trabajos Prácticos", aporte: 15 }
           ]
         }
       ];
 
       const apellidos = ["Acosta", "Benítez", "Cabrera", "Domínguez", "Espinoza", "Figueroa", "Gómez", "Ibarra", "Juárez", "Ledesma", "Medina", "Navarro", "Ojeda", "Paz", "Quiroga", "Ríos", "Silva", "Vega", "Villalba", "Zárate"];
       const nombres = ["Sofía", "Bautista", "Lucía", "Juan", "Micaela", "Franco", "Victoria", "Ignacio", "Antonella", "Joaquín", "Paula", "Ezequiel"];
-      const comisiones = [
+      const turnos = [
         { comision: "Comisión 1", turno: "Noche" },
         { comision: "Comisión 2", turno: "Mañana" },
         { comision: "Comisión 3", turno: "Tarde" }
       ];
 
-      const total = [...principales];
-      let idx = 0;
-      for (let leg = 24912; leg <= 25020; leg++) {
-        if (leg === 24945) continue;
-        const c = comisiones[idx % comisiones.length];
-        const score = 9 + (idx * 7) % 24;
-        total.push({
-          legajo: String(leg),
-          nombre: `${apellidos[idx % apellidos.length]}, ${nombres[idx % nombres.length]}`,
-          comision: c.comision,
-          turno: c.turno,
-          carrera: idx % 2 === 0 ? "Ingeniería en Sistemas de Información" : "Licenciatura en Sistemas",
-          asistencia_pct: 78 + (idx * 3) % 21,
+      const padron = [...prioritarios];
+      let i = 0;
+      for (let num = 24912; num <= 25020; num++) {
+        if (num === 24945) continue;
+        const t = turnos[i % turnos.length];
+        const score = 10 + (i * 7) % 22;
+        padron.push({
+          legajo: String(num),
+          nombre: `${apellidos[i % apellidos.length]}, ${nombres[i % nombres.length]}`,
+          comision: t.comision,
+          turno: t.turno,
+          carrera: i % 2 === 0 ? "Ingeniería en Sistemas de Información" : "Licenciatura en Sistemas",
+          asistencia_pct: 80 + (i * 3) % 19,
           faltas_ult_2sem: 0,
-          dias_inactivo_campus: idx % 4,
+          dias_inactivo_campus: i % 4,
           tps_entregados: 4,
           tps_exigidos: 4,
-          nota_parcial: Number((6.5 + (idx % 4) * 0.7).toFixed(1)),
+          nota_parcial: Number((6.5 + (i % 4) * 0.7).toFixed(1)),
           score_riesgo: score,
           nivel_riesgo: "BAJO",
           en_bandeja_tutor: false,
           prioridad_orden: null,
           regla_f3_revision: false,
-          tutor_asignado: "Seguimiento regular",
-          historial: [Math.max(4, score - 5), Math.max(5, score - 3), Math.max(6, score - 1), score],
-          factores_detalle: [{ clave: "regular", texto: "Cursada y entregas al día en campus.uch.edu.ar", aporte: score }]
+          tutor_asignado: "Cursada regular",
+          historial: [score - 4, score - 3, score - 1, score],
+          factores_detalle: [{ clave: "regular", texto: "Asistencia y entregas de trabajos prácticos al día", aporte: score }]
         });
-        idx++;
+        i++;
       }
-      return total;
+      return padron;
     }
 
-    function armarBitacoraPrometheus() {
-      const bitacora = [
-        { codigo: "P msj. 0*", origen: "Coordinación", destino: "A1 Monitoreo", rol: "N8", texto: "Habilita las fuentes del cuatrimestre con consentimientos informados firmados." },
-        { codigo: "P msj. 1", origen: "Docente (Prof. Méndez)", destino: "A1 Monitoreo", rol: "C1", texto: "Carga semanal de asistencia y notas de parciales (sin acceso a scores de IA)." }
-      ];
-      if (STATE.fallaF1) {
-        bitacora.push(
-          { codigo: "F1 msj. 2", origen: "A1 Monitoreo", destino: "A2 Eval. Riesgo", rol: "F1", texto: "Alerta F1: Caída de telemetría de campus.uch.edu.ar detectada." },
-          { codigo: "F1 msj. 4", origen: "A2 Eval. Riesgo", destino: "A3 Alertas", rol: "F1", texto: "Regla F1: falta de dato != inactividad. Casos marcados 'SIN EVALUAR'." },
-          { codigo: "F1 msj. 6", origen: "A3 Alertas", destino: "Coordinación", rol: "N5", texto: "Coordinación gestiona restablecimiento técnico con Sistemas (N5)." }
-        );
-      } else {
-        bitacora.push(
-          { codigo: "P msj. 2", origen: "A1 Monitoreo", destino: "A2 Eval. Riesgo", rol: null, texto: "Transmisión de 120 perfiles consolidados desde Moodle y SIU (Completitud: 100%)." },
-          { codigo: "P msj. 3", origen: "A2 Eval. Riesgo", destino: "A3 Alertas", rol: "XAI", texto: "Score logístico estimado: Caso Lucas González (#24901) = 82/100 + 3 factores XAI." },
-          { codigo: "P msj. 4", origen: "A3 Alertas", destino: "Tutor (Joel Aisama)", rol: "N1", texto: "Bandeja semanal priorizada (12 casos asignados, respetando tope <= 15)." },
-          { codigo: "F3 msj. 2", origen: "A3 Alertas", destino: "Tutor (Joel Aisama)", rol: "F3", texto: "Caso Mateo Fernández (#24945): 92% asistencia vs 14d sin Moodle -> 'EN REVISIÓN (F3)'." }
-        );
-      }
-      if (STATE.diasInaccionF2 >= 10) {
-        bitacora.push(
-          { codigo: "F2 msj. 3", origen: "A3 Alertas", destino: "Tutor A", rol: "F2", texto: "Recordatorio automático a los 7 días sin intervención sobre alerta crítica." },
-          { codigo: "F2 msj. 5", origen: "A3 Alertas", destino: "Coordinación", rol: "N6", texto: "Escalamiento a los 10 días (7+3): solicita reasignación de tutor." }
-        );
-      }
-      if (STATE.tutorReasignadoN6) {
-        bitacora.push(
-          { codigo: "F2 msj. 6", origen: "Coordinación", destino: "Tutor B (M. Suárez)", rol: "N6", texto: "Coordinación reasigna formalmente el caso #24901 al Tutor B (N6)." }
-        );
-      }
-      return bitacora;
-    }
-
-    async function iniciarCampusMoodle() {
-      STATE.estudiantes = generarCohorteLocal();
-      STATE.mensajesPrometheus = armarBitacoraPrometheus();
+    async function inicializarCampus() {
+      STATE.estudiantes = construirPadronEstudiantes();
       try {
         const res = await fetch('/api/data');
         if (res.ok) {
           const data = await res.json();
           if (data.estudiantes && data.estudiantes.length > 0) {
             STATE.estudiantes = data.estudiantes;
-            STATE.mensajesPrometheus = data.mensajes_prometheus || armarBitacoraPrometheus();
-            document.getElementById('backend-status-text').textContent = '● Servidor MVC Python Conectado (localhost:8050)';
           }
         }
-      } catch (err) {
-        document.getElementById('backend-status-text').textContent = '● Modo Autónomo MVC Activo (120 perfiles)';
-      }
+      } catch (e) {}
 
-      renderizarTodoMoodle();
-
-      // Soporte de parámetros URL para capturas automáticas
+      // Parámetros opcionales de URL para capturas de pantalla
       const params = new URLSearchParams(window.location.search);
       const sc = params.get('sc');
-      if (sc === 'cursos' || sc === 'assign') { ejecutarEscenarioMoodle('assign'); }
-      else if (sc === 'docente' || sc === 'c1') { ejecutarEscenarioMoodle('c1'); }
-      else if (sc === 'f1') { ejecutarEscenarioMoodle('f1'); }
-      else if (sc === 'f3') { ejecutarEscenarioMoodle('f3'); }
-      else if (sc === 'gov') { ejecutarEscenarioMoodle('gov'); }
-      else if (sc === 'gemini') { abrirModalJson(); }
+      if (sc === 'cursos' || sc === 'assign') {
+        STATE.rol = 'ALUMNO';
+        STATE.vista = 'assign';
+      } else if (sc === 'f1') {
+        STATE.rol = 'TUTOR';
+        STATE.vista = 'tutorias';
+        STATE.corteTelemetriaF1 = true;
+      } else if (sc === 'gov') {
+        STATE.rol = 'COORDINACION';
+        STATE.vista = 'secretaria';
+        STATE.diasSinGestionF2 = 10;
+      } else if (sc === 'gemini') {
+        STATE.rol = 'TUTOR';
+        STATE.vista = 'tutorias';
+        setTimeout(() => abrirModalGemini(), 100);
+      } else if ( params.has('sc') ) {
+        STATE.rol = 'TUTOR';
+        STATE.vista = 'tutorias';
+      }
+
+      document.getElementById('role-select').value = STATE.rol;
+      sincronizarCabeceraUsuario();
+      mostrarVista(STATE.vista);
     }
 
-    function mostrarNotificacion(msg) {
-      const t = document.getElementById('moodle-toast');
-      t.textContent = msg;
-      t.style.display = 'block';
-      clearTimeout(window._moodleToast);
-      window._moodleToast = setTimeout(() => { t.style.display = 'none'; }, 3800);
+    function notificar(texto) {
+      const el = document.getElementById('toast-msg');
+      el.textContent = texto;
+      el.style.display = 'block';
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => { el.style.display = 'none'; }, 3500);
     }
 
-    function abrirPestanaMoodle(tab) {
-      STATE.pestana = tab;
-      ['aula', 'assign', 'participantes', 'sita', 'gov'].forEach(k => {
-        document.getElementById(`tab-btn-${k}`)?.classList.toggle('active', k === tab);
-        document.getElementById(`top-nav-${k}`)?.classList.toggle('active', k === tab);
-        document.getElementById(`pane-${k}`)?.classList.toggle('active', k === tab);
-      });
+    function sincronizarCabeceraUsuario() {
+      const av = document.getElementById('header-avatar');
+      const nm = document.getElementById('header-username');
+      const rl = document.getElementById('header-userrole');
 
-      const urls = {
-        aula: 'https://campus.uch.edu.ar/course/view.php?id=101',
-        assign: `https://campus.uch.edu.ar/mod/assign/view.php?id=${TAREAS_MOODLE[STATE.tpSeleccionado].id}`,
-        participantes: 'https://campus.uch.edu.ar/user/index.php?id=101',
-        sita: 'https://campus.uch.edu.ar/local/sitaia/view.php?courseid=101',
-        gov: 'https://campus.uch.edu.ar/local/sitaia/governance.php?courseid=101'
-      };
-      const crumbs = {
-        aula: 'Curso: Algoritmos y Programación I (Vista General)',
-        assign: `Tareas / ${TAREAS_MOODLE[STATE.tpSeleccionado].titulo}`,
-        participantes: 'Participantes, Asistencia y Calificaciones (Regla C1)',
-        sita: 'Plugin Institucional SITA-IA · Monitor de Tutorías (Agentes A1–A3)',
-        gov: 'Gobernanza Ética (N1–N8), Auditoría de Sesgo N7 y Protocolo Prometheus'
-      };
-      document.getElementById('simulated-url-pill').textContent = urls[tab];
-      document.getElementById('breadcrumb-current').textContent = crumbs[tab];
-      renderizarTodoMoodle();
+      if (STATE.rol === 'ALUMNO') {
+        av.textContent = 'LG';
+        nm.textContent = 'Lucas González (#24901)';
+        rl.textContent = 'Estudiante · Ing. en Sistemas';
+      } else if (STATE.rol === 'DOCENTE') {
+        av.textContent = 'CM';
+        nm.textContent = 'Ing. Carlos Méndez';
+        rl.textContent = 'Profesor Titular (Regla C1)';
+      } else if (STATE.rol === 'TUTOR') {
+        av.textContent = 'JA';
+        nm.textContent = 'Prof. Joel Aisama';
+        rl.textContent = 'Tutor Académico de 1° Año';
+      } else if (STATE.rol === 'COORDINACION') {
+        av.textContent = 'BN';
+        nm.textContent = 'Bautista Navarro';
+        rl.textContent = 'Secretaría Académica y Coordinación';
+      }
     }
 
-    function seleccionarTareaMoodle(numTp) {
-      STATE.tpSeleccionado = numTp;
-      [1, 2, 3, 4].forEach(n => {
-        document.getElementById(`idx-tp${n}`)?.classList.toggle('active', n === numTp);
-      });
-      abrirPestanaMoodle('assign');
-    }
-
-    function cambiarRolMoodle(nuevoRol) {
+    function cambiarUsuarioActivo(nuevoRol) {
       STATE.rol = nuevoRol;
-      document.getElementById('moodle-role-select').value = nuevoRol;
-      const ini = document.getElementById('nav-user-initials');
-      const nom = document.getElementById('nav-user-name');
-      const desc = document.getElementById('nav-user-role');
-
+      sincronizarCabeceraUsuario();
       if (nuevoRol === 'ALUMNO') {
-        ini.textContent = 'LG';
-        nom.textContent = 'Lucas González (#24901)';
-        desc.textContent = 'Estudiante 1° Año · Comisión 1 Noche';
-        abrirPestanaMoodle('assign');
-        mostrarNotificacion('🎓 Rol Estudiante activo: visualizando estado de entrega en campus.uch.edu.ar/mod/assign/view.php?id=560274');
+        mostrarVista('assign');
       } else if (nuevoRol === 'DOCENTE') {
-        ini.textContent = 'CM';
-        nom.textContent = 'Prof. Ing. Carlos Méndez';
-        desc.textContent = 'Profesor Titular (Sujeto a Regla C1)';
-        abrirPestanaMoodle('participantes');
-        mostrarNotificacion('📘 Rol Profesor de Cátedra: puede calificar y cargar asistencia, pero los scores de IA están ocultos (Regla C1).');
+        mostrarVista('participantes');
       } else if (nuevoRol === 'TUTOR') {
-        ini.textContent = 'JA';
-        nom.textContent = 'Prof. Joel Aisama';
-        desc.textContent = 'Tutor Pedagógico SITA (N1–N4)';
-        abrirPestanaMoodle('sita');
-        mostrarNotificacion('🛡️ Rol Tutor Pedagógico: acceso completo a la bandeja priorizada (<=15), XAI y Gemini 1.5 Flash.');
+        mostrarVista('tutorias');
       } else if (nuevoRol === 'COORDINACION') {
-        ini.textContent = 'BN';
-        nom.textContent = 'Bautista Navarro';
-        desc.textContent = 'Coordinación Académica (N3, N5–N8)';
-        abrirPestanaMoodle('gov');
-        mostrarNotificacion('⚖️ Rol Coordinación: aprobación de derivaciones N3, reasignación N6 y auditoría de sesgo N7.');
+        mostrarVista('secretaria');
       }
-      renderizarTodoMoodle();
     }
 
-    function ejecutarEscenarioMoodle(clave) {
-      ['assign', 'sita', 'c1', 'f1', 'f3', 'gov'].forEach(k => {
-        const b = document.getElementById(`btn-sc-${k}`);
-        if (b) b.classList.toggle('active', k === clave);
+    function mostrarVista(nombreVista) {
+      STATE.vista = nombreVista;
+      const mapaVistas = {
+        'mis-cursos': 'view-mis-cursos',
+        'curso': 'view-curso',
+        'assign': 'view-assign',
+        'participantes': 'view-participantes',
+        'tutorias': 'view-tutorias',
+        'secretaria': 'view-secretaria'
+      };
+      Object.entries(mapaVistas).forEach(([k, id]) => {
+        document.getElementById(id)?.classList.toggle('active', k === nombreVista);
       });
 
-      if (clave === 'assign') {
-        STATE.fallaF1 = false;
-        STATE.tpSeleccionado = 3;
-        cambiarRolMoodle('ALUMNO');
-      } else if (clave === 'sita') {
-        STATE.fallaF1 = false;
-        STATE.filtroSita = 'BANDEJA';
-        STATE.legajoActual = '24901';
-        cambiarRolMoodle('TUTOR');
-      } else if (clave === 'gemini') {
-        STATE.fallaF1 = false;
-        STATE.legajoActual = '24901';
-        if (STATE.rol !== 'TUTOR') cambiarRolMoodle('TUTOR');
-        abrirPestanaMoodle('sita');
-        generarGuiaGemini(false);
-      } else if (clave === 'c1') {
-        STATE.fallaF1 = false;
-        cambiarRolMoodle('DOCENTE');
-      } else if (clave === 'f1') {
-        STATE.fallaF1 = !STATE.fallaF1;
-        STATE.mensajesPrometheus = armarBitacoraPrometheus();
-        abrirPestanaMoodle('sita');
-        mostrarNotificacion(STATE.fallaF1
-          ? '⚠️ Simulación F1 activa: caída de telemetría de Moodle. Agente A2 asigna "SIN EVALUAR" (falta de dato != abandono).'
-          : '✅ Telemetría de Moodle restablecida por Coordinación (Punto N5).');
-      } else if (clave === 'f3') {
-        STATE.fallaF1 = false;
-        STATE.filtroSita = 'F3';
-        STATE.legajoActual = '24945';
-        if (STATE.rol !== 'TUTOR') cambiarRolMoodle('TUTOR');
-        abrirPestanaMoodle('sita');
-        mostrarNotificacion('🔍 Caso Mateo Fernández (#24945): 92% asistencia presencial vs 14d sin login en Moodle -> EN REVISIÓN (F3).');
-      } else if (clave === 'gov') {
-        STATE.fallaF1 = false;
-        STATE.diasInaccionF2 = 10;
-        STATE.mensajesPrometheus = armarBitacoraPrometheus();
-        cambiarRolMoodle('COORDINACION');
-      }
-      renderizarTodoMoodle();
+      ['mis-cursos', 'curso', 'assign', 'participantes', 'tutorias'].forEach(k => {
+        document.getElementById(`nav-${k}`)?.classList.toggle('active', k === nombreVista);
+      });
+      ['curso', 'assign', 'participantes', 'tutorias', 'secretaria'].forEach(k => {
+        document.getElementById(`tab-${k}`)?.classList.toggle('active', k === nombreVista);
+      });
+
+      const titulosMigas = {
+        'mis-cursos': 'Área personal y Mis Cursos',
+        'curso': 'Unidades y Contenidos de la Materia',
+        'assign': CATALOGO_TPS[STATE.tpActual].nombre,
+        'participantes': 'Participantes, Asistencia y Calificaciones',
+        'tutorias': 'Programa Institucional de Tutorías y Acompañamiento (SITA)',
+        'secretaria': 'Secretaría Académica y Gobernanza Institucional'
+      };
+      document.getElementById('breadcrumb-actual').textContent = titulosMigas[nombreVista] || '';
+      renderizarTodo();
     }
 
-    function renderizarTodoMoodle() {
-      renderizarBannerContextual();
+    function abrirEntregaTP(numero) {
+      STATE.tpActual = numero;
+      [1, 2, 3, 4].forEach(n => {
+        document.getElementById(`tree-tp${n}`)?.classList.toggle('active', n === numero);
+      });
+      mostrarVista('assign');
+    }
+
+    function renderizarTodo() {
+      renderizarAvisosSuperiores();
       renderizarVistaAssign();
-      renderizarVistaAula();
-      renderizarVistaParticipantes();
-      renderizarVistaSita();
-      renderizarVistaGobernanza();
+      renderizarMisCursos();
+      renderizarParticipantes();
+      renderizarEspacioTutorias();
+      renderizarSecretariaAcademica();
     }
 
-    function renderizarBannerContextual() {
-      const box = document.getElementById('moodle-context-banner');
-      if (STATE.fallaF1) {
-        box.innerHTML = `
-          <div class="moodle-alert moodle-alert-danger">
+    function renderizarAvisosSuperiores() {
+      const area = document.getElementById('campus-banner-area');
+      if (STATE.corteTelemetriaF1) {
+        area.innerHTML = `
+          <div class="notice-box notice-danger">
             <div>
-              <strong>⚠️ ALERTA TÉCNICA F1 (Interrupción de Telemetría de Logs de Moodle):</strong>
-              Por regla ética de diseño (O8), el Agente A2 <strong>no interpreta la caída del servidor como inactividad del estudiante</strong>. Los puntajes quedan suspendidos en estado <code>SIN EVALUAR</code> hasta que Coordinación gestione la reconexión (Punto N5).
+              <strong>Aviso Técnico del Campus Virtual (Protocolo F1):</strong> La sincronización de registros de acceso del aula virtual se encuentra temporalmente interrumpida. De acuerdo con la normativa institucional (Regla F1), <strong>la falta de datos técnicos no se computa como inactividad del estudiante</strong> y los perfiles quedan en estado <em>Sin Evaluar</em> hasta su restablecimiento (Punto N5).
             </div>
-            <button class="btn-moodle btn-moodle-secondary" onclick="ejecutarEscenarioMoodle('f1')">Restablecer Telemetría (N5)</button>
+            <button class="btn-moodle btn-moodle-secondary" onclick="STATE.corteTelemetriaF1=false; renderizarTodo();">Restablecer Conexión</button>
           </div>
         `;
       } else if (STATE.rol === 'DOCENTE') {
-        box.innerHTML = `
-          <div class="moodle-alert moodle-alert-warn">
+        area.innerHTML = `
+          <div class="notice-box notice-warn">
             <div>
-              <strong>🔒 MODO PROFESOR DE CÁTEDRA ACTIVO (Salvaguarda Anti-Sesgo C1):</strong>
-              Están habilitadas las funciones de calificación de envíos (<code>mod/assign</code>) y carga de asistencia semanal (<code>P msj. 1</code>). Los puntajes de riesgo de abandono permanecen ocultos para evitar sesgos de confirmación en los exámenes parciales.
+              <strong>Sesión iniciada como Docente de Cátedra (Ing. Carlos Méndez):</strong> Dispone de permisos para calificar Trabajos Prácticos y registrar la asistencia semanal. Por disposición académica (Regla C1 de imparcialidad), los puntajes predictivos del gabinete de tutorías no se exhiben al cuerpo docente evaluador.
             </div>
-            <button class="btn-moodle btn-moodle-secondary" onclick="cambiarRolMoodle('TUTOR')">Cambiar a Rol Tutor SITA</button>
-          </div>
-        `;
-      } else if (STATE.rol === 'ALUMNO') {
-        box.innerHTML = `
-          <div class="moodle-alert moodle-alert-info">
-            <div>
-              <strong>🎓 VISTA DEL ESTUDIANTE EN CAMPUS.UCH.EDU.AR:</strong>
-              Estás viendo exactamente lo que ve <strong>Lucas González (#24901)</strong> al ingresar a <code>mod/assign/view.php?id=560274</code>: el estado de sus entregas y la invitación cordial de su tutor humano (sin puntajes ni etiquetas algorítmicas).
-            </div>
-            <button class="btn-moodle btn-moodle-primary" onclick="cambiarRolMoodle('TUTOR')">Ver este caso como Tutor SITA →</button>
           </div>
         `;
       } else {
-        box.innerHTML = '';
+        area.innerHTML = '';
       }
     }
 
     // ========================================================================
-    // RENDER PESTAÑA 1: /mod/assign/view.php?id=560274
+    // RENDER VISTA 1: ENTREGA DE TAREA (mod/assign/view.php?id=560274)
     // ========================================================================
     function renderizarVistaAssign() {
-      const tp = TAREAS_MOODLE[STATE.tpSeleccionado] || TAREAS_MOODLE[3];
-      document.getElementById('assign-title-heading').textContent = tp.titulo;
-      document.getElementById('assign-dates-box').innerHTML = `
+      const tp = CATALOGO_TPS[STATE.tpActual] || CATALOGO_TPS[3];
+      document.getElementById('assign-view-title').textContent = tp.nombre;
+      document.getElementById('assign-dates-info').innerHTML = `
         <div><strong>Apertura:</strong> ${tp.apertura}</div>
         <div><strong>Fecha de entrega:</strong> ${tp.cierre}</div>
-        <div style="color:var(--text-secondary); margin-top:4px;">
-          <strong>Sincronización SITA-IA (Agente A1):</strong> El estado de esta entrega en Moodle se consolida semanalmente junto con la asistencia presencial y la nota del primer parcial para detectar dificultades a tiempo.
-        </div>
       `;
 
-      // Sumario de calificación cuando el rol es Docente o Tutor
-      const gradingBox = document.getElementById('assign-grading-summary');
-      if (STATE.rol === 'DOCENTE' || STATE.rol === 'TUTOR' || STATE.rol === 'COORDINACION') {
-        gradingBox.innerHTML = `
-          <h3 style="font-size:14.5px; font-weight:700; margin-bottom:8px; color:var(--uch-navy);">Sumario de calificaciones (Vista Docente / Tutor en mod/assign)</h3>
-          <table class="moodle-generaltable" style="margin-bottom:16px;">
+      const teacherSummary = document.getElementById('assign-teacher-summary');
+      if (STATE.rol !== 'ALUMNO') {
+        teacherSummary.innerHTML = `
+          <h3 style="font-size:16px; font-weight:700; margin: 14px 0 8px;">Sumario de calificaciones</h3>
+          <table class="generaltable" style="margin-bottom:18px;">
             <tbody>
-              <tr>
-                <th class="cell-c0">Participantes de la cohorte</th>
-                <td>120 estudiantes matriculados (Comisiones 1, 2 y 3)</td>
-              </tr>
-              <tr>
-                <th class="cell-c0">Enviados</th>
-                <td>106 entregas recibidas en término</td>
-              </tr>
-              <tr>
-                <th class="cell-c0">Pendientes por entregar (Alerta A1)</th>
-                <td class="submission-warn">14 estudiantes adeudan esta entrega (incluye Caso Lucas González #24901)</td>
-              </tr>
+              <tr><th class="c0">Participantes inscriptos</th><td>120 estudiantes</td></tr>
+              <tr><th class="c0">Borradores</th><td>0</td></tr>
+              <tr><th class="c0">Enviados</th><td>106 entregas recibidas</td></tr>
+              <tr><th class="c0">Pendientes por entregar</th><td>14 estudiantes sin envío registrado (incluye legajo #24901)</td></tr>
             </tbody>
           </table>
         `;
       } else {
-        gradingBox.innerHTML = '';
+        teacherSummary.innerHTML = '';
       }
 
-      // Tabla clásica Moodle "Estado de la entrega"
-      const statusTable = document.getElementById('assign-status-table');
-      statusTable.innerHTML = `
+      document.getElementById('moodle-assign-table').innerHTML = `
         <tbody>
           <tr>
-            <th class="cell-c0">Estado de la entrega</th>
-            <td class="${tp.entregadoPorLucas ? 'submission-done' : 'submission-overdue'}">
-              ${tp.entregadoPorLucas ? 'Enviado para calificar' : 'Sin intento (No entregado — Registrado por Agente A1)'}
+            <th class="c0">Estudiante</th>
+            <td><strong>González, Lucas</strong> (Legajo #24901 · Comisión 1 Turno Noche)</td>
+          </tr>
+          <tr>
+            <th class="c0">Estado de la entrega</th>
+            <td class="${tp.entregado ? 'submissionstatussubmitted' : 'overduesubmission'}">
+              ${tp.entregado ? 'Enviado para calificar' : 'Sin intento (No entregado)'}
             </td>
           </tr>
           <tr>
-            <th class="cell-c0">Estado de la calificación</th>
-            <td>${tp.calificacionLucas}</td>
+            <th class="c0">Estado de la calificación</th>
+            <td>${tp.estadoCalificacion}</td>
           </tr>
           <tr>
-            <th class="cell-c0">Tiempo restante</th>
-            <td class="${tp.entregadoPorLucas ? 'submission-done' : 'submission-overdue'}">${tp.tiempoRestante}</td>
+            <th class="c0">Tiempo restante</th>
+            <td class="${tp.entregado ? 'earlysubmission' : 'overduesubmission'}">${tp.tiempo}</td>
           </tr>
           <tr>
-            <th class="cell-c0">Última modificación</th>
-            <td>${tp.entregadoPorLucas ? 'Martes, 28 de septiembre de 2026, 20:41' : '-'}</td>
+            <th class="c0">Última modificación</th>
+            <td>${tp.ultimaMod}</td>
           </tr>
           <tr>
-            <th class="cell-c0">Archivos enviados</th>
-            <td style="font-family:'JetBrains Mono',monospace; font-size:12px;">${tp.archivo}</td>
+            <th class="c0">Archivos enviados</th>
+            <td>${tp.archivo}</td>
           </tr>
           <tr>
-            <th class="cell-c0">Comentarios de la entrega</th>
-            <td><a>► Comentarios (0)</a></td>
+            <th class="c0">Comentarios de la entrega</th>
+            <td><a class="activity-link">${tp.comentarios}</a></td>
           </tr>
         </tbody>
       `;
 
-      // Bloque de acompañamiento de tutoría dentro de mod/assign
-      const supportBox = document.getElementById('assign-tutor-support-box');
-      supportBox.innerHTML = `
-        <div style="background:var(--uch-bordeaux-light); border:1px solid #f5c2c7; border-left:4px solid var(--uch-bordeaux); border-radius:var(--radius-lg); padding:16px; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;">
-          <div style="max-width:680px;">
-            <div style="font-size:12px; font-weight:700; color:var(--uch-bordeaux); text-transform:uppercase;">🤝 Espacio de Tutoría Universitaria · Acompañamiento Humano (Punto N2)</div>
-            <p style="font-size:13.5px; font-weight:600; color:var(--text-main); margin-top:3px;">
-              Hola Lucas: desde el equipo de tutorías de 1° año vimos que aún no pudiste subir el TP N° 2 ni el TP N° 3 y que tuviste inasistencias recientes en el turno noche.
-            </p>
-            <p style="font-size:12.5px; color:var(--text-secondary); margin-top:4px;">
-              Tu tutor asignado, el <strong>Prof. Joel Aisama</strong>, te invita a una breve charla de 15 minutos para armar un plan de entregas escalonadas o gestionar un cambio de comisión si se superpone con tu horario laboral. <em>(En SITA-IA la entrevista es voluntaria y humana; el sistema no aplica sanciones automáticas).</em>
-            </p>
+      const invBox = document.getElementById('student-tutor-invitation');
+      if (!tp.entregado) {
+        invBox.style.display = 'block';
+        invBox.innerHTML = `
+          <div class="moodle-section-title">
+            <span>🤝 Mensaje del Equipo de Tutoría Universitaria (Acompañamiento de 1° Año)</span>
+            <span class="completion-pill pill-info">Tutor asignado: Prof. Joel Aisama</span>
           </div>
-          <div style="display:flex; gap:8px;">
-            <button class="btn-moodle btn-moodle-primary" onclick="mostrarNotificacion('✅ El estudiante confirmó su asistencia a la entrevista con el Prof. Joel Aisama (P msj. 6).')">
-              ✅ Confirmar entrevista con Tutor
+          <p style="font-size:13.5px; color:#343a40; margin-bottom:12px;">
+            Estimado/a <strong>Lucas</strong>: Desde la Tutoría de 1° Año observamos que tenés pendientes las entregas del <strong>Trabajo Práctico N° 2 y N° 3</strong> y que registraste inasistencias en las últimas dos semanas del turno noche. Te invitamos a coordinar una breve reunión de orientación (presencial o virtual de 15 minutos) para organizar un plan de entregas escalonadas o evaluar alternativas horarias si tenés superposición laboral.
+          </p>
+          <div style="display:flex; gap:10px;">
+            <button class="btn-moodle btn-moodle-primary" onclick="notificar('✅ Confirmaste tu asistencia a la entrevista con el Prof. Joel Aisama (Punto N2).')">
+              Confirmar horario de tutoría
             </button>
-            <button class="btn-moodle btn-moodle-secondary" onclick="mostrarNotificacion('📤 Simulación de subida de entrega abierta.')">
-              📤 Agregar entrega
+            <button class="btn-moodle btn-moodle-secondary" onclick="mostrarVista('tutorias')">
+              Ir al Espacio de Tutorías
             </button>
           </div>
-        </div>
-      `;
+        `;
+      } else {
+        invBox.style.display = 'none';
+      }
     }
 
     // ========================================================================
-    // RENDER PESTAÑA 2: AULA VIRTUAL Y OTROS CURSOS DE 1° AÑO
+    // RENDER VISTA 3: MIS CURSOS (ÁREA PERSONAL DEL CAMPUS)
     // ========================================================================
-    function renderizarVistaAula() {
-      const container = document.getElementById('other-courses-cards');
-      const materias = [
-        { cod: "MAT-102", nom: "Álgebra y Geometría Analítica", prof: "Dr. Roberto Quiroga", asist: "81%", estado: "4 Guías activas en Moodle" },
-        { cod: "SIS-103", nom: "Sistemas y Organizaciones", prof: "Mg. Laura Pereyra", asist: "85%", estado: "TP integrador en curso" },
-        { cod: "ARQ-104", nom: "Arquitectura de Computadoras", prof: "Ing. Darío Gómez", asist: "83%", estado: "Laboratorio los sábados" }
-      ];
-      container.innerHTML = materias.map(m => `
-        <div style="border:1px solid var(--moodle-border); border-top:3px solid var(--uch-navy); border-radius:var(--radius); padding:12px; background:var(--moodle-gray-row);">
-          <div style="font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--uch-bordeaux); font-weight:700;">${m.cod} · 1° Año UCH</div>
-          <div style="font-weight:700; font-size:14px; margin:3px 0;">${m.nom}</div>
-          <div style="font-size:12px; color:var(--text-secondary);">Cátedra: ${m.prof}</div>
-          <div style="font-size:11.5px; color:var(--text-muted); margin-top:6px;">Asistencia media: <strong>${m.asist}</strong> · ${m.estado}</div>
+    function renderizarMisCursos() {
+      const grid = document.getElementById('mis-cursos-grid');
+      grid.innerHTML = MATERIAS_PRIMER_ANIO.map(m => `
+        <div class="moodle-course-card" onclick="mostrarVista('${m.codigo === 'TUT-100' ? 'tutorias' : 'curso'}')">
+          <div>
+            <div class="course-card-banner" style="background:${m.color};">
+              <span style="font-size:11.5px; opacity:0.9; font-weight:600;">${m.codigo} · ${m.comision}</span>
+              <span style="font-size:12px; background:rgba(255,255,255,0.2); padding:2px 8px; border-radius:4px; align-self:flex-start;">Ciclo 2026</span>
+            </div>
+            <div class="course-card-body">
+              <h4>${m.nombre}</h4>
+              <p style="font-size:12.5px; color:var(--moodle-muted); margin-bottom:10px;">${m.docente}</p>
+              <div style="font-size:12px; color:#343a40; background:#f8f9fa; padding:7px 10px; border-radius:4px; border:1px solid var(--moodle-border-light);">
+                ${m.progreso}
+              </div>
+            </div>
+          </div>
         </div>
       `).join('');
     }
 
     // ========================================================================
-    // RENDER PESTAÑA 3: PARTICIPANTES, ASISTENCIA Y NOTAS (REGLA C1)
+    // RENDER VISTA 4: PARTICIPANTES Y PLANILLA DE ASISTENCIA
     // ========================================================================
-    function renderizarVistaParticipantes() {
-      const tbody = document.getElementById('participants-tbody');
-      const muestra = STATE.estudiantes.slice(0, 18);
-      tbody.innerHTML = muestra.map(e => {
-        const esDocente = STATE.rol === 'DOCENTE';
+    function renderizarParticipantes() {
+      const tbody = document.getElementById('tabla-participantes-body');
+      const primeros = STATE.estudiantes.slice(0, 18);
+      tbody.innerHTML = primeros.map(e => {
+        const ocultarPorC1 = (STATE.rol === 'DOCENTE' || STATE.rol === 'ALUMNO');
         return `
           <tr>
-            <td style="font-family:'JetBrains Mono',monospace; font-weight:600;">#${e.legajo}</td>
-            <td><strong>${e.nombre}</strong><br><span style="font-size:11px; color:var(--text-muted);">${e.carrera}</span></td>
-            <td>Estudiante · ${e.comision} (${e.turno})</td>
-            <td>${STATE.fallaF1 ? '<span class="m-badge m-badge-danger">Sin conexión F1</span>' : (e.dias_inactivo_campus === 0 ? 'Hace 3 horas' : `Hace ${e.dias_inactivo_campus} días`)}</td>
+            <td><strong>#${e.legajo}</strong></td>
+            <td><strong>${e.nombre}</strong><br><span style="font-size:12px; color:var(--moodle-muted);">${e.carrera}</span></td>
+            <td>${e.comision} (${e.turno})</td>
+            <td>${STATE.corteTelemetriaF1 ? '<span class="completion-pill pill-late">Sin datos (F1)</span>' : (e.dias_inactivo_campus === 0 ? 'Hoy' : `Hace ${e.dias_inactivo_campus} días`)}</td>
             <td><strong>${e.asistencia_pct}%</strong> (${e.faltas_ult_2sem} faltas rec.)</td>
-            <td>${e.tps_entregados} de ${e.tps_exigidos} enviados</td>
-            <td><strong>${e.nota_parcial.toFixed(1)} / 10,0</strong></td>
+            <td>${e.tps_entregados} / ${e.tps_exigidos} enviados</td>
+            <td><strong>${e.nota_parcial.toFixed(1)}</strong></td>
             <td>
-              ${esDocente
-                ? '<span class="m-badge m-badge-neutral">🔒 Oculto al docente (Regla C1)</span>'
-                : `<span class="m-badge ${e.score_riesgo >= 70 ? 'm-badge-danger' : (e.regla_f3_revision ? 'm-badge-purple' : 'm-badge-success')}">${e.score_riesgo}/100</span>`}
+              ${ocultarPorC1
+                ? '<span style="color:var(--moodle-muted); font-size:12.5px;">🔒 Reservado a Tutorías (Regla C1)</span>'
+                : `<span class="completion-pill ${e.score_riesgo >= 70 ? 'pill-late' : (e.regla_f3_revision ? 'pill-warn' : 'pill-done')}">${e.regla_f3_revision ? 'En Revisión (F3)' : `Índice ${e.score_riesgo}/100`}</span>`}
             </td>
           </tr>
         `;
@@ -1917,210 +1626,217 @@
     }
 
     // ========================================================================
-    // RENDER PESTAÑA 4: MONITOR SITA-IA (TABLA + EXPEDIENTE XAI & GEMINI)
+    // RENDER VISTA 5: PROGRAMA DE TUTORÍAS (ADAPTADO AL ROL ACTIVO)
     // ========================================================================
-    function cambiarFiltroSita(f) {
-      STATE.filtroSita = f;
-      ['bandeja', 'f3', 'todos'].forEach(k => {
-        const btn = document.getElementById(`flt-${k}`);
-        if (btn) {
-          btn.className = (k.toUpperCase() === f) ? 'btn-moodle btn-moodle-primary' : 'btn-moodle btn-moodle-secondary';
-        }
-      });
-      renderizarTablaSita();
-    }
+    function renderizarEspacioTutorias() {
+      const container = document.getElementById('tutorias-main-container');
 
-    function renderizarVistaSita() {
-      document.getElementById('kpi-a1-val').textContent = `${STATE.estudiantes.length} alumnos`;
-      document.getElementById('kpi-a1-sub').textContent = STATE.fallaF1
-        ? '⚠️ Alerta F1: Campus caído (66.7%)'
-        : 'Completitud: 100% (3/3 fuentes activas)';
-      document.getElementById('kpi-a3-val').textContent = STATE.fallaF1 ? '0 / 15 máx.' : '12 / 15 máx.';
-
-      renderizarTablaSita();
-      renderizarExpedienteSita();
-    }
-
-    function renderizarTablaSita() {
-      const tbody = document.getElementById('sita-roster-tbody');
-      const q = (document.getElementById('sita-search-input')?.value || '').toLowerCase().trim();
-
-      const lista = STATE.estudiantes.filter(e => {
-        if (q && !e.nombre.toLowerCase().includes(q) && !String(e.legajo).includes(q)) return false;
-        if (STATE.filtroSita === 'BANDEJA') return e.en_bandeja_tutor;
-        if (STATE.filtroSita === 'F3') return e.regla_f3_revision;
-        return true;
-      });
-
-      tbody.innerHTML = lista.map(e => {
-        const sel = String(e.legajo) === String(STATE.legajoActual);
-        let badgeCls = 'm-badge-success';
-        let badgeTxt = `${e.score_riesgo}/100`;
-
-        if (STATE.rol === 'DOCENTE') {
-          badgeCls = 'm-badge-neutral';
-          badgeTxt = '🔒 C1';
-        } else if (STATE.fallaF1) {
-          badgeCls = 'm-badge-neutral';
-          badgeTxt = 'SIN EVALUAR';
-        } else if (e.regla_f3_revision) {
-          badgeCls = 'm-badge-purple';
-          badgeTxt = `${e.score_riesgo} · F3`;
-        } else if (e.score_riesgo >= 70) {
-          badgeCls = 'm-badge-danger';
-        } else if (e.score_riesgo >= 40) {
-          badgeCls = 'm-badge-warn';
-        }
-
-        const estTxt = STATE.fallaF1
-          ? 'Suspendido F1'
-          : (STATE.intervenciones[e.legajo]
-              ? `✅ ${STATE.intervenciones[e.legajo].resumen}`
-              : (e.regla_f3_revision ? 'En Revisión F3' : (e.prioridad_orden ? `Prioridad #${e.prioridad_orden}` : 'Regular')));
-
-        return `
-          <tr class="clickable-row ${sel ? 'selected' : ''}" onclick="seleccionarAlumnoSita('${e.legajo}')">
-            <td style="font-family:'JetBrains Mono',monospace; font-weight:700;">#${e.legajo}</td>
-            <td>
-              <div style="font-weight:600;">${e.nombre}</div>
-              <div style="font-size:11px; color:var(--text-muted);">${e.comision} (${e.turno})</div>
-            </td>
-            <td><strong>${e.asistencia_pct}%</strong></td>
-            <td>${STATE.fallaF1 ? 'F1' : `${e.dias_inactivo_campus}d`}</td>
-            <td>${e.tps_entregados}/${e.tps_exigidos}</td>
-            <td><span class="m-badge ${badgeCls}">${badgeTxt}</span></td>
-            <td style="font-size:11.5px; font-weight:600;">${estTxt}</td>
-          </tr>
-        `;
-      }).join('');
-    }
-
-    function seleccionarAlumnoSita(leg) {
-      STATE.legajoActual = String(leg);
-      renderizarTablaSita();
-      renderizarExpedienteSita();
-    }
-
-    function renderizarExpedienteSita() {
-      const box = document.getElementById('sita-dossier-container');
-      const est = STATE.estudiantes.find(s => String(s.legajo) === String(STATE.legajoActual)) || STATE.estudiantes[0];
-      if (!est) return;
-
-      if (STATE.rol === 'DOCENTE') {
-        box.innerHTML = `
-          <div style="padding:20px; text-align:center;">
-            <h4 style="color:var(--uch-bordeaux); margin-bottom:8px;">🔒 Expediente Protegido por Regla C1 (Aislamiento Anti-Sesgo)</h4>
-            <p style="font-size:12.5px; color:var(--text-secondary);">Los profesores de cátedra no acceden al puntaje de propensión al abandono ni a las causales XAI del estudiante para garantizar evaluaciones parciales 100% imparciales.</p>
-            <button class="btn-moodle btn-moodle-primary" style="margin-top:12px;" onclick="cambiarRolMoodle('TUTOR')">Conmutar a Rol Tutor Pedagógico</button>
+      // Si el usuario activo es ALUMNO, ve su espacio estudiantil de orientación (sin scores de riesgo)
+      if (STATE.rol === 'ALUMNO') {
+        container.innerHTML = `
+          <div class="moodle-section-card">
+            <div class="moodle-section-title">
+              <span>Espacio de Tutoría y Orientación Estudiantil · Alumno: González, Lucas (#24901)</span>
+              <span class="completion-pill pill-info">Acompañamiento Personalizado</span>
+            </div>
+            <p style="font-size:14px; margin-bottom:14px;">
+              El Programa Institucional de Tutorías acompaña a los estudiantes de 1° año para facilitar su adaptación universitaria, organizar tiempos de estudio y canalizar solicitudes ante la Secretaría Académica.
+            </p>
+            <table class="generaltable">
+              <tbody>
+                <tr><th class="c0">Tutor Académico Asignado</th><td><strong>Prof. Joel Aisama</strong> (joel.aisama@alu.uch.edu.ar)</td></tr>
+                <tr><th class="c0">Situación de Entregas Detectada</th><td>Trabajos Prácticos N° 2 y N° 3 pendientes de envío · 1° Parcial con instancia de recuperación</td></tr>
+                <tr><th class="c0">Propuesta de Encuentro</th><td>Entrevista individual de orientación (15 minutos) para acordar cronograma de entregas o cambio de turno</td></tr>
+                <tr><th class="c0">Garantía de Privacidad (Punto N8)</th><td>Tus datos académicos son confidenciales y ninguna herramienta informática toma decisiones automáticas sobre tu regularidad.</td></tr>
+              </tbody>
+            </table>
+            <div style="margin-top:16px; display:flex; gap:10px;">
+              <button class="btn-moodle btn-moodle-primary" onclick="notificar('✅ Reunión confirmada con el Prof. Joel Aisama.')">Confirmar asistencia a entrevista</button>
+              <button class="btn-moodle btn-moodle-secondary" onclick="cambiarUsuarioActivo('TUTOR')">Ver expediente como Tutor (Prof. Joel Aisama)</button>
+            </div>
           </div>
         `;
         return;
       }
 
-      const hist = est.historial || [35, 52, 68, est.score_riesgo || 0];
-      const factores = STATE.fallaF1
-        ? [{ texto: "Caída del servidor de Moodle (Regla F1): la ausencia de datos no se computa como inactividad.", aporte: 0 }]
-        : (est.factores_detalle || []);
+      // Si el usuario activo es DOCENTE, ve el aviso de separación de funciones C1
+      if (STATE.rol === 'DOCENTE') {
+        container.innerHTML = `
+          <div class="moodle-section-card">
+            <div class="moodle-section-title">
+              <span>Separación de Funciones Académicas (Regla Institucional C1)</span>
+            </div>
+            <p style="font-size:14px; color:#495057; margin-bottom:14px;">
+              Para garantizar que las calificaciones de parciales y exámenes finales estén libres de sesgos de expectativa, el seguimiento preventivo de deserción es gestionado exclusivamente por el equipo de Tutores Pedagógicos y la Secretaría Académica.
+            </p>
+            <button class="btn-moodle btn-moodle-primary" onclick="cambiarUsuarioActivo('TUTOR')">Cambiar a Vista del Tutor (Prof. Joel Aisama)</button>
+          </div>
+        `;
+        return;
+      }
 
-      const guia = STATE.guiasGemini[est.legajo] || {
-        fuente: "Google AI Studio · Gemini 1.5 Flash (Guía N2)",
-        apertura: `Hola ${est.nombre.split(',')[1] || est.nombre}, te escribo desde la tutoría de 1° año de la Universidad Champagnat para saber cómo venís llevando la cursada y los trabajos prácticos en el campus.`,
+      // Vista completa para TUTOR y SECRETARÍA ACADÉMICA
+      const q = (document.getElementById('busqueda-tutoria')?.value || '').toLowerCase().trim();
+      const filtrados = STATE.estudiantes.filter(e => {
+        if (q && !e.nombre.toLowerCase().includes(q) && !String(e.legajo).includes(q)) return false;
+        if (STATE.filtroTutoria === 'PRIORIZADOS') return e.en_bandeja_tutor;
+        if (STATE.filtroTutoria === 'REVISION_F3') return e.regla_f3_revision;
+        return true;
+      });
+
+      const seleccionado = STATE.estudiantes.find(e => String(e.legajo) === String(STATE.legajoSeleccionado)) || STATE.estudiantes[0];
+      const hist = seleccionado.historial || [35, 52, 68, seleccionado.score_riesgo || 0];
+      const factores = STATE.corteTelemetriaF1
+        ? [{ texto: "Sincronización de aula virtual en mantenimiento (Regla F1: no se infiere abandono por falta de datos).", aporte: 0 }]
+        : (seleccionado.factores_detalle || []);
+
+      const guia = STATE.guiasGemini[seleccionado.legajo] || {
+        fuente: "Asistente Pedagógico Gemini 1.5 Flash",
+        apertura: `Hola ${seleccionado.nombre.split(',')[1] || seleccionado.nombre}, te escribo desde la tutoría de 1° año para conversar sobre cómo venís con los tiempos de cursada y las entregas de Programación I.`,
         preguntas_sugeridas: [
-          "¿Sentís que los horarios del turno o alguna responsabilidad laboral te están dificultando asistir a las clases prácticas?",
-          "¿Tuviste algún inconveniente para acceder a las consignas del TP N° 2 y TP N° 3 en campus.uch.edu.ar?",
-          "¿Te ayudaría que coordinemos un esquema de entregas escalonadas o evaluemos un pase de comisión?"
+          "¿Sentís que el horario del turno noche o alguna obligación laboral te está dificultando asistir a las prácticas?",
+          "¿Tuviste algún inconveniente para resolver o subir los Trabajos Prácticos N° 2 y N° 3 en el campus?",
+          "¿Te ayudaría que armemos un esquema de entregas escalonadas o que solicitemos un cambio de comisión a Secretaría Académica?"
         ],
-        medida_sugerida: "Proponer a Coordinación (Punto N3) flexibilización de plazos en mod/assign o cambio de turno."
+        medida_sugerida: "Acordar plan de recuperación de TPs o elevar solicitud de cambio de turno (Punto N3)."
       };
 
-      const tutorResp = (STATE.tutorReasignadoN6 && est.legajo === '24901') ? STATE.tutorReasignadoN6 : est.tutor_asignado;
+      const tutorResp = (STATE.tutorReasignadoN6 && seleccionado.legajo === '24901') ? STATE.tutorReasignadoN6 : seleccionado.tutor_asignado;
 
-      box.innerHTML = `
-        <div style="display:flex; justify-content:space-between; align-items:flex-start; border-bottom:1px solid var(--moodle-border); padding-bottom:10px;">
-          <div>
-            <div style="font-size:15.5px; font-weight:700; color:var(--uch-navy);">${est.nombre} <span style="font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--text-muted);">#${est.legajo}</span></div>
-            <div style="font-size:12px; color:var(--text-muted);">${est.carrera} · ${est.comision} (Turno ${est.turno})</div>
-            <div style="font-size:11.5px; margin-top:3px;"><strong>Tutor asignado:</strong> <span style="color:var(--uch-bordeaux); font-weight:700;">${tutorResp}</span></div>
+      container.innerHTML = `
+        <div class="moodle-section-card" style="padding:14px 20px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+            <div style="font-size:13.5px;">
+              <strong>Estado del Seguimiento Semanal (Agentes A1 → A2 → A3):</strong>
+              120 estudiantes relevados · <strong>12 casos asignados al tutor</strong> (tope institucional: máx. 15 casos por tutor) · 1 caso con señales contradictorias en revisión (Regla F3).
+            </div>
+            <div style="display:flex; gap:8px;">
+              <button class="btn-moodle btn-moodle-secondary" onclick="STATE.corteTelemetriaF1=!STATE.corteTelemetriaF1; renderizarTodo();">
+                ${STATE.corteTelemetriaF1 ? 'Restablecer Telemetría (F1)' : 'Simular Corte de Campus (Regla F1)'}
+              </button>
+              <button class="btn-moodle btn-moodle-secondary" onclick="abrirModalGemini()">
+                Ver Consulta JSON Gemini API
+              </button>
+            </div>
           </div>
-          <span class="m-badge ${STATE.fallaF1 ? 'm-badge-neutral' : (est.regla_f3_revision ? 'm-badge-purple' : (est.score_riesgo >= 70 ? 'm-badge-danger' : 'm-badge-success'))}">
-            ${STATE.fallaF1 ? 'SIN EVALUAR (F1)' : (est.regla_f3_revision ? `EN REVISIÓN F3 · ${est.score_riesgo}` : `RIESGO ${est.nivel_riesgo} · ${est.score_riesgo}/100`)}
-          </span>
         </div>
 
-        <!-- Evolución de 4 Semanas -->
-        <div style="background:var(--moodle-gray-row); border:1px solid var(--moodle-border); border-radius:var(--radius); padding:10px 12px;">
-          <div style="display:flex; justify-content:space-between; font-size:11.5px; font-weight:700; margin-bottom:6px;">
-            <span>📈 Evolución Longitudinal (4 Semanas)</span>
-            <span style="font-family:'JetBrains Mono',monospace; color:var(--uch-bordeaux);">S1:${hist[0]} → S2:${hist[1]} → S3:${hist[2]} → S4:${STATE.fallaF1 ? 'F1' : hist[3]}</span>
-          </div>
-          <svg viewBox="0 0 320 56" style="width:100%; height:52px; background:#fff; border:1px solid var(--moodle-border); border-radius:4px;">
-            <polyline fill="none" stroke="#7c1830" stroke-width="2.5"
-              points="30,${50 - (hist[0]||20)*0.44} 115,${50 - (hist[1]||30)*0.44} 200,${50 - (hist[2]||40)*0.44} 285,${50 - (hist[3]||50)*0.44}" />
-            <circle cx="30" cy="${50 - (hist[0]||20)*0.44}" r="3.5" fill="#1b2a4a" />
-            <circle cx="115" cy="${50 - (hist[1]||30)*0.44}" r="3.5" fill="#1b2a4a" />
-            <circle cx="200" cy="${50 - (hist[2]||40)*0.44}" r="3.5" fill="#1b2a4a" />
-            <circle cx="285" cy="${50 - (hist[3]||50)*0.44}" r="4.5" fill="#7c1830" />
-          </svg>
-        </div>
-
-        <!-- Factores Explicativos XAI (Agente A2) -->
-        <div style="background:var(--moodle-gray-row); border:1px solid var(--moodle-border); border-radius:var(--radius); padding:10px 12px;">
-          <div style="font-size:11.5px; font-weight:700; margin-bottom:8px; color:var(--uch-navy);">🧠 Factores Determinantes XAI (Agente A2 · Descomposición de Logit)</div>
-          ${factores.map(f => `
-            <div style="margin-bottom:7px;">
-              <div style="display:flex; justify-content:space-between; font-size:12px;">
-                <span>${f.texto}</span>
-                <strong style="font-family:'JetBrains Mono',monospace; color:var(--uch-bordeaux);">+${f.aporte} pts</strong>
-              </div>
-              <div class="xai-bar-wrap">
-                <div class="xai-bar-inner" style="width:${Math.min(100, f.aporte * 2.3)}%;"></div>
+        <div class="tutoria-grid">
+          <!-- Tabla de Nómina de Seguimiento -->
+          <div class="moodle-section-card">
+            <div class="moodle-section-title">
+              <span>Nómina de Seguimiento Semanal</span>
+              <div style="display:flex; gap:6px;">
+                <button class="btn-moodle ${STATE.filtroTutoria === 'PRIORIZADOS' ? 'btn-moodle-primary' : 'btn-moodle-secondary'}" style="padding:4px 10px; font-size:12px;" onclick="STATE.filtroTutoria='PRIORIZADOS'; renderizarEspacioTutorias();">Priorizados (12)</button>
+                <button class="btn-moodle ${STATE.filtroTutoria === 'REVISION_F3' ? 'btn-moodle-primary' : 'btn-moodle-secondary'}" style="padding:4px 10px; font-size:12px;" onclick="STATE.filtroTutoria='REVISION_F3'; STATE.legajoSeleccionado='24945'; renderizarEspacioTutorias();">Revisión F3 (Mateo)</button>
+                <button class="btn-moodle ${STATE.filtroTutoria === 'TODOS' ? 'btn-moodle-primary' : 'btn-moodle-secondary'}" style="padding:4px 10px; font-size:12px;" onclick="STATE.filtroTutoria='TODOS'; renderizarEspacioTutorias();">Todos (120)</button>
               </div>
             </div>
-          `).join('')}
-        </div>
 
-        <!-- Asistente Google AI Studio (Gemini 1.5 Flash) -->
-        <div style="background:#f5f3ff; border:1px solid #ddd6fe; border-radius:var(--radius); padding:12px;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-            <strong style="font-size:12.5px; color:#4c1d95;">✨ Guía de Entrevista Empática · Gemini 1.5 Flash (Punto N2)</strong>
-            <button class="btn-moodle btn-moodle-gemini" style="padding:3px 9px; font-size:11px;" onclick="generarGuiaGemini(false)">⚡ Consultar Gemini API</button>
+            <div style="max-height:520px; overflow-y:auto;">
+              <table class="generaltable">
+                <thead>
+                  <tr>
+                    <th>Legajo</th>
+                    <th>Estudiante</th>
+                    <th>Asist.</th>
+                    <th>Sin acceso</th>
+                    <th>TPs</th>
+                    <th>Índice SITA</th>
+                    <th>Situación</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${filtrados.map(e => `
+                    <tr class="student-tr ${String(e.legajo) === String(STATE.legajoSeleccionado) ? 'selected' : ''}" onclick="STATE.legajoSeleccionado='${e.legajo}'; renderizarEspacioTutorias();">
+                      <td><strong>#${e.legajo}</strong></td>
+                      <td>
+                        <strong>${e.nombre}</strong>
+                        <div style="font-size:11.5px; color:var(--moodle-muted);">${e.comision} (${e.turno})</div>
+                      </td>
+                      <td>${e.asistencia_pct}%</td>
+                      <td>${STATE.corteTelemetriaF1 ? '-' : `${e.dias_inactivo_campus} días`}</td>
+                      <td>${e.tps_entregados}/${e.tps_exigidos}</td>
+                      <td>
+                        <span class="completion-pill ${STATE.corteTelemetriaF1 ? 'pill-info' : (e.regla_f3_revision ? 'pill-warn' : (e.score_riesgo >= 70 ? 'pill-late' : 'pill-done'))}">
+                          ${STATE.corteTelemetriaF1 ? 'Sin evaluar (F1)' : (e.regla_f3_revision ? `${e.score_riesgo} · Revisión F3` : `${e.score_riesgo} / 100`)}
+                        </span>
+                      </td>
+                      <td style="font-size:12px;">
+                        ${STATE.actasTutoria[e.legajo] ? `✅ ${STATE.actasTutoria[e.legajo]}` : (e.regla_f3_revision ? 'Discordancia F3' : (e.prioridad_orden ? `Prioridad #${e.prioridad_orden}` : 'Regular'))}
+                      </td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            </div>
           </div>
-          <div style="font-size:11.5px; background:#fff; padding:8px; border-radius:4px; border:1px solid #e9d5ff; margin-bottom:6px;">
-            <strong>Apertura sugerida al tutor:</strong> "${guia.apertura}"
-          </div>
-          <ol style="padding-left:18px; font-size:11.5px; color:var(--text-secondary); display:flex; flex-direction:column; gap:3px;">
-            ${(guia.preguntas_sugeridas || []).map(p => `<li>${p}</li>`).join('')}
-          </ol>
-        </div>
 
-        <!-- Decisión Humana No Delegable (N1 a N4) -->
-        <div style="background:var(--moodle-gray-row); border:1px solid var(--moodle-border); border-radius:var(--radius); padding:10px 12px;">
-          <div style="font-size:11.5px; font-weight:700; margin-bottom:6px; color:var(--uch-navy);">✍️ Registro de Decisión Humana del Tutor (Puntos N1 a N4)</div>
-          <select id="select-decision-n1" style="width:100%; padding:6px 8px; border:1px solid var(--moodle-border-dark); border-radius:4px; font-size:12px; margin-bottom:6px;">
-            <option value="entrevista">N1/N2 · Aceptar alerta y citar a entrevista de acompañamiento</option>
-            <option value="comision">N3 · Proponer a Coordinación cambio de comisión/turno por horario laboral</option>
-            <option value="beca">N3 · Solicitar a Coordinación beca de conectividad / apuntes</option>
-            <option value="falso_positivo">N1/F3 · Desestimar alerta (Registrar como Falso Positivo tras hablar con el alumno)</option>
-            <option value="cierre_n4">N4 · Cerrar caso por regularización de entregas en mod/assign</option>
-          </select>
-          <div style="display:flex; justify-content:space-between; align-items:center;">
-            <span style="font-size:11px; color:var(--text-muted);">La IA no envía correos automáticos al estudiante.</span>
-            <button class="btn-moodle btn-moodle-primary" onclick="guardarDecisionTutor('${est.legajo}')">💾 Guardar en Expediente</button>
+          <!-- Ficha Individual del Estudiante Seleccionado -->
+          <div class="moodle-section-card">
+            <div class="moodle-section-title">
+              <span>Ficha Académica · ${seleccionado.nombre} (#${seleccionado.legajo})</span>
+              <button class="btn-moodle btn-moodle-secondary" style="padding:4px 10px; font-size:12px;" onclick="mostrarVista('assign')">Ver entregas en el aula ↗</button>
+            </div>
+
+            <table class="generaltable" style="margin-bottom:14px;">
+              <tbody>
+                <tr><th class="c0">Carrera y Comisión</th><td>${seleccionado.carrera} · ${seleccionado.comision} (Turno ${seleccionado.turno})</td></tr>
+                <tr><th class="c0">Tutor Responsable</th><td><strong>${tutorResp}</strong></td></tr>
+                <tr><th class="c0">Indicadores Cursada</th><td>Asistencia: <strong>${seleccionado.asistencia_pct}%</strong> · Entregas: <strong>${seleccionado.tps_entregados}/${seleccionado.tps_exigidos} TPs</strong> · 1° Parcial: <strong>${seleccionado.nota_parcial.toFixed(1)}</strong></td></tr>
+                <tr><th class="c0">Evolución 4 Semanas</th><td>Semana 1: <strong>${hist[0]}</strong> → Semana 2: <strong>${hist[1]}</strong> → Semana 3: <strong>${hist[2]}</strong> → Actual: <strong>${STATE.corteTelemetriaF1 ? 'Suspendido (F1)' : hist[3] + '/100'}</strong></td></tr>
+              </tbody>
+            </table>
+
+            <!-- Factores Explicativos (Agente A2) -->
+            <div style="background:#f8f9fa; border:1px solid var(--moodle-border-light); border-radius:6px; padding:12px 14px; margin-bottom:14px;">
+              <div style="font-weight:700; font-size:13px; margin-bottom:8px;">Motivos principales detectados en la cursada (Explicabilidad XAI · Agente A2):</div>
+              <ul style="padding-left:18px; font-size:13px; color:#343a40;">
+                ${factores.map(f => `<li style="margin-bottom:4px;">${f.texto} <strong>(+${f.aporte} pts)</strong></li>`).join('')}
+              </ul>
+            </div>
+
+            <!-- Guía de Entrevista Generada con Google AI Studio (Gemini 1.5 Flash) -->
+            <div style="background:#fdf2f4; border:1px solid #f5c2c7; border-radius:6px; padding:14px; margin-bottom:14px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <strong style="color:var(--uch-bordeaux); font-size:13.5px;">Guía orientativa para la entrevista del tutor (Gemini 1.5 Flash · Punto N2)</strong>
+                <button class="btn-moodle btn-moodle-primary" style="padding:4px 10px; font-size:12px;" onclick="solicitarGuiaGemini(false)">Regenerar con Gemini API</button>
+              </div>
+              <p style="font-size:13px; background:#fff; padding:9px 12px; border-radius:5px; border:1px solid var(--moodle-border-light); margin-bottom:8px;">
+                <strong>Apertura sugerida:</strong> "${guia.apertura}"
+              </p>
+              <ol style="padding-left:20px; font-size:13px; color:#343a40;">
+                ${(guia.preguntas_sugeridas || []).map(p => `<li style="margin-bottom:4px;">${p}</li>`).join('')}
+              </ol>
+            </div>
+
+            <!-- Registro de Intervención Humana del Tutor (N1 a N4) -->
+            <div style="background:#f8f9fa; border:1px solid var(--moodle-border-light); border-radius:6px; padding:14px;">
+              <div style="font-weight:700; font-size:13px; margin-bottom:6px;">Acta de Resolución del Tutor (Decisión Humana No Delegable N1–N4):</div>
+              <select id="select-resolucion-tutor" style="width:100%; padding:8px; border:1px solid var(--moodle-border); border-radius:5px; font-family:inherit; font-size:13px; margin-bottom:10px;">
+                <option value="Citar a entrevista (N1/N2)">N1/N2 · Aceptar alerta y citar al estudiante a entrevista de orientación</option>
+                <option value="Solicitar cambio de turno (N3)">N3 · Solicitar a Secretaría Académica cambio de comisión/turno por horario laboral</option>
+                <option value="Solicitar beca conectividad (N3)">N3 · Elevar pedido de beca de apuntes / conectividad a Secretaría Académica</option>
+                <option value="Desestimar alerta - Falso Positivo (N1/F3)">N1/F3 · Desestimar alerta tras verificar con el alumno (Registrar Falso Positivo)</option>
+                <option value="Cerrar seguimiento semanal (N4)">N4 · Cerrar seguimiento por regularización de entregas</option>
+              </select>
+              <button class="btn-moodle btn-moodle-primary" onclick="registrarActaTutor('${seleccionado.legajo}')">Guardar resolución en el legajo</button>
+            </div>
           </div>
         </div>
       `;
     }
 
-    async function generarGuiaGemini(desdeModal) {
-      const est = STATE.estudiantes.find(s => String(s.legajo) === String(STATE.legajoActual)) || STATE.estudiantes[0];
-      const apiKey = document.getElementById('live-api-key-input')?.value?.trim() || null;
-      mostrarNotificacion(`✨ Invocando Google AI Studio (Gemini 1.5 Flash) para #${est.legajo}...`);
+    async function solicitarGuiaGemini(desdeModal) {
+      const est = STATE.estudiantes.find(e => String(e.legajo) === String(STATE.legajoSeleccionado)) || STATE.estudiantes[0];
+      const key = document.getElementById('input-gemini-key')?.value?.trim() || null;
+      notificar(`Consultando Google AI Studio (Gemini 1.5 Flash) para el legajo #${est.legajo}...`);
 
       try {
         const res = await fetch('/api/gemini_guia', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ legajo: String(est.legajo), api_key: apiKey })
+          body: JSON.stringify({ legajo: String(est.legajo), api_key: key })
         });
         if (res.ok) {
           const data = await res.json();
@@ -2128,191 +1844,148 @@
         }
       } catch (e) {
         STATE.guiasGemini[est.legajo] = {
-          fuente: "Google AI Studio · Gemini 1.5 Flash (JSON Estructurado)",
+          fuente: "Google AI Studio · Gemini 1.5 Flash",
           modelo: "gemini-1.5-flash",
-          apertura: `Hola ${est.nombre.split(',')[1] || est.nombre}, desde el equipo de tutorías de 1° año de la Universidad Champagnat queremos acompañarte con las entregas de Programación I.`,
+          apertura: `Hola ${est.nombre.split(',')[1] || est.nombre}, desde la tutoría de 1° año de la Universidad Champagnat queremos acompañarte para que puedas ponerte al día con las entregas de Programación I.`,
           preguntas_sugeridas: [
-            "¿Qué aspectos del horario del turno noche o de tus actividades laborales te están dificultando asistir?",
-            "¿Pudiste revisar los enunciados del TP 2 y TP 3 en campus.uch.edu.ar o necesitás una tutoría de apoyo?",
-            "¿Te resultaría útil que gestionemos una prórroga formal de entrega o un cambio de comisión (N3)?"
+            "¿Qué aspectos del horario de cursada o de tus actividades laborales te están dificultando asistir a las prácticas?",
+            "¿Pudiste descargar las consignas del TP N° 2 y TP N° 3 en el Campus Virtual o necesitás una clase de apoyo con el JTP?",
+            "¿Te resultaría útil que gestionemos una prórroga de entregas o un pase al turno mañana ante Secretaría Académica?"
           ],
-          medida_sugerida: "Acordar cronograma de entregas en mod/assign y elevar propuesta N3 a Coordinación."
+          medida_sugerida: "Acordar cronograma de entregas escalonadas y evaluar cambio de comisión (Punto N3)."
         };
       }
 
-      renderizarExpedienteSita();
-      actualizarContenidoModalJson(est);
-      mostrarNotificacion('✅ Guía empática generada con Gemini 1.5 Flash (Punto N2).');
+      renderizarEspacioTutorias();
+      actualizarJsonViewer(est);
+      notificar('✅ Guía de entrevista generada por Gemini 1.5 Flash.');
     }
 
-    function abrirModalJson() {
-      const est = STATE.estudiantes.find(s => String(s.legajo) === String(STATE.legajoActual)) || STATE.estudiantes[0];
-      actualizarContenidoModalJson(est);
-      document.getElementById('modal-gemini-json').style.display = 'flex';
+    function abrirModalGemini() {
+      const est = STATE.estudiantes.find(e => String(e.legajo) === String(STATE.legajoSeleccionado)) || STATE.estudiantes[0];
+      actualizarJsonViewer(est);
+      document.getElementById('gemini-modal').style.display = 'flex';
     }
 
-    function cerrarModalJson() {
-      document.getElementById('modal-gemini-json').style.display = 'none';
+    function cerrarModalGemini() {
+      document.getElementById('gemini-modal').style.display = 'none';
     }
 
-    function actualizarContenidoModalJson(est) {
+    function actualizarJsonViewer(est) {
       const guia = STATE.guiasGemini[est.legajo] || {
         fuente: "Google AI Studio API (gemini-1.5-flash)",
-        apertura: "Apertura empática para entrevista del tutor (N2).",
+        apertura: "Apertura empática para entrevista del tutor (Punto N2).",
         preguntas_sugeridas: [
-          "¿Cómo venís organizando los tiempos de cursada y entregas en campus.uch.edu.ar?",
-          "¿Tuviste inconvenientes con los temas de estructuras iterativas del TP N° 3?",
-          "¿Qué apoyo institucional te serviría más en esta etapa del cuatrimestre?"
+          "¿Cómo venís organizando los tiempos entre el trabajo y las materias de primer año?",
+          "¿Tuviste dificultades con los temas de estructuras iterativas del Trabajo Práctico N° 3?",
+          "¿Qué apoyo de la facultad te resultaría más útil en esta etapa del cuatrimestre?"
         ],
-        medida_sugerida: "Reprogramación de entregas en mod/assign o cambio de turno (N3)."
+        medida_sugerida: "Reprogramación de entregas o pase de comisión (Punto N3)."
       };
-
-      const payload = {
+      const detalle = {
         endpoint: "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent",
-        salvaguarda_privacidad_n8: "Prompt anonimizado (sin DNI ni datos sensibles)",
-        request_payload: {
-          contents: [{
-            parts: [{
-              text: `Actúa como asesor pedagógico universitario (SITA-IA). Estudiante 1° año (${est.carrera}, Turno ${est.turno}). Score riesgo: ${est.score_riesgo}/100. Factores XAI: ${(est.factores_detalle || []).map(f => f.texto).join('; ')}. Devuelve JSON con apertura, 3 preguntas abiertas y medida institucional sugerida.`
-            }]
-          }],
-          generationConfig: { responseMimeType: "application/json", temperature: 0.3 }
-        },
-        response_json: guia
+        privacidad_n8: "Datos personales desidentificados antes de consultar el modelo generativo",
+        prompt_enviado: `Estudiante de 1° año (${est.carrera}, Turno ${est.turno}). Índice SITA: ${est.score_riesgo}/100. Factores: ${(est.factores_detalle || []).map(f => f.texto).join('; ')}. Generar apertura empática y 3 preguntas abiertas para el tutor.`,
+        respuesta_json: guia
       };
-      document.getElementById('modal-json-content').textContent = JSON.stringify(payload, null, 2);
+      document.getElementById('gemini-json-viewer').textContent = JSON.stringify(detalle, null, 2);
     }
 
-    function guardarDecisionTutor(leg) {
-      const sel = document.getElementById('select-decision-n1');
-      const val = sel.value;
-      const txt = sel.options[sel.selectedIndex].text;
-
-      STATE.intervenciones[leg] = {
-        tipo: val,
-        resumen: txt.split('·')[0].trim()
-      };
-
-      if (['comision', 'beca'].includes(val)) {
-        STATE.derivacionesN3[leg] = {
-          legajo: leg,
-          medida: txt,
+    function registrarActaTutor(legajo) {
+      const val = document.getElementById('select-resolucion-tutor').value;
+      STATE.actasTutoria[legajo] = val;
+      if (val.includes('N3')) {
+        STATE.solicitudesSecretariaN3[legajo] = {
+          legajo: legajo,
+          solicitud: val,
           aprobada: false
         };
-        mostrarNotificacion(`📤 Solicitud institucional N3 enviada a Coordinación para el legajo #${leg}.`);
+        notificar(`📤 Solicitud elevada a Secretaría Académica (Punto N3) para el legajo #${legajo}.`);
       } else {
-        mostrarNotificacion(`✅ Decisión humana (${txt.split('·')[0].trim()}) registrada para #${leg}.`);
+        notificar(`✅ Resolución del tutor registrada en el legajo #${legajo}.`);
       }
-      renderizarTodoMoodle();
+      renderizarEspacioTutorias();
     }
 
     // ========================================================================
-    // RENDER PESTAÑA 5: GOBERNANZA Y AUDITORÍA (COORDINACIÓN N1-N8 + PROMETHEUS)
+    // RENDER VISTA 6: SECRETARÍA ACADÉMICA Y COORDINACIÓN (N3, N5, N6, N7, N8)
     // ========================================================================
-    function renderizarVistaGobernanza() {
-      const container = document.getElementById('gov-cards-container');
-      const derivs = Object.values(STATE.derivacionesN3);
+    function renderizarSecretariaAcademica() {
+      const container = document.getElementById('secretaria-main-container');
+      const solicitudes = Object.values(STATE.solicitudesSecretariaN3);
 
       container.innerHTML = `
-        <!-- Card 1: Auditoría de Sesgo Inter-Turno N7 -->
-        <div class="moodle-box">
-          <div class="moodle-box-header">
-            <h3>⚖️ Auditoría de Equidad Inter-Turno y Recalibración (Punto N7)</h3>
-            <span class="m-badge m-badge-success">Brecha Δ = 3.8 pts (≤ 10 pts)</span>
+        <div class="moodle-section-card" style="margin-bottom:18px;">
+          <div class="moodle-section-title">
+            <span>Resoluciones de Secretaría Académica y Coordinación de Tutorías (Bautista Navarro)</span>
+            <span class="completion-pill pill-done">Gobernanza Humana N1–N8</span>
           </div>
-          <div style="padding:16px; display:flex; flex-direction:column; gap:12px;">
-            <p style="font-size:12.5px; color:var(--text-secondary);">
-              El Agente A2 <strong>no se auto-recalibra solo</strong>. Al cierre del cuatrimestre, Coordinación verifica que la sensibilidad (<em>Recall</em>) sea equitativa entre los turnos Mañana, Tarde y Noche:
+
+          <h3 style="font-size:15px; font-weight:700; margin-bottom:8px;">1. Aprobación de Derivaciones y Medidas Institucionales (Punto N3)</h3>
+          ${solicitudes.length === 0 ? `
+            <p style="font-size:13.5px; color:var(--moodle-muted); margin-bottom:10px;">
+              Cuando un tutor solicita un cambio de comisión/turno o una beca de apoyo para un alumno, Secretaría Académica evalúa y aprueba la medida aquí.
             </p>
-            <table class="moodle-generaltable">
+            <button class="btn-moodle btn-moodle-secondary" onclick="STATE.solicitudesSecretariaN3['24901']={legajo:'24901', solicitud:'Cambio de Comisión (Turno Noche a Turno Mañana) por superposición laboral - González, Lucas', aprobada:false}; renderizarSecretariaAcademica();">
+              Cargar solicitud N3 del Caso Lucas González (#24901)
+            </button>
+          ` : `
+            <table class="generaltable" style="margin-bottom:14px;">
+              <thead><tr><th>Legajo</th><th>Medida Propuesta por el Tutor</th><th>Estado Secretaría</th></tr></thead>
               <tbody>
-                <tr><th class="cell-c0">Recall Turno Mañana</th><td><strong>76.2%</strong></td></tr>
-                <tr><th class="cell-c0">Recall Turno Tarde</th><td><strong>74.8%</strong></td></tr>
-                <tr><th class="cell-c0">Recall Turno Noche</th><td><strong>72.4%</strong> (Diferencia máxima: 3.8 pts ≤ 10 pts exigidos)</td></tr>
+                ${solicitudes.map(s => `
+                  <tr>
+                    <td><strong>#${s.legajo}</strong></td>
+                    <td>${s.solicitud}</td>
+                    <td>
+                      ${s.aprobada
+                        ? '<span class="completion-pill pill-done">✅ Aprobada por Secretaría Académica (P msj. 10)</span>'
+                        : `<button class="btn-moodle btn-moodle-primary" onclick="STATE.solicitudesSecretariaN3['${s.legajo}'].aprobada=true; notificar('✅ Medida institucional N3 aprobada.'); renderizarSecretariaAcademica();">Aprobar Resolución (N3)</button>`}
+                    </td>
+                  </tr>
+                `).join('')}
               </tbody>
             </table>
-            <div style="display:flex; justify-content:space-between; align-items:center;">
-              <span style="font-size:12px; font-weight:600;">
-                Estado: ${STATE.recalibracionFirmadaN7 ? '✅ Aprobada por Bautista Navarro (N7)' : 'Pendiente de firma semestral'}
-              </span>
-              <button class="btn-moodle btn-moodle-primary" onclick="STATE.recalibracionFirmadaN7=true; mostrarNotificacion('✅ Recalibración semestral autorizada por Coordinación (Punto N7).'); renderizarVistaGobernanza();">
-                ✍️ Aprobar Recalibración Semestral (N7)
-              </button>
-            </div>
-          </div>
-        </div>
+          `}
 
-        <!-- Card 2: Escalamiento F2 (10 días) y Reasignación N6 -->
-        <div class="moodle-box">
-          <div class="moodle-box-header">
-            <h3>⏱️ Protocolo de Inacción F2 (7d / 10d) y Reasignación (Punto N6)</h3>
-            <span class="m-badge ${STATE.diasInaccionF2 >= 10 ? 'm-badge-danger' : 'm-badge-success'}">
-              ${STATE.diasInaccionF2 >= 10 ? 'Escalamiento 10d Activo' : 'SLA Tutores al Día'}
-            </span>
+          <h3 style="font-size:15px; font-weight:700; margin: 20px 0 8px;">2. Protocolo ante Inacción del Tutor (Regla F2 · 7 y 10 días) y Reasignación (Punto N6)</h3>
+          <p style="font-size:13.5px; color:#495057; margin-bottom:10px;">
+            Si un caso prioritario no registra intervención del tutor a los <strong>7 días</strong>, se envía recordatorio. A los <strong>10 días</strong>, se eleva a Secretaría Académica para reasignar el caso a un tutor suplente (el sistema nunca envía mensajes automáticos al alumno).
+          </p>
+          <div style="display:flex; gap:10px; align-items:center;">
+            <button class="btn-moodle btn-moodle-secondary" onclick="STATE.diasSinGestionF2=10; notificar('Se simularon 10 días sin respuesta del Tutor A. Caso escalado a Secretaría.'); renderizarSecretariaAcademica();">
+              Simular vencimiento de 10 días (F2)
+            </button>
+            <button class="btn-moodle btn-moodle-primary" onclick="STATE.diasSinGestionF2=10; STATE.tutorReasignadoN6='Prof. Martín Suárez (Tutor Suplente)'; notificar('✅ Legajo #24901 reasignado formalmente al Prof. Martín Suárez (Punto N6).'); renderizarTodo();">
+              Reasignar caso al Prof. Martín Suárez (Tutor B · N6)
+            </button>
+            <span style="font-size:13px;"><strong>Asignación actual #24901:</strong> ${STATE.tutorReasignadoN6 || 'Prof. Joel Aisama (Tutor Titular)'}</span>
           </div>
-          <div style="padding:16px; display:flex; flex-direction:column; gap:12px;">
-            <p style="font-size:12.5px; color:var(--text-secondary);">
-              Si un tutor no actúa sobre una alerta crítica en <strong>7 días</strong>, recibe recordatorio (<code>F2 msj. 3</code>). A los <strong>10 días (7+3)</strong>, el Agente A3 escala a Coordinación (<code>F2 msj. 5</code>) para reasignar el caso al Tutor B (<strong>la IA jamás contacta al alumno para suplir al tutor</strong>).
-            </p>
-            <div style="display:flex; gap:8px;">
-              <button class="btn-moodle btn-moodle-secondary" onclick="STATE.diasInaccionF2=10; STATE.mensajesPrometheus=armarBitacoraPrometheus(); mostrarNotificacion('⏱️ Simulación F2: 10 días sin respuesta. Caso escalado a Coordinación.'); renderizarVistaGobernanza();">
-                Simular 10 Días sin Gestión (F2)
-              </button>
-              <button class="btn-moodle btn-moodle-primary" onclick="STATE.diasInaccionF2=10; STATE.tutorReasignadoN6='Prof. Martín Suárez (Tutor B)'; STATE.mensajesPrometheus=armarBitacoraPrometheus(); mostrarNotificacion('✅ Caso #24901 reasignado formalmente al Prof. Martín Suárez (Tutor B · Punto N6).'); renderizarTodoMoodle();">
-                Reasignar a Tutor B (Prof. Martín Suárez · N6)
-              </button>
-            </div>
-            <div style="font-size:12px; background:var(--moodle-gray-row); padding:10px; border-radius:4px; border:1px solid var(--moodle-border);">
-              <strong>Estado N6:</strong> ${STATE.tutorReasignadoN6 ? `✅ Reasignado a ${STATE.tutorReasignadoN6}` : 'Asignado a Tutor Titular (Prof. Joel Aisama)'}
-            </div>
-          </div>
-        </div>
 
-        <!-- Card 3: Aprobación de Medidas Institucionales N3 -->
-        <div class="moodle-box">
-          <div class="moodle-box-header">
-            <h3>🏛️ Aprobación de Derivaciones Institucionales (Punto N3)</h3>
-            <span class="m-badge m-badge-warn">${derivs.length} propuestas</span>
-          </div>
-          <div style="padding:16px; display:flex; flex-direction:column; gap:10px;">
-            ${derivs.length === 0 ? `
-              <p style="font-size:12.5px; color:var(--text-muted);">Las propuestas de cambio de comisión, beca de conectividad o gabinete psicopedagógico elevadas por el tutor requieren aprobación de Coordinación (N3).</p>
-              <button class="btn-moodle btn-moodle-secondary" onclick="STATE.derivacionesN3['24901']={legajo:'24901', medida:'N3 · Pase de Comisión Noche a Mañana por superposición laboral', aprobada:false}; renderizarVistaGobernanza();">
-                Cargar Propuesta N3 de Ejemplo (Caso Lucas #24901)
-              </button>
-            ` : derivs.map(d => `
-              <div style="padding:10px; border:1px solid var(--moodle-border); border-radius:4px; display:flex; justify-content:space-between; align-items:center;">
-                <div style="font-size:12.5px;"><strong>Legajo #${d.legajo}:</strong> ${d.medida}</div>
-                ${d.aprobada
-                  ? '<span class="m-badge m-badge-success">✅ Aprobada (P msj. 10)</span>'
-                  : `<button class="btn-moodle btn-moodle-primary" onclick="STATE.derivacionesN3['${d.legajo}'].aprobada=true; mostrarNotificacion('✅ Medida institucional N3 aprobada por Coordinación.'); renderizarVistaGobernanza();">Aprobar N3</button>`}
-              </div>
-            `).join('')}
-          </div>
-        </div>
-
-        <!-- Card 4: Bitácora Formal Prometheus -->
-        <div class="moodle-box">
-          <div class="moodle-box-header">
-            <h3>📡 Bitácora de Mensajería Inter-Agente (Protocolo Prometheus)</h3>
-            <span class="m-badge m-badge-neutral">${STATE.mensajesPrometheus.length} mensajes</span>
-          </div>
-          <div style="padding:12px 16px; max-height:210px; overflow-y:auto; display:flex; flex-direction:column; gap:6px;">
-            ${STATE.mensajesPrometheus.map(m => `
-              <div style="font-size:11.5px; padding:6px 10px; background:var(--moodle-gray-row); border:1px solid var(--moodle-border); border-radius:4px; display:flex; justify-content:space-between; gap:8px;">
-                <div>
-                  <strong style="font-family:'JetBrains Mono',monospace; color:var(--uch-bordeaux);">[${m.codigo}]</strong>
-                  <strong>${m.origen} → ${m.destino}:</strong> ${m.texto || m.contenido}
-                </div>
-                ${m.rol ? `<span class="m-badge m-badge-neutral">${m.rol}</span>` : ''}
-              </div>
-            `).join('')}
-          </div>
+          <h3 style="font-size:15px; font-weight:700; margin: 20px 0 8px;">3. Auditoría Semestral de Equidad entre Turnos y Recalibración (Punto N7)</h3>
+          <p style="font-size:13.5px; color:#495057; margin-bottom:10px;">
+            Al finalizar el cuatrimestre, Secretaría Académica verifica que la sensibilidad del modelo (<em>Recall</em>) no perjudique al turno noche (brecha máxima permitida ≤ 10 puntos porcentuales):
+          </p>
+          <table class="generaltable" style="margin-bottom:12px;">
+            <tbody>
+              <tr><th class="c0">Sensibilidad (Recall) Turno Mañana</th><td>76,2 %</td></tr>
+              <tr><th class="c0">Sensibilidad (Recall) Turno Tarde</th><td>74,8 %</td></tr>
+              <tr><th class="c0">Sensibilidad (Recall) Turno Noche</th><td>72,4 % — <strong>Diferencia inter-turno: 3,8 pts</strong> (Cumple criterio ≤ 10 pts)</td></tr>
+              <tr>
+                <th class="c0">Autorización de Recalibración Semestral (N7)</th>
+                <td>
+                  ${STATE.recalibracionAprobadaN7
+                    ? '<span class="completion-pill pill-done">✅ Recalibración autorizada por Secretaría Académica</span>'
+                    : `<button class="btn-moodle btn-moodle-primary" onclick="STATE.recalibracionAprobadaN7=true; notificar('✅ Auditoría de equidad N7 aprobada.'); renderizarSecretariaAcademica();">Firmar Conformidad de Auditoría (N7)</button>`}
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       `;
     }
 
-    window.addEventListener('DOMContentLoaded', iniciarCampusMoodle);
+    window.addEventListener('DOMContentLoaded', inicializarCampus);
   </script>
 </body>
 </html>
