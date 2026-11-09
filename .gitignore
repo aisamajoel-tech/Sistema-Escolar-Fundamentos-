@@ -1,0 +1,7 @@
+*.pptx
+Presentacion_Parcial_FIA_SITA.pptx
+screenshots/pptx_assets/
+tools/generate_pptx.py
+TRABAJO_GRUPAL_DEMO.zip
+__pycache__/
+*.pyc
