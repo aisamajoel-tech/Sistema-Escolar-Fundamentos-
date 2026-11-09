@@ -9,19 +9,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --uch-bordeaux: #80162b;
-      --uch-bordeaux-light: #fbe9ec;
-      --uch-navy: #0f172a;
-      --uch-blue: #1e3a8a;
-      --uch-gold: #d97706;
-      --accent-purple: #6d28d9;
-      --accent-green: #059669;
-      --bg-slide: #f8fafc;
-      --card-bg: #ffffff;
-      --text-dark: #0f172a;
-      --text-body: #334155;
-      --text-muted: #64748b;
-      --border: #e2e8f0;
+      --uch-bordeaux: #e11d48;
+      --uch-bordeaux-dark: #881337;
+      --uch-gold: #fbbf24;
+      --accent-cyan: #38bdf8;
+      --accent-purple: #a855f7;
+      --accent-green: #34d399;
+      --bg-dark: #0b0f19;
+      --card-glass: rgba(20, 27, 45, 0.86);
+      --card-border: rgba(148, 163, 184, 0.18);
+      --text-white: #f8fafc;
+      --text-body: #cbd5e1;
+      --text-muted: #94a3b8;
     }
 
     * {
@@ -31,9 +30,9 @@
     }
 
     body {
-      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #090d16;
-      color: var(--text-dark);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #060911;
+      color: var(--text-white);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -41,29 +40,28 @@
       padding: 24px 0 60px;
     }
 
-    /* Barra flotante de presentación (se oculta al imprimir/exportar a PDF) */
     .deck-controls {
       position: fixed;
       bottom: 18px;
       background: rgba(15, 23, 42, 0.92);
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(10px);
       color: #fff;
       padding: 8px 18px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.16);
       display: flex;
       align-items: center;
       gap: 14px;
       font-size: 13px;
       z-index: 100;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.45);
     }
 
     .deck-controls button {
-      background: var(--uch-bordeaux);
+      background: linear-gradient(135deg, #be123c, #e11d48);
       color: #fff;
       border: none;
-      padding: 6px 12px;
+      padding: 6px 14px;
       border-radius: 999px;
       font-weight: 700;
       font-size: 12px;
@@ -74,88 +72,99 @@
     .slide {
       width: 1280px;
       height: 720px;
-      background: var(--bg-slide);
+      background:
+        radial-gradient(circle at 88% 14%, rgba(159, 18, 57, 0.42) 0%, transparent 46%),
+        radial-gradient(circle at 12% 88%, rgba(79, 70, 229, 0.25) 0%, transparent 45%),
+        linear-gradient(160deg, #0d1322 0%, #090d16 100%);
       border-radius: 16px;
       overflow: hidden;
       position: relative;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 38px 48px 30px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.45);
+      padding: 32px 44px 24px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.55);
       page-break-after: always;
       flex-shrink: 0;
+      border: 1px solid rgba(255,255,255,0.08);
     }
 
-    /* Slide 1 Hero Dark Theme */
-    .slide.slide-hero {
-      background: radial-gradient(circle at 85% 20%, #4c1122 0%, #111827 52%, #090d16 100%);
-      color: #ffffff;
+    /* Barra superior decorativa degradada */
+    .slide::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #e11d48 0%, #fbbf24 50%, #8b5cf6 100%);
     }
 
-    /* Cabecera estándar de diapositiva (Slides 2 a 6) */
     .slide-top {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: space-between;
-      border-bottom: 2px solid var(--border);
-      padding-bottom: 14px;
-      margin-bottom: 18px;
+      gap: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 12px;
+      margin-bottom: 16px;
     }
 
     .slide-kicker {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 0.8px;
-      color: var(--uch-bordeaux);
-      background: var(--uch-bordeaux-light);
+      letter-spacing: 0.9px;
+      color: #fda4af;
+      background: rgba(159, 18, 57, 0.35);
+      border: 1px solid rgba(244, 63, 94, 0.45);
       padding: 4px 12px;
       border-radius: 999px;
       margin-bottom: 6px;
     }
 
     .slide-title {
-      font-size: 27px;
+      font-size: 25px;
       font-weight: 800;
-      color: var(--uch-navy);
-      letter-spacing: -0.5px;
-      line-height: 1.15;
+      color: var(--text-white);
+      letter-spacing: -0.4px;
+      line-height: 1.18;
     }
 
     .slide-num-badge {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 700;
-      color: var(--text-muted);
-      background: #fff;
-      border: 1px solid var(--border);
+      color: #e2e8f0;
+      background: rgba(30, 41, 59, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.3);
       padding: 6px 14px;
       border-radius: 999px;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
-    /* Pie de diapositiva */
     .slide-footer {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding-top: 10px;
-      border-top: 1px solid var(--border);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
       font-size: 11.5px;
       color: var(--text-muted);
       font-weight: 600;
     }
 
-    /* Marco de navegador estilo Canva para capturas del sistema */
+    /* Marco de navegador macOS oscuro con sombra */
     .browser-mockup {
-      background: #1e293b;
-      border-radius: 12px;
+      background: #182132;
+      border-radius: 14px;
       padding: 8px 8px 6px;
-      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.18);
-      border: 1px solid rgba(255,255,255,0.15);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55);
+      border: 1px solid rgba(148, 163, 184, 0.28);
       display: flex;
       flex-direction: column;
       overflow: hidden;
@@ -165,7 +174,7 @@
       display: flex;
       align-items: center;
       gap: 6px;
-      padding: 0 6px 6px;
+      padding: 0 6px 7px;
     }
 
     .b-dot {
@@ -176,12 +185,13 @@
 
     .b-url {
       margin-left: 8px;
-      background: rgba(255,255,255,0.12);
+      background: #0d1322;
       color: #cbd5e1;
       font-family: 'JetBrains Mono', monospace;
       font-size: 10px;
-      padding: 2px 10px;
-      border-radius: 4px;
+      padding: 3px 10px;
+      border-radius: 6px;
+      border: 1px solid rgba(148,163,184,0.18);
       flex: 1;
       white-space: nowrap;
       overflow: hidden;
@@ -193,57 +203,57 @@
       height: 100%;
       object-fit: cover;
       object-position: top center;
-      border-radius: 6px;
+      border-radius: 8px;
       background: #fff;
     }
 
-    /* Tarjetas tipo Canva */
+    /* Tarjetas Glassmorphic tipo Canva Pitch */
     .canva-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
+      background: var(--card-glass);
+      border: 1px solid var(--card-border);
       border-radius: 14px;
-      padding: 16px 18px;
-      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+      padding: 14px 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
     }
 
     .canva-card h4 {
-      font-size: 14.5px;
+      font-size: 14px;
       font-weight: 800;
-      color: var(--uch-navy);
-      margin-bottom: 6px;
+      color: #ffffff;
+      margin-bottom: 5px;
       display: flex;
       align-items: center;
       gap: 8px;
     }
 
     .canva-card p, .canva-card li {
-      font-size: 12.5px;
+      font-size: 12px;
       color: var(--text-body);
-      line-height: 1.45;
+      line-height: 1.44;
+    }
+
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      background: rgba(255, 255, 255, 0.09);
+      color: #fde68a;
+      padding: 1px 6px;
+      border-radius: 4px;
     }
 
     .pill-tag {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 10.5px;
+      font-size: 10px;
       font-weight: 700;
-      padding: 2px 8px;
+      padding: 3px 9px;
       border-radius: 6px;
       display: inline-block;
     }
 
     @media print {
-      body {
-        background: #fff;
-        padding: 0;
-        gap: 0;
-      }
-      .deck-controls {
-        display: none !important;
-      }
-      .slide {
-        border-radius: 0;
-        box-shadow: none;
-      }
+      body { background: #090d16; padding: 0; gap: 0; }
+      .deck-controls { display: none !important; }
+      .slide { border-radius: 0; box-shadow: none; }
     }
   </style>
 </head>
@@ -252,53 +262,56 @@
   <!-- ========================================================================
        DIAPOSITIVA 1: PORTADA PITCH HACKATHON & DEFENSA FIA
        ======================================================================== -->
-  <section class="slide slide-hero" id="slide-1">
+  <section class="slide" id="slide-1">
     <div style="display:flex; justify-content:space-between; align-items:center;">
       <div style="display:flex; align-items:center; gap:14px;">
-        <img src="logo_uch.png" onerror="this.src='../views/logo_uch.png'" style="width:48px; height:48px; background:#fff; padding:4px; border-radius:10px; object-fit:contain;" />
+        <img src="logo_uch.png" onerror="this.src='../views/logo_uch.png'" style="width:46px; height:46px; background:#fff; padding:4px; border-radius:10px; object-fit:contain;" />
         <div>
-          <div style="font-weight:800; font-size:15px; letter-spacing:0.3px;">UNIVERSIDAD CHAMPAGNAT · FACULTAD DE INFORMÁTICA</div>
-          <div style="font-size:12px; color:#cbd5e1;">Fundamentos de Inteligencia Artificial (3° Año) · Pitch de Producto & Defensa Oral</div>
+          <div style="font-weight:800; font-size:14.5px; letter-spacing:0.3px;">UNIVERSIDAD CHAMPAGNAT · FACULTAD DE INFORMÁTICA</div>
+          <div style="font-size:12px; color:#94a3b8;">Fundamentos de Inteligencia Artificial (3° Año) · Pitch Deck & Defensa Oral</div>
         </div>
       </div>
-      <div style="display:flex; gap:10px;">
-        <span style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); padding:6px 14px; border-radius:999px; font-size:12px; font-weight:700; color:#fcd34d;">⚡ IA Híbrida: ML XAI + Gemini 1.5 Flash</span>
-        <span style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); padding:6px 14px; border-radius:999px; font-size:12px; font-weight:700;">Diapositiva 01 / 06</span>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span style="background:rgba(139,92,246,0.18); border:1px solid rgba(168,85,247,0.45); padding:6px 14px; border-radius:999px; font-size:11.5px; font-weight:700; color:#fcd34d; white-space:nowrap;">⚡ IA Híbrida: ML XAI + Gemini 1.5 Flash</span>
+        <span class="slide-num-badge">SLIDE 01 / 06</span>
       </div>
     </div>
 
     <!-- Centro Hero: Pitch Izquierda + Captura Derecha -->
-    <div style="display:grid; grid-template-columns: 1.05fr 1.15fr; gap:34px; align-items:center; margin: 10px 0;">
-      <div style="display:flex; flex-direction:column; gap:18px;">
-        <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(225,29,72,0.22); border:1px solid rgba(244,63,94,0.45); color:#fda4af; padding:5px 14px; border-radius:999px; font-size:12px; font-weight:800; width:fit-content;">
-          🚀 SOLUCIÓN EDTECH PARA EDUCACIÓN SUPERIOR
+    <div style="display:grid; grid-template-columns: 1.02fr 1.18fr; gap:30px; align-items:center; margin: 8px 0;">
+      <div style="display:flex; flex-direction:column; gap:16px;">
+        <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(225,29,72,0.22); border:1px solid rgba(244,63,94,0.45); color:#fda4af; padding:5px 14px; border-radius:999px; font-size:11.5px; font-weight:800; width:fit-content;">
+          🚀 SOLUCIÓN EDTECH PARA RETENCIÓN UNIVERSITARIA
         </div>
-        <h1 style="font-size:44px; font-weight:800; line-height:1.08; letter-spacing:-1px;">
-          SITA-IA: Detectamos el abandono universitario <span style="color:#fbbf24;">4 semanas antes</span> de que ocurra.
+        <h1 style="font-size:42px; font-weight:800; line-height:1.08; letter-spacing:-0.9px;">
+          SITA-IA: Detectamos el abandono <span style="color:#fbbf24;">4 semanas antes</span> de que ocurra.
         </h1>
-        <p style="font-size:15.5px; color:#cbd5e1; line-height:1.55;">
-          Un sistema multiagente integrado directamente al <strong>Campus Virtual Moodle (<code>campus.uch.edu.ar</code>)</strong> que transforma la asistencia, entregas de TPs y actividad digital en <strong>acompañamiento humano temprano</strong>, con explicabilidad algorítmica y ética por diseño.
+        <p style="font-size:14.5px; color:#cbd5e1; line-height:1.55;">
+          Un sistema multiagente integrado al <strong>Campus Virtual Moodle (<code>campus.uch.edu.ar</code>)</strong> que transforma la asistencia, entregas de TPs y actividad digital en <strong>acompañamiento humano temprano</strong>, con explicabilidad XAI y ética por diseño.
         </p>
 
         <!-- 3 KPIs de Venta -->
         <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:12px; margin-top:4px;">
-          <div style="background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.15); border-radius:12px; padding:12px 14px;">
-            <div style="font-family:'JetBrains Mono',monospace; font-size:24px; font-weight:800; color:#fbbf24;">≥ 4 Sem.</div>
-            <div style="font-size:11.5px; color:#cbd5e1; margin-top:2px;">Anticipación preventiva antes del 1° parcial</div>
+          <div class="canva-card" style="border-left:4px solid #fbbf24; padding:12px 14px;">
+            <div style="font-family:'JetBrains Mono',monospace; font-size:22px; font-weight:800; color:#fbbf24;">≥ 4 Sem.</div>
+            <div style="font-size:11px; color:#e2e8f0; margin-top:3px; font-weight:600;">Anticipación real</div>
+            <div style="font-size:10.5px; color:#94a3b8;">Antes del 1° parcial</div>
           </div>
-          <div style="background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.15); border-radius:12px; padding:12px 14px;">
-            <div style="font-family:'JetBrains Mono',monospace; font-size:24px; font-weight:800; color:#34d399;">≤ 15 Casos</div>
-            <div style="font-size:11.5px; color:#cbd5e1; margin-top:2px;">Tope inteligente por tutor (Cero saturación)</div>
+          <div class="canva-card" style="border-left:4px solid #34d399; padding:12px 14px;">
+            <div style="font-family:'JetBrains Mono',monospace; font-size:22px; font-weight:800; color:#34d399;">≤ 15 Casos</div>
+            <div style="font-size:11px; color:#e2e8f0; margin-top:3px; font-weight:600;">Tope por tutor (O4)</div>
+            <div style="font-size:10.5px; color:#94a3b8;">Cero saturación docente</div>
           </div>
-          <div style="background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.15); border-radius:12px; padding:12px 14px;">
-            <div style="font-family:'JetBrains Mono',monospace; font-size:24px; font-weight:800; color:#a78bfa;">$0 USD</div>
-            <div style="font-size:11.5px; color:#cbd5e1; margin-top:2px;">Python MVC nativo + Gemini Free Tier</div>
+          <div class="canva-card" style="border-left:4px solid #38bdf8; padding:12px 14px;">
+            <div style="font-family:'JetBrains Mono',monospace; font-size:22px; font-weight:800; color:#38bdf8;">$0 USD</div>
+            <div style="font-size:11px; color:#e2e8f0; margin-top:3px; font-weight:600;">Costo operativo</div>
+            <div style="font-size:10.5px; color:#94a3b8;">Python MVC + Gemini API</div>
           </div>
         </div>
       </div>
 
       <!-- Mockup del Sistema Real -->
-      <div class="browser-mockup" style="height:430px;">
+      <div class="browser-mockup" style="height:445px;">
         <div class="browser-bar">
           <span class="b-dot" style="background:#ef4444;"></span>
           <span class="b-dot" style="background:#f59e0b;"></span>
@@ -309,9 +322,9 @@
       </div>
     </div>
 
-    <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid rgba(255,255,255,0.15); padding-top:14px; font-size:12.5px; color:#cbd5e1;">
-      <div><strong>Equipo Desarrollador:</strong> Joel Aisama (Modelos IA & Tutoría) · Bautista Navarro (Arquitectura, Auditoría & Coordinación)</div>
-      <div style="font-family:'JetBrains Mono',monospace; color:#fbbf24;">github.com/aisamajoel-tech/Sistema-Escolar-Fundamentos- (ampalmaj)</div>
+    <div class="slide-footer">
+      <span><strong>Equipo Desarrollador:</strong> Joel Aisama (Modelos IA & Tutoría) · Bautista Navarro (Arquitectura MVC, Auditoría & Coordinación)</span>
+      <span style="font-family:'JetBrains Mono',monospace; color:#fbbf24;">github.com/aisamajoel-tech/Sistema-Escolar-Fundamentos- (ampalmaj)</span>
     </div>
   </section>
 
@@ -322,68 +335,66 @@
     <div>
       <div class="slide-top">
         <div>
-          <span class="slide-kicker">📌 Puntos 1 y 2 · Problema Local, Usuarios y Alcance</span>
-          <h2 class="slide-title">El Problema: Nadie reprueba de un día para el otro, pero la facultad se entera tarde</h2>
+          <span class="slide-kicker">📌 Puntos 1 y 2 · Problema Local, Usuarios y Límites</span>
+          <h2 class="slide-title">El Problema: Las señales de abandono existen, pero están aisladas</h2>
         </div>
-        <span class="slide-num-badge">Diapositiva 02 / 06</span>
+        <span class="slide-num-badge">SLIDE 02 / 06</span>
       </div>
 
-      <div style="display:grid; grid-template-columns: 1.05fr 1fr; gap:24px; align-items:stretch;">
-        <!-- Columna Izquierda: Problema + Usuarios + Alcance -->
-        <div style="display:flex; flex-direction:column; gap:12px;">
-          <div class="canva-card" style="border-left:5px solid var(--uch-bordeaux);">
-            <h4>🔥 1. El Dolor Institucional en 1° Año Universitario</h4>
-            <p>El mayor desgranamiento ocurre en las <strong>primeras 6 a 8 semanas</strong>. Las señales tempranas existen, pero están aisladas en 3 silos: <strong>planillas docentes de asistencia</strong>, <strong>entregas vencidas en Moodle</strong> y <strong>notas de parciales</strong>. Cuando se cruzan a mano al final del cuatrimestre, el estudiante ya desertó.</p>
+      <div style="display:grid; grid-template-columns: 1.02fr 1.08fr; gap:22px; align-items:stretch;">
+        <div style="display:flex; flex-direction:column; gap:11px;">
+          <div class="canva-card" style="border-left:4px solid #e11d48;">
+            <h4 style="color:#fbbf24;">🔥 1. Deserción Silenciosa en las Primeras 6 Semanas</h4>
+            <p>En 1° año, la asistencia (<strong>SIU-Guaraní</strong>), las entregas vencidas en <strong>Moodle (<code>/mod/assign</code>)</strong> y las notas de parciales viven en silos separados. Cuando la facultad los cruza al cierre del cuatrimestre, el estudiante ya abandonó.</p>
           </div>
 
-          <div class="canva-card" style="border-left:5px solid var(--uch-blue);">
-            <h4>👥 2. Ecosistema de 4 Roles con Permisos Diferenciados</h4>
-            <ul style="padding-left:18px; display:flex; flex-direction:column; gap:4px;">
-              <li><strong>Tutor Pedagógico (Joel Aisama):</strong> Usuario primario; recibe hasta 15 alertas priorizadas y conduce la entrevista empática (<code>N1–N4</code>).</li>
-              <li><strong>Secretaría / Coordinación (Bautista Navarro):</strong> Aprueba pases de turno/becas (<code>N3</code>), reasigna tutores (<code>N6</code>) y audita sesgos (<code>N7</code>).</li>
-              <li><strong>Docente de Cátedra (Ing. Méndez):</strong> Carga asistencia y notas, pero <strong>tiene el score bloqueado con candado (Regla C1)</strong> para no sesgar exámenes.</li>
-              <li><strong>Estudiante (Lucas González):</strong> Firma consentimiento (<code>N8</code>) y recibe invitación humana cordial sin etiquetas de riesgo.</li>
+          <div class="canva-card" style="border-left:4px solid #38bdf8;">
+            <h4 style="color:#38bdf8;">👥 2. Cuatro Roles con Permisos Estrictamente Aislados</h4>
+            <ul style="padding-left:16px; display:flex; flex-direction:column; gap:4px;">
+              <li><strong>Tutor Pedagógico (Joel Aisama):</strong> Recibe ≤ 15 alertas priorizadas y conduce la entrevista empática (<code>N1–N4</code>).</li>
+              <li><strong>Secretaría Académica (Bautista Navarro):</strong> Aprueba pases/becas (<code>N3</code>), reasigna tutores (<code>N6</code>) y audita sesgos (<code>N7</code>).</li>
+              <li><strong>Profesor de Cátedra (Ing. Méndez):</strong> Carga asistencia y notas, pero <strong style="color:#fde047;">tiene el Score Bloqueado (Regla C1)</strong> para no sesgar exámenes.</li>
+              <li><strong>Estudiante (Lucas González):</strong> Firma consentimiento (<code>N8</code>) y recibe orientación humana cordial.</li>
             </ul>
           </div>
 
-          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px;">
-            <div class="canva-card" style="background:#f0fdf4; border-color:#bbf7d0;">
-              <h4 style="color:#166534;">✅ Qué SÍ hace SITA-IA</h4>
-              <p style="font-size:12px;">Consolida datos cada semana, estima riesgo 0–100, explica los 3 motivos (XAI) y sugiere preguntas empáticas al tutor.</p>
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:11px;">
+            <div class="canva-card" style="background:rgba(6, 78, 59, 0.35); border-color:rgba(52, 211, 153, 0.4);">
+              <h4 style="color:#34d399;">✅ Qué SÍ hace SITA-IA</h4>
+              <p style="font-size:11.5px;">Calcula riesgo 0–100 semanal, explica los 3 motivos (XAI) y sugiere preguntas empáticas al tutor.</p>
             </div>
-            <div class="canva-card" style="background:#fef2f2; border-color:#fecaca;">
-              <h4 style="color:#991b1b;">🚫 Qué NO hace jamás</h4>
-              <p style="font-size:12px;"><strong>Nunca</strong> envía correos automáticos al alumno, no sanciona, no da de baja de materias ni altera calificaciones.</p>
+            <div class="canva-card" style="background:rgba(136, 19, 55, 0.35); border-color:rgba(244, 63, 94, 0.4);">
+              <h4 style="color:#fb7185;">🚫 Qué NO hace jamás</h4>
+              <p style="font-size:11.5px;">No envía alertas automáticas al alumno, no sanciona, no altera notas ni da de baja cursadas.</p>
             </div>
           </div>
         </div>
 
-        <!-- Columna Derecha: Captura de la Vista del Estudiante en el Campus + Criterios de Éxito -->
-        <div style="display:flex; flex-direction:column; gap:12px;">
-          <div class="browser-mockup" style="height:365px;">
+        <div style="display:flex; flex-direction:column; gap:11px;">
+          <div class="browser-mockup" style="height:368px;">
             <div class="browser-bar">
               <span class="b-dot" style="background:#ef4444;"></span>
               <span class="b-dot" style="background:#f59e0b;"></span>
               <span class="b-dot" style="background:#10b981;"></span>
-              <span class="b-url">Vista Estudiante · campus.uch.edu.ar/mod/assign/view.php?id=560274 (TP N° 3 Retrasado)</span>
+              <span class="b-url">Vista Docente de Cátedra · Score SITA Bloqueado (Regla Anti-Sesgo C1)</span>
             </div>
-            <img src="../screenshots/sc1_normal.png" onerror="this.src='screenshots/sc1_normal.png'" alt="Vista Entrega Moodle" />
+            <img src="../screenshots/sc2_docente_c1.png" onerror="this.src='screenshots/sc2_docente_c1.png'" alt="Vista Docente C1" />
           </div>
 
-          <div class="canva-card" style="background:#eff6ff; border-color:#bfdbfe;">
-            <h4 style="color:#1e40af;">🎯 Criterios de Éxito Cuantificables (Punto 2d)</h4>
-            <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:8px; text-align:center; margin-top:4px;">
-              <div style="background:#fff; padding:6px; border-radius:8px; border:1px solid #dbeafe;">
-                <strong style="font-size:15px; color:#1e3a8a;">≥ 70%</strong><div style="font-size:10.5px;">Recall (Sensibilidad)</div>
+          <div class="canva-card" style="border-color:rgba(56, 189, 248, 0.35);">
+            <h4 style="color:#93c5fd; margin-bottom:8px;">🎯 Criterios de Éxito Cuantificables del Proyecto (Punto 2d)</h4>
+            <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:8px; text-align:center;">
+              <div style="background:rgba(15,23,42,0.8); padding:6px; border-radius:8px; border:1px solid rgba(148,163,184,0.2);">
+                <strong style="font-size:15px; color:#fbbf24;">≥ 70%</strong><div style="font-size:10px; color:#cbd5e1;">Recall (O1)</div>
               </div>
-              <div style="background:#fff; padding:6px; border-radius:8px; border:1px solid #dbeafe;">
-                <strong style="font-size:15px; color:#1e3a8a;">≥ 50%</strong><div style="font-size:10.5px;">Precisión Alertas</div>
+              <div style="background:rgba(15,23,42,0.8); padding:6px; border-radius:8px; border:1px solid rgba(148,163,184,0.2);">
+                <strong style="font-size:15px; color:#34d399;">≥ 50%</strong><div style="font-size:10px; color:#cbd5e1;">Precisión (O2)</div>
               </div>
-              <div style="background:#fff; padding:6px; border-radius:8px; border:1px solid #dbeafe;">
-                <strong style="font-size:15px; color:#1e3a8a;">≤ 15</strong><div style="font-size:10.5px;">Casos / Tutor (O4)</div>
+              <div style="background:rgba(15,23,42,0.8); padding:6px; border-radius:8px; border:1px solid rgba(148,163,184,0.2);">
+                <strong style="font-size:15px; color:#38bdf8;">≤ 15</strong><div style="font-size:10px; color:#cbd5e1;">Casos / Tutor</div>
               </div>
-              <div style="background:#fff; padding:6px; border-radius:8px; border:1px solid #dbeafe;">
-                <strong style="font-size:15px; color:#1e3a8a;">-15%</strong><div style="font-size:10.5px;">Meta Deserción</div>
+              <div style="background:rgba(15,23,42,0.8); padding:6px; border-radius:8px; border:1px solid rgba(148,163,184,0.2);">
+                <strong style="font-size:15px; color:#c084fc;">-15%</strong><div style="font-size:10px; color:#cbd5e1;">Meta Deserción</div>
               </div>
             </div>
           </div>
@@ -392,8 +403,8 @@
     </div>
 
     <div class="slide-footer">
-      <span>SITA-IA · Universidad Champagnat · Patrón MVC (models/ · views/ · controllers/)</span>
-      <span>Objetivo: Detectar temprano para acompañar con empatía humana</span>
+      <span>SITA-IA · Arquitectura MVC (models/ · views/ · controllers/)</span>
+      <span style="color:#fbbf24;">Regla C1: Prevención del Efecto Pigmalión en Evaluaciones</span>
     </div>
   </section>
 
@@ -404,57 +415,57 @@
     <div>
       <div class="slide-top">
         <div>
-          <span class="slide-kicker">🧠 Puntos 3 y 4 · Subcampos de IA, Arquitectura Multiagente y API Gemini</span>
-          <h2 class="slide-title">IA Híbrida en Acción: Scoring Predictivo XAI + Generación NLP con Gemini 1.5 Flash</h2>
+          <span class="slide-kicker">🧠 Puntos 3 y 4 · Pipeline Multiagente (A1 → A2 → A3) y Gemini 1.5 Flash</span>
+          <h2 class="slide-title">IA Híbrida en Acción: Scoring Predictivo XAI + Empatía con Gemini 1.5</h2>
         </div>
-        <span class="slide-num-badge">Diapositiva 03 / 06</span>
+        <span class="slide-num-badge">SLIDE 03 / 06</span>
       </div>
 
-      <!-- Diagrama de Bloques Horizontal: Entradas -> Procesamiento -> Salidas -->
-      <div style="display:grid; grid-template-columns: 1fr 1.25fr 1.25fr 1fr; gap:12px; margin-bottom:16px;">
-        <div class="canva-card" style="background:#f8fafc; border-top:4px solid #475569;">
-          <h4>1. ENTRADAS (CSVs)</h4>
-          <p style="font-size:11.5px;">• <code>asistencia.csv</code> (SIU)<br>• <code>campus.csv</code> (Moodle)<br>• <code>notas.csv</code> (TPs/Parcial)<br>• <code>historial.csv</code> (4 sem.)</p>
+      <!-- Diagrama de Bloques Horizontal -->
+      <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:12px; margin-bottom:14px;">
+        <div class="canva-card" style="border-top:3px solid #38bdf8; padding:11px 14px;">
+          <h4 style="color:#38bdf8; font-size:12.5px;">1. ENTRADAS CSV (A1)</h4>
+          <p style="font-size:11px;">Consolida <code>asistencia.csv</code>, <code>campus.csv</code>, <code>notas.csv</code> e <code>historial.csv</code> (4 semanas).</p>
         </div>
-        <div class="canva-card" style="background:#fef2f2; border-top:4px solid var(--uch-bordeaux);">
-          <h4>2. ML SUPERVISADO + XAI</h4>
-          <p style="font-size:11.5px;"><strong>Subcampo: Aprendizaje Automático.</strong><br>Agente A1 consolida; <strong>Agente A2</strong> aplica regresión logística ($P=\sigma(z)$) + top 3 factores en puntos; <strong>Agente A3</strong> prioriza ($\le 15$).</p>
+        <div class="canva-card" style="border-top:3px solid #fbbf24; padding:11px 14px;">
+          <h4 style="color:#fbbf24; font-size:12.5px;">2. ML + XAI (AGENTE A2)</h4>
+          <p style="font-size:11px;">Regresión Logística <code>P = σ(z)</code> (0–100) + desglose exacto de los 3 motivos en puntos.</p>
         </div>
-        <div class="canva-card" style="background:#f5f3ff; border-top:4px solid var(--accent-purple);">
-          <h4>3. API GEMINI 1.5 FLASH</h4>
-          <p style="font-size:11.5px;"><strong>Subcampo: NLP / IA Generativa.</strong><br>Envía factores XAI anonimizados a <strong>Google AI Studio REST API</strong> y genera JSON con apertura empática + 3 preguntas abiertas.</p>
+        <div class="canva-card" style="border-top:3px solid #a855f7; padding:11px 14px;">
+          <h4 style="color:#c084fc; font-size:12.5px;">3. A3 + GEMINI 1.5 FLASH</h4>
+          <p style="font-size:11px;">Prioriza tope <code>≤ 15</code> alertas y consulta <strong>Google AI Studio REST API</strong> sin PII.</p>
         </div>
-        <div class="canva-card" style="background:#f0fdf4; border-top:4px solid var(--accent-green);">
-          <h4>4. SALIDA HUMANA</h4>
-          <p style="font-size:11.5px;">Ficha Académica del Tutor + Acta de resolución humana no delegable (<code>N1</code> a <code>N4</code>) y derivación a Secretaría (<code>N3</code>).</p>
+        <div class="canva-card" style="border-top:3px solid #34d399; padding:11px 14px;">
+          <h4 style="color:#34d399; font-size:12.5px;">4. SALIDA HUMANA</h4>
+          <p style="font-size:11px;">Ficha explicable del tutor + entrevista empática (<code>N2</code>) y derivación a Secretaría (<code>N3</code>).</p>
         </div>
       </div>
 
       <!-- Evidencia Visual: Caso Lucas (82/100) + Modal JSON de Gemini API -->
-      <div style="display:grid; grid-template-columns: 1fr 1.15fr; gap:20px; align-items:stretch;">
-        <div class="canva-card" style="display:flex; flex-direction:column; justify-content:space-between;">
+      <div style="display:grid; grid-template-columns: 1fr 1.15fr; gap:18px; align-items:stretch;">
+        <div class="canva-card" style="display:flex; flex-direction:column; justify-content:space-between; border-left:4px solid #fbbf24;">
           <div>
-            <h4>🔍 Caso Demostrativo en Vivo: Lucas González (#24901)</h4>
-            <p style="margin-bottom:10px;">Trayectoria en 4 semanas: <strong>35 → 52 → 68 → 82 / 100 (Riesgo Alto · Prioridad #1)</strong>.</p>
-            <div style="background:#f8fafc; border:1px solid var(--border); border-radius:10px; padding:10px 12px; margin-bottom:10px;">
-              <div style="font-size:11.5px; font-weight:800; color:var(--uch-bordeaux); margin-bottom:6px;">EXPLICABILIDAD XAI (AGENTE A2 · DESCOMPOSICIÓN DE LOGIT):</div>
-              <div style="font-size:12px; margin-bottom:4px;">1. Asistencia presencial del 40% (4 faltas recientes) → <strong>+35 pts</strong></div>
-              <div style="font-size:12px; margin-bottom:4px;">2. Adeuda 2 de 4 TPs en Moodle (TP N° 2 y TP N° 3) → <strong>+27 pts</strong></div>
-              <div style="font-size:12px;">3. 12 días corridos sin ingresar al Campus Virtual → <strong>+20 pts</strong></div>
+            <h4 style="color:#fbbf24;">🔍 Caso Real Demostrativo: Lucas González (Legajo #24901)</h4>
+            <p style="margin-bottom:8px; color:#fca5a5; font-weight:700;">Evolución 4 semanas: 35 → 52 → 68 → 82 / 100 (Riesgo Alto · Prioridad #1)</p>
+            <div style="background:rgba(15, 23, 42, 0.75); border:1px solid rgba(148,163,184,0.2); border-radius:10px; padding:10px 12px; margin-bottom:10px;">
+              <div style="font-size:10.5px; font-weight:800; color:#94a3b8; margin-bottom:5px;">EXPLICABILIDAD XAI (DESCOMPOSICIÓN DE LOGIT · AGENTE A2):</div>
+              <div style="font-size:11.5px; margin-bottom:3px; color:#f1f5f9;">1. Asistencia presencial del 40% (4 faltas recientes) → <strong style="color:#fbbf24;">+35 pts</strong></div>
+              <div style="font-size:11.5px; margin-bottom:3px; color:#f1f5f9;">2. Adeuda 2 de 4 TPs en Moodle (TP N° 2 y TP N° 3) → <strong style="color:#fbbf24;">+27 pts</strong></div>
+              <div style="font-size:11.5px; color:#f1f5f9;">3. 12 días corridos sin ingresar al Campus Virtual → <strong style="color:#fbbf24;">+20 pts</strong></div>
             </div>
           </div>
-          <div style="background:#f5f3ff; border:1px solid #ddd6fe; border-radius:10px; padding:10px 12px; font-size:12px;">
-            <strong style="color:#5b21b6;">✨ Salida de Gemini 1.5 Flash para el Tutor (Punto N2):</strong><br>
+          <div style="background:rgba(88, 28, 135, 0.35); border:1px solid rgba(168, 85, 247, 0.45); border-radius:10px; padding:10px 12px; font-size:11.5px; color:#f3e8ff;">
+            <strong style="color:#d8b4fe;">✨ Guía Generada por Gemini 1.5 Flash para el Tutor (Punto N2):</strong><br>
             <em>«¿Sentís que el horario del turno noche o alguna obligación laboral te está dificultando asistir a las prácticas? ¿Te ayudaría armar un esquema de entregas escalonadas o solicitar un pase de comisión?»</em>
           </div>
         </div>
 
-        <div class="browser-mockup" style="height:325px;">
+        <div class="browser-mockup" style="height:355px;">
           <div class="browser-bar">
             <span class="b-dot" style="background:#ef4444;"></span>
             <span class="b-dot" style="background:#f59e0b;"></span>
             <span class="b-dot" style="background:#10b981;"></span>
-            <span class="b-url">Evidencia de Prueba · Payload y Respuesta JSON de Google AI Studio (gemini-1.5-flash)</span>
+            <span class="b-url">Google AI Studio REST API (gemini-1.5-flash) · Expediente #24901</span>
           </div>
           <img src="../screenshots/sc8_gemini_api.png" onerror="this.src='screenshots/sc8_gemini_api.png'" alt="Evidencia Gemini API" />
         </div>
@@ -462,8 +473,8 @@
     </div>
 
     <div class="slide-footer">
-      <span>Flujo Técnico Trazable bajo Metodología Prometheus (Mensajes P msj. 0* a P msj. 12*)</span>
-      <span>Integración REST en models/gemini_service.py</span>
+      <span>Flujo técnico trazable bajo Metodología Prometheus (Mensajes P msj. 0* a P msj. 12*)</span>
+      <span style="color:#fbbf24;">Integración REST en models/gemini_service.py</span>
     </div>
   </section>
 
@@ -474,46 +485,54 @@
     <div>
       <div class="slide-top">
         <div>
-          <span class="slide-kicker">🛡️ Punto 5 · Requisitos Mínimos, Costos, Seguridad y Tolerancia a Fallas</span>
-          <h2 class="slide-title">Ingeniería Resiliente ante Fallas Reales (F1, F2, F3) y Operación Costo $0</h2>
+          <span class="slide-kicker">🛡️ Punto 5 · Ingeniería Resiliente, Seguridad y Costo $0 USD</span>
+          <h2 class="slide-title">Tolerancia a Fallas Reales (F1, F2, F3): Ningún error técnico perjudica al alumno</h2>
         </div>
-        <span class="slide-num-badge">Diapositiva 04 / 06</span>
+        <span class="slide-num-badge">SLIDE 04 / 06</span>
       </div>
 
-      <div style="display:grid; grid-template-columns: 1.05fr 1.1fr; gap:22px; align-items:stretch;">
-        <!-- Izquierda: Los 3 Protocolos de Falla + Requisitos -->
-        <div style="display:flex; flex-direction:column; gap:11px;">
-          <div class="canva-card" style="border-left:5px solid #dc2626;">
-            <h4>⚠️ Falla F1: Caída de Telemetría del Campus (Falta de dato ≠ Inactividad)</h4>
-            <p>Si el servidor de Moodle cae, el Agente A1 detecta la interrupción y el Agente A2 <strong>jamás penaliza al alumno por un fallo informático</strong>: congela el perfil en estado <code>Sin Evaluar (F1)</code> hasta que Secretaría restablezca la fuente (<code>Punto N5</code>).</p>
+      <div style="display:grid; grid-template-columns: 1.02fr 1.08fr; gap:20px; align-items:stretch;">
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <div class="canva-card" style="border-left:4px solid #f59e0b; padding:12px 15px;">
+            <h4 style="color:#fbbf24;">⚠️ Falla F1: Caída del Servidor Moodle (Falta de dato ≠ Inactividad)</h4>
+            <p>Si Moodle se cae, el Agente A1 detecta la interrupción y congela los perfiles en estado <code>SIN EVALUAR (F1)</code>. Jamás se infla el riesgo por un corte informático (<code>Punto N5</code>).</p>
           </div>
 
-          <div class="canva-card" style="border-left:5px solid #d97706;">
-            <h4>🔍 Falla F3: Señales Contradictorias (Caso Mateo Fernández #24945)</h4>
-            <p>Mateo registra <strong>92% de asistencia en aula</strong> pero <strong>14 días sin entrar a Moodle</strong>. El Agente A3 <strong>no promedia ciegamente</strong> señales opuestas: lo clasifica como <code>En Revisión (F3)</code> para que el tutor verifique si estudia con apuntes impresos.</p>
+          <div class="canva-card" style="border-left:4px solid #38bdf8; padding:12px 15px;">
+            <h4 style="color:#38bdf8;">🔍 Falla F3: Señales Contradictorias (Caso Mateo Fernández #24945)</h4>
+            <p>Mateo registra <strong>92% de asistencia en aula</strong> pero <strong>14 días sin entrar a Moodle</strong>. El Agente A3 no promedia señales opuestas: lo separa como <code>EN REVISIÓN (F3)</code> para verificación humana.</p>
           </div>
 
-          <div class="canva-card" style="border-left:5px solid #2563eb;">
-            <h4>⏱️ Falla F2: Inacción del Tutor (SLA 7 y 10 días → Reasignación N6)</h4>
-            <p>Si una alerta crítica no es atendida en <strong>7 días</strong>, A3 envía recordatorio; a los <strong>10 días</strong>, escala a Secretaría Académica para reasignar el caso al <strong>Tutor Suplente (Prof. Martín Suárez · N6)</strong>. La IA nunca contacta sola al alumno.</p>
+          <div class="canva-card" style="border-left:4px solid #a855f7; padding:12px 15px;">
+            <h4 style="color:#c084fc;">⏱️ Falla F2: Inacción del Tutor (SLA 7 y 10 días → Reasignación N6)</h4>
+            <p>Si una alerta crítica no se atiende en <strong>7 días</strong>, A3 envía recordatorio; a los <strong>10 días</strong>, escala a Secretaría Académica para reasignar al <strong>Tutor Suplente (Prof. Martín Suárez · N6)</strong>.</p>
           </div>
 
-          <div class="canva-card" style="background:#f8fafc;">
-            <h4>💻 Requisitos Mínimos y Estructura de Costos ($0 USD)</h4>
-            <p><strong>Stack:</strong> Python 3.10+ estándar (sin GPUs ni librerías pagas) + API gratuita de Google AI Studio (1.500 req/día libres; el sistema requiere solo ~15 req/semana). <strong>Privacidad:</strong> Prompts sin DNI ni datos sensibles + Consentimiento firmado (<code>N8</code>).</p>
+          <div class="canva-card" style="border-left:4px solid #34d399; padding:12px 15px;">
+            <h4 style="color:#34d399;">💻 Costo Operativo $0 USD y Privacidad (Ley 25.326)</h4>
+            <p>Python 3.10+ nativo (sin GPUs) + Free Tier de Google AI Studio (1.500 req/día libres; el sistema usa ~15 req/semana). Prompts 100% desidentificados sin DNI ni apellido (<code>Punto N8</code>).</p>
           </div>
         </div>
 
-        <!-- Derecha: Captura de Contingencia F1 en el Campus -->
         <div style="display:flex; flex-direction:column; gap:12px;">
-          <div class="browser-mockup" style="height:445px;">
+          <div class="browser-mockup" style="height:225px;">
             <div class="browser-bar">
               <span class="b-dot" style="background:#ef4444;"></span>
               <span class="b-dot" style="background:#f59e0b;"></span>
               <span class="b-dot" style="background:#10b981;"></span>
-              <span class="b-url">Simulación de Contingencia F1 Activa · Perfiles protegidos en estado "Sin Evaluar"</span>
+              <span class="b-url">Protocolo F1 Activo · Perfiles Protegidos en Estado "Sin Evaluar"</span>
             </div>
             <img src="../screenshots/sc3_f1_corte.png" onerror="this.src='screenshots/sc3_f1_corte.png'" alt="Contingencia F1" />
+          </div>
+
+          <div class="browser-mockup" style="height:225px;">
+            <div class="browser-bar">
+              <span class="b-dot" style="background:#ef4444;"></span>
+              <span class="b-dot" style="background:#f59e0b;"></span>
+              <span class="b-dot" style="background:#10b981;"></span>
+              <span class="b-url">Protocolo F3 Activo · Señales Contradictorias (Mateo 92% Asistencia vs 14d)</span>
+            </div>
+            <img src="../screenshots/sc4_f3_mateo.png" onerror="this.src='screenshots/sc4_f3_mateo.png'" alt="Contingencia F3" />
           </div>
         </div>
       </div>
@@ -521,7 +540,7 @@
 
     <div class="slide-footer">
       <span>SITA-IA · Viabilidad inmediata para cualquier universidad pública o privada</span>
-      <span>Seguridad por diseño: Anonimización de PII antes de consultar LLMs externos</span>
+      <span style="color:#fbbf24;">Seguridad por diseño: Anonimización de PII antes de consultar LLMs</span>
     </div>
   </section>
 
@@ -532,55 +551,58 @@
     <div>
       <div class="slide-top">
         <div>
-          <span class="slide-kicker">⚖️ Punto 6 · Análisis Ético Obligatorio (5 Riesgos y Salvaguardas en Código)</span>
-          <h2 class="slide-title">Ética Programada en la Arquitectura: 5 Riesgos y Compuertas Humanas N1–N8</h2>
+          <span class="slide-kicker">⚖️ Punto 6 · Análisis Ético Obligatorio y Compuertas Humanas N1–N8</span>
+          <h2 class="slide-title">Ética Programada en Código: 5 Riesgos Mitigados por Diseño</h2>
         </div>
-        <span class="slide-num-badge">Diapositiva 05 / 06</span>
+        <span class="slide-num-badge">SLIDE 05 / 06</span>
       </div>
 
-      <div style="display:grid; grid-template-columns: 1.15fr 1fr; gap:20px; align-items:stretch;">
-        <!-- Tabla de los 5 Riesgos Éticos -->
-        <div style="display:flex; flex-direction:column; gap:9px;">
-          <div class="canva-card" style="padding:11px 15px;">
-            <h4>1. Sesgo Algorítmico (Penalización a alumnos trabajadores del Turno Noche)</h4>
-            <p><strong>Mitigación (Punto N7):</strong> El modelo no se auto-recalibra. Secretaría audita al cierre semestral que la brecha de sensibilidad (<em>Recall</em>) entre Mañana (<code>76.2%</code>), Tarde (<code>74.8%</code>) y Noche (<code>72.4%</code>) sea <strong>Δ = 3.8 pts ≤ 10 pts</strong>.</p>
+      <div style="display:grid; grid-template-columns: 1.05fr 1.05fr; gap:20px; align-items:stretch;">
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <div class="canva-card" style="padding:10px 14px; border-left:4px solid #fbbf24;">
+            <h4 style="color:#fbbf24; font-size:13px;">1. Sesgo Algorítmico contra el Turno Noche</h4>
+            <p style="font-size:11.3px;"><strong>Mitigación (N7):</strong> Auditoría semestral de sensibilidad (<em>Recall</em>) entre Mañana (<code>76.2%</code>), Tarde (<code>74.8%</code>) y Noche (<code>72.4%</code>) → Brecha <strong>Δ = 3.8 pts ≤ 10 pts</strong>.</p>
           </div>
-          <div class="canva-card" style="padding:11px 15px;">
-            <h4>2. Uso Indebido y Estigmatización Docente (Efecto Pigmalión en exámenes)</h4>
-            <p><strong>Mitigación (Regla C1):</strong> Aislamiento estricto de vistas. El profesor de cátedra carga asistencia y notas, pero <strong>tiene la columna del score bloqueada con candado (<code>🔒 Regla C1</code>)</strong>.</p>
+          <div class="canva-card" style="padding:10px 14px; border-left:4px solid #f43f5e;">
+            <h4 style="color:#fb7185; font-size:13px;">2. Estigmatización Docente (Efecto Pigmalión)</h4>
+            <p style="font-size:11.3px;"><strong>Mitigación (Regla C1):</strong> El profesor de cátedra tiene el score de riesgo bloqueado con candado para no sesgar la corrección de exámenes.</p>
           </div>
-          <div class="canva-card" style="padding:11px 15px;">
-            <h4>3. Privacidad y Vigilancia Digital Invasiva</h4>
-            <p><strong>Mitigación (Punto N8):</strong> Habilitación sujeta a consentimiento informado registrado (<code>P msj. 0*</code>), uso exclusivo de variables académicas y desidentificación previo al envío a Gemini API.</p>
+          <div class="canva-card" style="padding:10px 14px; border-left:4px solid #38bdf8;">
+            <h4 style="color:#38bdf8; font-size:13px;">3. Privacidad y Vigilancia Digital Invasiva</h4>
+            <p style="font-size:11.3px;"><strong>Mitigación (N8):</strong> Opt-in con consentimiento informado (<code>P msj. 0*</code>), variables solo académicas y anonimización antes de Gemini API.</p>
           </div>
-          <div class="canva-card" style="padding:11px 15px;">
-            <h4>4. Dependencia de Automatización y Falsas Alarmas por Fallas Técnicas</h4>
-            <p><strong>Mitigación (Reglas F1 y F3):</strong> Suspensión automática del cálculo ante caída de Moodle (<code>F1</code>) y bloqueo de promedios engañosos ante señales opuestas (<code>F3</code>), más registro de Falsos Positivos.</p>
+          <div class="canva-card" style="padding:10px 14px; border-left:4px solid #a855f7;">
+            <h4 style="color:#c084fc; font-size:13px;">4. Automatización Ciega ante Fallas Técnicas</h4>
+            <p style="font-size:11.3px;"><strong>Mitigación (F1 y F3):</strong> Suspensión automática en estado <code>Sin Evaluar</code> ante caída de Moodle y revisión humana ante datos opuestos.</p>
           </div>
-          <div class="canva-card" style="padding:11px 15px;">
-            <h4>5. Impacto Social y Deshumanización del Vínculo Pedagógico</h4>
-            <p><strong>Mitigación (Puntos N1 a N4):</strong> Prohibición total de bots o notificaciones automáticas de riesgo al alumno; toda comunicación es humana, voluntaria y mediada por el tutor.</p>
+          <div class="canva-card" style="padding:10px 14px; border-left:4px solid #34d399;">
+            <h4 style="color:#34d399; font-size:13px;">5. Deshumanización del Vínculo Pedagógico</h4>
+            <p style="font-size:11.3px;"><strong>Mitigación (N1 a N4):</strong> Cero bots al alumno. El tutor humano valida el caso, realiza la entrevista empática y firma cada resolución.</p>
           </div>
         </div>
 
-        <!-- Captura de Auditoría de Sesgo N7 y Secretaría Académica -->
-        <div style="display:flex; flex-direction:column; gap:12px;">
-          <div class="browser-mockup" style="height:455px;">
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <div class="browser-mockup" style="height:375px;">
             <div class="browser-bar">
               <span class="b-dot" style="background:#ef4444;"></span>
               <span class="b-dot" style="background:#f59e0b;"></span>
               <span class="b-dot" style="background:#10b981;"></span>
-              <span class="b-url">Secretaría Académica · Resoluciones N3, Reasignación N6 y Auditoría de Equidad Inter-Turno N7</span>
+              <span class="b-url">Secretaría Académica · Derivación N3, Reasignación N6 y Auditoría N7</span>
             </div>
             <img src="../screenshots/sc5_sesgo_n7.png" onerror="this.src='screenshots/sc5_sesgo_n7.png'" alt="Gobernanza N7" />
+          </div>
+
+          <div class="canva-card" style="background:rgba(6, 78, 59, 0.35); border-color:rgba(52, 211, 153, 0.4); padding:10px 14px;">
+            <h4 style="color:#34d399; font-size:12.5px;">✅ Auditoría Algorítmica Semestral Verificada (Punto N7)</h4>
+            <p style="font-size:11.2px; color:#d1fae5;">Recall Mañana: <strong>76.2%</strong> | Recall Tarde: <strong>74.8%</strong> | Recall Noche: <strong>72.4%</strong> → Diferencia inter-turno: <strong>3.8 pts</strong> (Cumple criterio ≤ 10 pts).</p>
           </div>
         </div>
       </div>
     </div>
 
     <div class="slide-footer">
-      <span>Gobernanza Human-in-the-Loop · Ninguna decisión sobre la trayectoria estudiantil es delegada a la IA</span>
-      <span>Verificado sobre cohorte de 120 estudiantes</span>
+      <span>Cumplimiento integral de los 8 Puntos de Gobernanza Humana (N1 a N8)</span>
+      <span style="color:#fbbf24;">Supervisión algorítmica: Secretaría Académica UCH</span>
     </div>
   </section>
 
@@ -591,49 +613,49 @@
     <div>
       <div class="slide-top">
         <div>
-          <span class="slide-kicker">🎤 Punto 7 · Estructura de Defensa Oral (5 Minutos) y Recomendación Final</span>
-          <h2 class="slide-title">Hoja de Ruta de la Exposición y Conclusión Institucional del Equipo</h2>
+          <span class="slide-kicker">🎤 Punto 7 · Guion de Defensa Oral (5 Minutos) y Conclusión del Equipo</span>
+          <h2 class="slide-title">Hoja de Ruta de la Exposición y Recomendación Institucional Final</h2>
         </div>
-        <span class="slide-num-badge">Diapositiva 06 / 06</span>
+        <span class="slide-num-badge">SLIDE 06 / 06</span>
       </div>
 
       <!-- Línea de Tiempo de 5 Minutos -->
       <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:14px; margin-bottom:20px;">
-        <div class="canva-card" style="border-top:4px solid var(--uch-bordeaux);">
-          <span class="pill-tag" style="background:var(--uch-bordeaux-light); color:var(--uch-bordeaux); margin-bottom:6px;">0:00 – 1:15 · JOEL AISAMA</span>
-          <h4>1. Problema y Alcance</h4>
-          <p>Deserción silenciosa en las primeras 6 semanas de 1° año. Por qué cruzar asistencia, TPs de Moodle y parciales permite anticiparse 4 semanas.</p>
+        <div class="canva-card" style="border-top:4px solid #e11d48;">
+          <span class="pill-tag" style="background:rgba(225,29,72,0.22); color:#fda4af; border:1px solid rgba(225,29,72,0.45); margin-bottom:8px;">0:00 – 1:15 · JOEL AISAMA</span>
+          <h4>1. Problema y Valor</h4>
+          <p>Deserción silenciosa en las primeras 6 semanas de 1° año. Cómo cruzar asistencia, TPs de Moodle y parciales anticipa el riesgo 4 semanas antes.</p>
         </div>
 
-        <div class="canva-card" style="border-top:4px solid var(--accent-purple);">
-          <span class="pill-tag" style="background:#f5f3ff; color:var(--accent-purple); margin-bottom:6px;">1:15 – 2:45 · JOEL AISAMA</span>
-          <h4>2. Flujo IA y Demo Lucas</h4>
-          <p>Pipeline MVC (<code>A1 → A2 → A3</code>). Caso Lucas González (#24901, score 82/100 + 3 factores XAI) y generación en vivo de la guía empática con <strong>Gemini 1.5 Flash</strong>.</p>
+        <div class="canva-card" style="border-top:4px solid #a855f7;">
+          <span class="pill-tag" style="background:rgba(168,85,247,0.22); color:#d8b4fe; border:1px solid rgba(168,85,247,0.45); margin-bottom:8px;">1:15 – 2:45 · JOEL AISAMA</span>
+          <h4>2. IA Híbrida + Caso Lucas</h4>
+          <p>Pipeline MVC (<code>A1 → A2 → A3</code>). Caso Lucas González (#24901, Score 82/100 + 3 factores XAI) y guía empática en vivo con <strong>Gemini 1.5 Flash</strong>.</p>
         </div>
 
-        <div class="canva-card" style="border-top:4px solid var(--uch-blue);">
-          <span class="pill-tag" style="background:#eff6ff; color:var(--uch-blue); margin-bottom:6px;">2:45 – 4:00 · BAUTISTA NAVARRO</span>
-          <h4>3. Fallas y Ética (N1–N8)</h4>
-          <p>Demostración de bloqueo docente <code>C1</code>, corte de campus <code>F1</code> (<em>Sin Evaluar</em>), contradicción <code>F3</code> (Mateo), escalamiento <code>F2/N6</code> y auditoría inter-turno <code>N7</code> (Δ 3.8 pts).</p>
+        <div class="canva-card" style="border-top:4px solid #38bdf8;">
+          <span class="pill-tag" style="background:rgba(56,189,248,0.2); color:#7dd3fc; border:1px solid rgba(56,189,248,0.45); margin-bottom:8px;">2:45 – 4:00 · BAUTISTA NAVARRO</span>
+          <h4>3. Roles y Fallas F1–F3</h4>
+          <p>Demostración del Bloqueo Docente <code>C1</code>, contingencia <code>F1</code> (<em>Sin Evaluar</em>), contradicción <code>F3</code> (Mateo) y escalamiento <code>F2/N6</code>.</p>
         </div>
 
-        <div class="canva-card" style="border-top:4px solid var(--accent-green);">
-          <span class="pill-tag" style="background:#f0fdf4; color:var(--accent-green); margin-bottom:6px;">4:00 – 5:00 · BAUTISTA & JOEL</span>
-          <h4>4. Viabilidad y Cierre</h4>
-          <p>Costo operativo $0 USD, privacidad de datos (<code>N8</code>), despliegue inmediato en el Campus UCH y recomendación ética final del equipo.</p>
+        <div class="canva-card" style="border-top:4px solid #34d399;">
+          <span class="pill-tag" style="background:rgba(52,211,153,0.2); color:#6ee7b7; border:1px solid rgba(52,211,153,0.45); margin-bottom:8px;">4:00 – 5:00 · BAUTISTA & JOEL</span>
+          <h4>4. Ética, Costo $0 y Cierre</h4>
+          <p>Auditoría inter-turno <code>N7</code> (Δ 3.8 pts), privacidad Ley 25.326 (<code>N8</code>), costo operativo $0 USD y recomendación ética final del equipo.</p>
         </div>
       </div>
 
       <!-- Bloque Central de Recomendación Final del Equipo -->
-      <div style="background: linear-gradient(135deg, #111827 0%, #4c1122 100%); color:#ffffff; border-radius:16px; padding:26px 32px; display:flex; flex-direction:column; gap:14px; box-shadow: 0 12px 28px rgba(128, 22, 43, 0.2);">
+      <div style="background: linear-gradient(135deg, rgba(136,19,55,0.65) 0%, rgba(17,24,39,0.95) 100%); border: 1px solid rgba(251,191,36,0.45); color:#ffffff; border-radius:16px; padding:26px 32px; display:flex; flex-direction:column; gap:14px; box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);">
         <div style="display:flex; justify-content:space-between; align-items:center;">
-          <span style="font-family:'JetBrains Mono',monospace; font-size:12px; color:#fbbf24; font-weight:700; text-transform:uppercase;">💡 Recomendación Final del Equipo (Cierre de Defensa Oral)</span>
+          <span style="font-family:'JetBrains Mono',monospace; font-size:12px; color:#fbbf24; font-weight:700; text-transform:uppercase;">💡 Recomendación Institucional Final del Equipo (Cierre de Defensa Oral)</span>
           <span style="font-size:12px; color:#cbd5e1;">Universidad Champagnat · FIA 2026</span>
         </div>
         <blockquote style="font-size:18.5px; font-weight:700; line-height:1.45; color:#ffffff;">
           «Nuestra recomendación como equipo es adoptar SITA-IA bajo una premisa innegociable: en la educación universitaria, la Inteligencia Artificial debe funcionar como un <span style="color:#fbbf24;">radar temprano que multiplique la capacidad humana de escuchar y llegar a tiempo</span>, pero jamás como un tribunal automatizado que etiquete, sancione o decida el futuro académico de un estudiante.»
         </blockquote>
-        <div style="display:flex; justify-content:space-between; align-items:center; padding-top:10px; border-top:1px solid rgba(255,255,255,0.15); font-size:13px; color:#e2e8f0;">
+        <div style="display:flex; justify-content:space-between; align-items:center; padding-top:10px; border-top:1px solid rgba(255,255,255,0.15); font-size:13px; color:#fda4af;">
           <div><strong>Autores:</strong> Joel Aisama & Bautista Navarro</div>
           <div><strong>Repositorio Entregado:</strong> <code>github.com/aisamajoel-tech/Sistema-Escolar-Fundamentos-</code> (Usuario docente: <strong>ampalmaj</strong>)</div>
         </div>
@@ -641,13 +663,13 @@
     </div>
 
     <div class="slide-footer">
-      <span>SITA-IA · Presentación Ejecutiva de 6 Diapositivas (Canva Pitch Deck Format)</span>
-      <span>¡Muchas gracias! Quedamos abiertos a preguntas del jurado / cátedra.</span>
+      <span>SITA-IA · Presentación Ejecutiva de 6 Diapositivas (PowerPoint .pptx + PDF + Web)</span>
+      <span style="color:#fbbf24;">¡Muchas gracias! Quedamos abiertos a preguntas de la cátedra.</span>
     </div>
   </section>
 
   <div class="deck-controls">
-    <span>📊 <strong>Presentación Canva SITA-IA (6 Diapositivas)</strong></span>
+    <span>📊 <strong>Presentación SITA-IA (6 Diapositivas)</strong></span>
     <button onclick="window.print()">🖨️ Exportar / Imprimir PDF</button>
   </div>
 

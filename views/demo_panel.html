@@ -1363,10 +1363,18 @@
       if (sc === 'cursos' || sc === 'assign') {
         STATE.rol = 'ALUMNO';
         STATE.vista = 'assign';
+      } else if (sc === 'docente') {
+        STATE.rol = 'DOCENTE';
+        STATE.vista = 'participantes';
       } else if (sc === 'f1') {
         STATE.rol = 'TUTOR';
         STATE.vista = 'tutorias';
         STATE.corteTelemetriaF1 = true;
+      } else if (sc === 'f3') {
+        STATE.rol = 'TUTOR';
+        STATE.vista = 'tutorias';
+        STATE.filtroTutoria = 'REVISION_F3';
+        STATE.legajoSeleccionado = '24945';
       } else if (sc === 'gov') {
         STATE.rol = 'COORDINACION';
         STATE.vista = 'secretaria';
