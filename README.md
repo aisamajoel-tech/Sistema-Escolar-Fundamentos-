@@ -168,7 +168,7 @@ En la barra superior del sistema encontrará la botonera **`Guion Defensa 5 Min`
 
 ## 👥 6. Autores y Cátedra
 
-* **Joel Aisama** — Modelos de IA, Inferencia Logística XAI y Rol Tutor (`joel.aisama@alu.uch.edu.ar`)
-* **Bautista Navarro** — Arquitectura de Gobernanza, Métricas de Equidad y Rol Coordinación (`bautista.navarro@alu.uch.edu.ar`)
+* **Joel Aisama** ([`@aisamajoel-tech`](https://github.com/aisamajoel-tech)) — Modelos de IA, Inferencia Logística XAI, Integración Gemini 1.5 Flash y Rol Tutor (`joel.aisama@alu.uch.edu.ar`)
+* **Bautista Navarro** ([`@BautiNavarro`](https://github.com/BautiNavarro)) — Arquitectura MVC, Gobernanza Ética, Métricas de Equidad y Rol Coordinación (`bautista.navarro@alu.uch.edu.ar`)
 * **Asignatura:** Fundamentos de Inteligencia Artificial (3° Año) — Universidad Champagnat
-* **Repositorio Oficial:** [https://github.com/aisamajoel-tech/Sistema-Escolar-Fundamentos-](https://github.com/aisamajoel-tech/Sistema-Escolar-Fundamentos-) (Acceso compartido con el usuario docente **`ampalmaj`**)
+* **Repositorio Oficial:** [https://github.com/aisamajoel-tech/Sistema-Escolar-Fundamentos-](https://github.com/aisamajoel-tech/Sistema-Escolar-Fundamentos-) (Colaboradores habilitados: **`BautiNavarro`** y usuario docente **`ampalmaj`**)
